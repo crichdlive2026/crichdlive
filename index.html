@@ -4,394 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricHD Live - Premium Sports Streaming</title>
-    <meta name="description" content="Watch Live Cricket Streaming in HD without buffering. India vs New Zealand, IPL, PSL, and BBL live scores.">
     <link rel="icon" type="image/png" href="favicon.png">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- RESET & BASICS --- */
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-            color: #333;
-        }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; }
+        
+        /* HEADER */
+        header { background: #111; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .logo { font-size: 22px; font-weight: bold; }
+        .logo span { color: #e74c3c; }
+        nav a { color: white; margin-left: 15px; text-decoration: none; font-size: 14px; }
 
-        /* --- HEADER (Brand Identity) --- */
-        header {
-            background: linear-gradient(90deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span { color: #e74c3c; } /* Red Accent */
-
-        nav a {
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: #e74c3c; }
-
-        /* --- MAIN CONTAINER --- */
-        main {
-            max-width: 1100px;
+        /* PLAYER SECTION */
+        .player-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
             margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        /* --- HERO PLAYER SECTION (The Professional Part) --- */
-        .video-container {
-            position: relative;
-            width: 100%;
             background: #000;
-            border-radius: 12px;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            margin-bottom: 40px;
-            aspect-ratio: 16/9; /* Cinematic Ratio */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Thumbnail Image */
-        #video-placeholder {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        /* Dark Overlay for Text Readability */
-        .video-overlay {
+        /* Jab video play nahi ho raha tab ye dikhega */
+        .poster-overlay {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1200');
+            background-size: cover;
+            background-position: center;
             display: flex;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
+            z-index: 2;
+        }
+        
+        /* Dark shade over image */
+        .poster-overlay::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: -1;
         }
 
-        /* Play Button with Pulse Effect */
         .play-btn {
-            width: 80px;
-            height: 80px;
-            background-color: #e74c3c;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 30px;
-            box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
-            animation: pulse-red 2s infinite;
-            transition: transform 0.3s;
+            font-size: 60px; color: white; cursor: pointer;
+            transition: transform 0.2s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+        }
+        .play-btn:hover { transform: scale(1.1); color: #e74c3c; }
+
+        /* Asli Video Frame */
+        iframe {
+            width: 100%; height: 100%; border: none;
+            position: absolute; top: 0; left: 0; z-index: 1;
+            display: none; /* Pehle chhupa rahega */
         }
 
-        .video-container:hover .play-btn { transform: scale(1.1); }
-
-        /* Match Info Text inside Player */
-        .match-title-overlay {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            text-align: left;
-            color: white;
-        }
+        /* MAIN CONTENT */
+        main { max-width: 1000px; margin: auto; padding: 20px; }
         
-        .match-title-overlay h2 { margin: 0; font-size: 28px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .match-title-overlay p { margin: 5px 0 0; opacity: 0.9; font-size: 14px; }
+        .match-card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn { display: inline-block; padding: 10px 20px; background: #e74c3c; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
 
-        /* Live Badge Top Left */
-        .live-badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: #e74c3c;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .blink-dot {
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            animation: blink 1s infinite;
-        }
-
-        /* Watching Count Top Right */
-        .watching-count {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(5px);
-        }
-
-        /* Actual Iframe (Hidden initially) */
-        #main-iframe {
-            display: none;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(231, 76, 60, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* --- MATCH CARDS (Grid) --- */
-        .section-heading {
-            border-left: 5px solid #e74c3c;
-            padding-left: 15px;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 22px;
-        }
-
-        .match-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .match-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #eee;
-        }
-
-        .match-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .team-vs {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .match-meta {
-            color: #7f8c8d;
-            font-size: 13px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .watch-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        
-        .watch-btn:hover { background: #e74c3c; }
-
-        /* --- CONTENT & FAQ --- */
-        .content-box {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            line-height: 1.6;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
-        .faq-item:last-child { border-bottom: none; }
-        .faq-item h3 { margin: 0 0 8px; font-size: 16px; color: #2c3e50; }
-        .faq-item p { margin: 0; color: #666; font-size: 14px; }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #1a1a1a;
-            color: #777;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            font-size: 14px;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .match-title-overlay h2 { font-size: 18px; }
-            .play-btn { width: 60px; height: 60px; font-size: 24px; }
-            header { padding: 15px; }
-        }
+        /* FOOTER */
+        footer { background: #222; color: #aaa; text-align: center; padding: 30px; margin-top: 50px; }
+        .footer-links a { color: #fff; margin: 0 10px; text-decoration: none; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <i class="fas fa-play-circle" style="color: #e74c3c;"></i>
-            CricHD<span>Live</span>
-        </div>
-        <nav>
-            <a href="https://crichdlive.in">Home</a>
-            <a href="#">Schedule</a>
-        </nav>
+        <div class="logo">CricHD<span>Live</span></div>
+        <nav><a href="index.html">Home</a></nav>
     </header>
 
+    <div class="player-container" id="playerBox">
+        <div class="poster-overlay" id="poster" onclick="startPlayer()">
+            <div style="color:white; font-weight:bold; margin-bottom:10px;">LIVE NOW</div>
+            <i class="fas fa-play-circle play-btn"></i>
+            <div style="color:white; margin-top:10px; font-size:12px;">Click to Play</div>
+        </div>
+
+        <iframe id="videoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+
     <main>
-        
-        <div class="video-container" id="player-box" onclick="loadVideo()">
-            
-            <div class="video-overlay" id="video-overlay">
-                <div class="live-badge">
-                    <span class="blink-dot"></span> LIVE
-                </div>
-                <div class="watching-count">
-                    <i class="fas fa-eye"></i> 1.2M Watching
-                </div>
-
-                <div class="play-btn">
-                    <i class="fas fa-play" style="margin-left: 5px;"></i>
-                </div>
-
-                <div class="match-title-overlay">
-                    <h2>India vs New Zealand</h2>
-                    <p>3rd Test • Day 4 • Live from Wankhede</p>
-                </div>
-            </div>
-
-            <img id="video-placeholder" src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1200&auto=format&fit=crop" alt="Match Thumbnail">
-
-            <iframe id="main-iframe" src="" allowfullscreen></iframe>
+        <h2>Live Matches</h2>
+        <div class="match-card">
+            <h3>India vs New Zealand</h3>
+            <p>3rd Test • Live Streaming</p>
+            <a href="https://abpcrime.github.io/mylive/" target="_blank" class="btn">Watch on Server 2 (Backup)</a>
         </div>
 
-        <h2 class="section-heading">Featured Matches</h2>
-        <div class="match-grid">
-            <div class="match-card">
-                <div class="team-vs">IND vs NZ</div>
-                <div class="match-meta"><i class="fas fa-circle text-danger" style="color:red; font-size:10px;"></i> &nbsp; Live Now</div>
-                <a href="javascript:void(0)" onclick="window.scrollTo(0,0); loadVideo()" class="watch-btn">Watch Stream</a>
-            </div>
-
-            <div class="match-card">
-                <div class="team-vs">BBL: Stars vs Heat</div>
-                <div class="match-meta"><i class="far fa-clock"></i> &nbsp; Starts at 7:30 PM</div>
-                <a href="javascript:void(0)" onclick="window.scrollTo(0,0); loadVideo()" class="watch-btn">Watch Stream</a>
-            </div>
-
-            <div class="match-card">
-                <div class="team-vs">WPL 2026 Opening</div>
-                <div class="match-meta"><i class="far fa-calendar"></i> &nbsp; Jan 6, 2026</div>
-                <a href="javascript:void(0)" onclick="window.scrollTo(0,0); loadVideo()" class="watch-btn">Set Reminder</a>
-            </div>
+        <div style="background:white; padding:20px; border-radius:8px;">
+            <h3>Welcome to CricHD</h3>
+            <p>Watch unlimited cricket streaming for free.</p>
         </div>
-
-        <section class="content-box">
-            <h2 style="margin-top:0;">Watch Live Cricket Free on CricHD</h2>
-            <p>Experience the thrill of live cricket with <strong>CricHD Live</strong>. We provide seamless, high-definition streaming for all major cricket tournaments including ICC World Cups, IPL, BBL, and Test Series. Our platform is optimized for both mobile and desktop, ensuring you never miss a ball.</p>
-        </section>
-
-        <section class="content-box">
-            <h2 style="margin-top:0;">FAQs</h2>
-            <div class="faq-item">
-                <h3>Is this service free?</h3>
-                <p>Yes, CricHD Live provides 100% free streaming for cricket fans globally.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Does it work on low internet speed?</h3>
-                <p>Our adaptive player adjusts quality automatically to work on 3G, 4G, and Wi-Fi.</p>
-            </div>
-        </section>
-
     </main>
 
     <footer>
-        <p>&copy; 2026 CricHD Live. Streaming Rights Reserved.</p>
-        <div style="margin-top: 10px;">
-            <a href="#" style="color:#777; margin:0 10px; text-decoration:none;">Privacy</a>
-            <a href="#" style="color:#777; margin:0 10px; text-decoration:none;">DMCA</a>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="disclaimer.html">Disclaimer</a>
+            <a href="contact.html">Contact Us</a>
         </div>
+        <p>&copy; 2026 CricHD Live</p>
     </footer>
 
     <script>
-        function loadVideo() {
-            // 1. Asli Video Link (Yahan apni link dalein)
-            const videoUrl = "https://abpcrime.github.io/mylive/"; 
+        function startPlayer() {
+            // Aapka Video Link Yahan Dalein
+            var videoLink = "https://abpcrime.github.io/mylive/"; 
             
-            // 2. Elements ko select karein
-            const iframe = document.getElementById('main-iframe');
-            const overlay = document.getElementById('video-overlay');
-            const placeholder = document.getElementById('video-placeholder');
-            
-            // 3. UI Changes (Overlay hatayein, Video dikhayein)
-            overlay.style.display = 'none';
-            placeholder.style.display = 'none';
-            iframe.style.display = 'block';
-            
-            // 4. Source set karein (Auto-play logic)
-            iframe.src = videoUrl;
+            var frame = document.getElementById('videoFrame');
+            var poster = document.getElementById('poster');
+
+            // Poster chupao, Video dikhao
+            poster.style.display = 'none';
+            frame.style.display = 'block';
+            frame.src = videoLink; 
         }
     </script>
-
 </body>
 </html>
