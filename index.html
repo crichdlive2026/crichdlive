@@ -3,130 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricHD Live - Premium Sports Streaming</title>
+    <title>CricHD Live - Watch Free Live Cricket</title>
+    <meta name="description" content="Looking for CricHD scores? Visit Crichd Live for the fastest cricket updates, news, and real-time stats. Your ultimate Cric HD alternative is here.">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; color: #333; }
-        
-        /* HEADER */
-        header { background: #111; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; color: white; }
-        .logo { font-size: 22px; font-weight: bold; }
-        .logo span { color: #e74c3c; }
-        nav a { color: white; margin-left: 15px; text-decoration: none; font-size: 14px; }
+        /* 1. Modern Fonts Import (Google Fonts) */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-        /* PLAYER SECTION */
-        .player-container {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
-            background: #000;
-            aspect-ratio: 16/9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif; /* Modern Font */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; /* Light Greyish-Blue Background */
+            color: #333;
         }
 
-        /* Jab video play nahi ho raha tab ye dikhega */
-        .poster-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1200');
-            background-size: cover;
-            background-position: center;
+        /* 2. Professional Header with Gradient */
+        header {
+            background: linear-gradient(135deg, #004d25 0%, #008000 100%); /* Gradient Green */
+            color: white;
+            padding: 15px 30px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            flex-direction: column;
-            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffeb3b; /* Yellow on Hover */
+        }
+
+        /* Main Content Container */
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        /* --- NEW PLAYER STYLES START --- */
+        .live-player-section {
+            width: 100%;
+            max-width: 850px; /* Desktop par control rakhne ke liye */
+            margin: 0 auto 50px auto; /* Center aur bottom margin */
+            background-color: #000;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); /* Attractive Shadow */
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .player-header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-indicator {
+            background-color: #d32f2f;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        video.responsive-video {
+            width: 100%;
+            height: auto; /* Aspect ratio banaye rakhega */
+            display: block;
+            outline: none;
+            max-height: 80vh; /* Screen se bada na ho */
+        }
+        /* --- NEW PLAYER STYLES END --- */
+
+        /* Section Headings */
+        h2.section-title {
+            text-align: center;
+            color: #004d25;
+            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: 700;
+            position: relative;
         }
         
-        /* Dark shade over image */
-        .poster-overlay::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: -1;
+        h2.section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: #d32f2f; /* Red underline */
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
-        .play-btn {
-            font-size: 60px; color: white; cursor: pointer;
-            transition: transform 0.2s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-        }
-        .play-btn:hover { transform: scale(1.1); color: #e74c3c; }
-
-        /* Asli Video Frame */
-        iframe {
-            width: 100%; height: 100%; border: none;
-            position: absolute; top: 0; left: 0; z-index: 1;
-            display: none; /* Pehle chhupa rahega */
+        /* 3. Engaging Cards (Matches) */
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
-        /* MAIN CONTENT */
-        main { max-width: 1000px; margin: auto; padding: 20px; }
-        
-        .match-card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .btn { display: inline-block; padding: 10px 20px; background: #e74c3c; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        .match-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-        /* FOOTER */
-        footer { background: #222; color: #aaa; text-align: center; padding: 30px; margin-top: 50px; }
-        .footer-links a { color: #fff; margin: 0 10px; text-decoration: none; }
+        .match-card:hover {
+            transform: translateY(-7px); /* Card hawa mein uthega */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .match-card h3 {
+            margin-top: 0;
+            color: #1a1a1a;
+            font-size: 20px;
+        }
+
+        .match-card p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* 4. High-Conversion Buttons */
+        .watch-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #d32f2f, #ff5252); /* Red Gradient */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .watch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.6);
+        }
+
+        /* SEO Content & FAQ Design */
+        .seo-content, .faq-section {
+            background-color: white;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            line-height: 1.8;
+        }
+
+        .seo-content h2, .faq-section h2 {
+            color: #004d25;
+            font-size: 24px;
+            border-bottom: 2px solid #e0e0e0;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .seo-content h3 {
+            color: #444;
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .seo-content ul, .seo-content ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .seo-content li {
+            margin-bottom: 10px;
+        }
+
+        /* FAQ Specific Style */
+        .faq-item {
+            background-color: #fff;
+            border-left: 4px solid #008000;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 0 8px 8px 0;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item:hover {
+            background-color: #f9fff9;
+        }
+
+        .faq-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #aaa;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">CricHD<span>Live</span></div>
-        <nav><a href="index.html">Home</a></nav>
+        <div class="logo">
+            <h1>CricHD Live</h1>
+        </div>
+        <nav>
+            <a href="https://crichdlive.in">Home</a>
+            
+        </nav>
     </header>
 
-    <div class="player-container" id="playerBox">
-        <div class="poster-overlay" id="poster" onclick="startPlayer()">
-            <div style="color:white; font-weight:bold; margin-bottom:10px;">LIVE NOW</div>
-            <i class="fas fa-play-circle play-btn"></i>
-            <div style="color:white; margin-top:10px; font-size:12px;">Click to Play</div>
-        </div>
-
-        <iframe id="videoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
-    </div>
-
     <main>
-        <h2>Live Matches</h2>
-        <div class="match-card">
-            <h3>India vs New Zealand</h3>
-            <p>3rd Test • Live Streaming</p>
-            <a href="https://abpcrime.github.io/mylive/" target="_blank" class="btn">Watch on Server 2 (Backup)</a>
+
+        <div class="live-player-section">
+            <div class="player-header">
+                <span>Featured Match</span>
+                <span class="live-indicator">● LIVE</span>
+            </div>
+            
+            <video id="mainLivePlayer" class="responsive-video" controls autoplay muted playsinline preload="auto">
+                <source src="APKA_LIVE_STREAM_LINK_YAHAN_DALEN.m3u8" type="application/x-mpegURL">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <h2 class="section-title">Live Matches</h2>
+        
+        <div class="match-grid">
+            <div class="match-card">
+                <h3>India vs New Zealand</h3>
+                <p>Status: 🔴 Live Now</p>
+                <a href="#mainLivePlayer" class="watch-btn">Watch Live</a>
+            </div>
+
+            <div class="match-card">
+                <h3>WPL 2026 Live</h3>
+                <p>🔴 Start 6 Jan 2026</p>
+                <a href="https://abpcrime.github.io/mylive/" class="watch-btn">Watch Live</a>
+            </div>
+
+            <div class="match-card">
+                <h3>BBL Live</h3>
+                <p>🔴 Live Now</p>
+                <a href="https://abpcrime.github.io/mylive/" class="watch-btn">Watch Live</a>
+            </div>
         </div>
 
-        <div style="background:white; padding:20px; border-radius:8px;">
-            <h3>Welcome to CricHD</h3>
-            <p>Watch unlimited cricket streaming for free.</p>
-        </div>
+        <section class="seo-content">
+            <h2>Welcome to CricHD Live – Watch Free Live Cricket</h2>
+            <p><strong>CricHD Live</strong> par aapka swagat hai – cricket premion ke liye live matches dekhne ka sabse behtareen manch! Agar aap apne pasandida cricket match ko bina kisi rukawat ke dekhna chahte hain, toh <strong>CricHD</strong> aapke liye sahi jagah hai. Hum jante hain ki ek saccha fan ek bhi ball miss nahi karna chahta, isliye <strong>Cric HD</strong> aapko high-quality streaming aur sabse tez live updates provide karta hai.</p>
+
+            <h3>CricHD Live Ki Khaas Baatein (Features)</h3>
+            <p><strong>CricHD Live</strong> sirf ek website nahi, balki cricket fans ki pehli pasand hai. Yahan aapko milta hai:</p>
+            <ul>
+                <li><strong>HD Quality Video:</strong> Ab dhundhle video se pareshan hone ki zaroorat nahi. <strong>CricHD</strong> par har match Crystal Clear HD quality mein dekhein.</li>
+                <li><strong>Bilkul Free Streaming:</strong> <strong>Cric HD</strong> par match dekhne ke liye aapko koi subscription lene ki zaroorat nahi hai. Yeh 100% free hai.</li>
+                <li><strong>Hindi Commentary:</strong> Apni bhasha mein match ka maza lijiye! <strong>CricHD Live</strong> par aapko English ke saath-saath Hindi commentary ka option bhi milta hai.</li>
+            </ul>
+
+            <h3>CricHD Live Par Match Kaise Dekhein?</h3>
+            <p><strong>CricHD</strong> par live match dekhna bahut aasaan hai. Bas in steps ko follow karein:</p>
+            <ol>
+                <li>Apne mobile ya laptop par <strong>CricHD Live</strong> ki website kholein.</li>
+                <li>Apne pasandida match ke aage bane <strong>'Watch Live'</strong> button par click karein.</li>
+                <li>Bas ho gaya! Ab aap bina kisi rukawat ke <strong>Free HD Live Cricket</strong> enjoy kar sakte hain.</li>
+            </ol>
+
+            <h3>Nishkarsh (Conclusion)</h3>
+            <p>Toh doston, ab intezaar kis baat ka? <strong>CricHD Live</strong> ke saath judiye aur cricket ki duniya ka poora aanand lijiye. Agar aapko humari service pasand aayi, toh is website ko <strong>apne doston ke saath share karein</strong> aur unhein bhi free HD cricket ka tohfa dein.</p>
+        </section>
+
+        <section class="faq-section">
+            <h2>Aksar Puche Jane Wale Sawal (FAQs)</h2>
+
+            <div class="faq-item">
+                <h3>Q: Kya CricHD Live par match dekhna free hai?</h3>
+                <p><strong>Ans:</strong> Ji haan, <strong>CricHD Live</strong> ek bilkul free platform hai. Aap bina kisi subscription ya hidden charges ke poora match enjoy kar sakte hain.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q: Kya main apne mobile par live cricket dekh sakta hun?</h3>
+                <p><strong>Ans:</strong> Bilkul! Humari website mobile-friendly hai. Chahe aap Android use karein ya iPhone, aap aasaani se <strong>Live Cricket Streaming</strong> dekh sakte hain.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q: Video quality kaisi hogi?</h3>
+                <p><strong>Ans:</strong> Hum aapko behtareen experience dene ke liye <strong>HD Quality</strong> mein streaming provide karte hain, taaki aap ball-by-ball action saaf dekh sakein.</p>
+            </div>
+        </section>
+
     </main>
 
     <footer>
         <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-use.html">Terms of Use</a>
             <a href="disclaimer.html">Disclaimer</a>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact-us.html">Contact Us</a>
         </div>
-        <p>&copy; 2026 CricHD Live</p>
+        <p>&copy; 2026 CricHD Live. All rights reserved.</p>
     </footer>
 
     <script>
-        function startPlayer() {
-            // Aapka Video Link Yahan Dalein
-            var videoLink = "https://abpcrime.github.io/mylive/"; 
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('mainLivePlayer');
             
-            var frame = document.getElementById('videoFrame');
-            var poster = document.getElementById('poster');
-
-            // Poster chupao, Video dikhao
-            poster.style.display = 'none';
-            frame.style.display = 'block';
-            frame.src = videoLink; 
-        }
+            // Promise handling to ensure autoplay works
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    console.log("Autoplay started (muted).");
+                }).catch(error => {
+                    console.log("Autoplay prevented. User interaction required.");
+                });
+            }
+        });
     </script>
 </body>
 </html>
