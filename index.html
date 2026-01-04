@@ -61,54 +61,6 @@
             padding: 20px;
         }
 
-        /* --- NEW PLAYER STYLES START --- */
-        .live-player-section {
-            width: 100%;
-            max-width: 850px; /* Desktop par control rakhne ke liye */
-            margin: 0 auto 50px auto; /* Center aur bottom margin */
-            background-color: #000;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); /* Attractive Shadow */
-            overflow: hidden;
-            position: relative;
-            border: 1px solid #333;
-        }
-
-        .player-header {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .live-indicator {
-            background-color: #d32f2f;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 12px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        video.responsive-video {
-            width: 100%;
-            height: auto; /* Aspect ratio banaye rakhega */
-            display: block;
-            outline: none;
-            max-height: 80vh; /* Screen se bada na ho */
-        }
-        /* --- NEW PLAYER STYLES END --- */
-
         /* Section Headings */
         h2.section-title {
             text-align: center;
@@ -292,18 +244,6 @@
     </header>
 
     <main>
-
-        <div class="live-player-section">
-            <div class="player-header">
-                <span>Featured Match</span>
-                <span class="live-indicator">● LIVE</span>
-            </div>
-            
-            <video id="mainLivePlayer" class="responsive-video" controls autoplay muted playsinline preload="auto">
-                <source src="APKA_LIVE_STREAM_LINK_YAHAN_DALEN.m3u8" type="application/x-mpegURL">
-                Your browser does not support the video tag.
-            </video>
-        </div>
         <h2 class="section-title">Live Matches</h2>
         
         <div class="match-grid">
@@ -381,22 +321,19 @@
         <p>&copy; 2026 CricHD Live. All rights reserved.</p>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('mainLivePlayer');
-            
-            // Promise handling to ensure autoplay works
-            const playPromise = video.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    console.log("Autoplay started (muted).");
-                }).catch(error => {
-                    console.log("Autoplay prevented. User interaction required.");
-                });
-            }
-        });
-    </script>
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
