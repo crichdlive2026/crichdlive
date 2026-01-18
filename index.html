@@ -3,136 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IND vs NZ 1st ODI 2026: Match Preview, Squad & Live Streaming Details</title>
+    <title>Live Cricket: IND vs NZ | CricHDLive Premium</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-XZFSKSMR7G');
-    </script>
-    <meta name="description" content="India vs New Zealand 1st ODI 2026 ki poori jankari. Janiye match date, venue, playing 11, aur kahan dekhen live streaming.">
-    <meta name="keywords" content="IND vs NZ 1st ODI 2026, India vs New Zealand Live, Cricket News Hindi, Shubman Gill Captaincy, IND vs NZ Playing 11">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <meta name="description" content="Watch India vs New Zealand 1st ODI Live. High Quality Free Streaming with Live Chat.">
     
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: auto; padding: 20px; }
-        h1 { color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 10px; }
-        h2 { color: #d32f2f; margin-top: 30px; border-left: 5px solid #d32f2f; padding-left: 10px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .highlight { background-color: #fff9c4; padding: 15px; border-radius: 5px; border: 1px solid #fbc02d; font-style: italic; }
-        .squad-section { background-color: #e3f2fd; padding: 15px; border-radius: 8px; }
-        .footer-note { font-weight: bold; color: #555; margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; }
-        
-        /* Live Player Container Style */
-        .live-container {
-            margin: 20px 0;
-            border: 2px solid #d32f2f;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #141414;
+            --primary: #00e5ff; /* Neon Blue */
+            --accent: #ff0055; /* Neon Pink */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient: linear-gradient(45deg, #00e5ff, #2979ff);
         }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        /* --- Header Section --- */
+        header {
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #333;
+        }
+
+        .brand {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            background: rgba(255, 0, 85, 0.2);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 5px var(--accent); } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* --- Video Player Area --- */
+        .player-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            background: #000;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+        }
+
+        .aspect-ratio {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .aspect-ratio iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* --- Action Bar (Refresh/Share) --- */
+        .action-bar {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            background: #111;
+        }
+
+        .btn {
+            background: #222;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary { background: var(--gradient); color: #000; }
+        .btn:active { transform: scale(0.95); }
+
+        /* --- Ticker (Breaking News) --- */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--primary);
+            color: #000;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            padding: 5px 0;
+        }
+        .ticker-move { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* --- Tabs Navigation --- */
+        .tabs {
+            display: flex;
+            background: #111;
+            margin-top: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .tab-btn.active { color: var(--primary); }
+        .tab-btn.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary);
+            box-shadow: 0 -2px 10px var(--primary);
+        }
+
+        /* --- Content Sections --- */
+        .content-area { padding: 20px; max-width: 1000px; margin: auto; min-height: 400px; }
+        
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Info Cards */
+        .card { background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #222; }
+        h2 { font-family: 'Rajdhani', sans-serif; margin-top: 0; color: var(--primary); }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        td, th { padding: 12px; border-bottom: 1px solid #333; text-align: left; }
+        th { color: var(--text-muted); font-size: 12px; text-transform: uppercase; }
+
+        /* Chat Frame */
+        .chat-container { height: 500px; width: 100%; border: none; border-radius: 8px; }
+
     </style>
 </head>
 <body>
 
-    <article>
-        <h1>IND vs NZ 1st ODI 2026: Match Preview, Squad, Venue aur Live Streaming ki Poori Jankari</h1>
+    <header>
+        <div class="brand">CricHDLive</div>
+        <div class="status-badge"><div class="dot"></div> LIVE</div>
+    </header>
 
-        <p>Bharat aur New Zealand ke beech cricket ka romanch ek baar phir se shuru hone wala hai. <strong>New Zealand tour of India 2026</strong> ka aagaz 11 January se hone ja raha hai, jahan dono teamen pehle ODI match mein aamne-saamne hongi. Is series ko 2026 ke aane wale bade tournaments ke lihaz se bahut aham mana ja raha hai.</p>
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            BREAKING: India vs New Zealand 1st ODI Live Streaming is ON. Toss: India opt to bat first. Shubman Gill to lead. | Watch Free HD Stream here.
+        </div>
+    </div>
 
-        <p>Is blog mein hum aapko <strong>IND vs NZ 1st ODI</strong> se judi har choti-badi update denge.</p>
+    <div class="player-wrapper">
+        <div class="aspect-ratio">
+            <iframe id="main-player" src="https://player.kick.com/crichdlive" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+        </div>
+    </div>
 
-        <hr>
+    <div class="action-bar">
+        <button class="btn btn-primary" onclick="refreshStream()">
+            🔄 Refresh Stream
+        </button>
+        <button class="btn" onclick="shareMatch()">
+            📤 Share Match
+        </button>
+    </div>
 
-        <h2 style="background-color: #000; color: #fff; padding: 10px; border-left: none; text-align: center;">🔴 WATCH LIVE: IND vs NZ 1st ODI</h2>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('info')">MATCH INFO</button>
+        <button class="tab-btn" onclick="openTab('chat')">LIVE CHAT</button>
+        <button class="tab-btn" onclick="openTab('squad')">SQUADS</button>
+    </div>
+
+    <div class="content-area">
         
-        <div class="live-container">
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background-color: #000;">
-                <iframe 
-                    src="https://player.kick.com/CricHDLive" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allowfullscreen="true">
-                </iframe>
+        <div id="info" class="tab-content active">
+            <div class="card">
+                <h2>🏏 Match Summary</h2>
+                <p style="color: #ccc;">IND vs NZ 1st ODI 2026, Vadodara.</p>
+                <div style="display: flex; justify-content: space-between; margin-top: 15px; background: #000; padding: 15px; border-radius: 8px;">
+                    <div style="text-align: center;">
+                        <span style="display: block; font-size: 24px;">🇮🇳</span>
+                        <strong style="color: var(--primary)">IND</strong>
+                    </div>
+                    <div style="text-align: center; align-self: center; font-weight: bold; color: #666;">VS</div>
+                    <div style="text-align: center;">
+                        <span style="display: block; font-size: 24px;">🇳🇿</span>
+                        <strong>NZ</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>ℹ️ Stream Status</h2>
+                <p>Status: <span style="color: #0f0;">Excellent (HD)</span></p>
+                <p style="font-size: 12px; color: #777;">Note: Agar video load na ho, toh 'Refresh Stream' button dabayein.</p>
             </div>
         </div>
-        <p style="text-align: center; font-size: 0.9em; color: #666;"><em>Agar stream start na ho, to kripya page refresh karein ya play button dabayein.</em></p>
-        <hr>
 
-        <h2>Match Details: Kab aur Kahan Hoga Pehla ODI?</h2>
-        <p>India vs New Zealand ka pehla ODI match Gujarat ke Vadodara mein khela jayega. Ye stadium ek naye rang-roop mein international cricket ke liye taiyar hai.</p>
+        <div id="chat" class="tab-content">
+            <iframe class="chat-container" src="https://kick.com/crichdlive/chat" frameborder="0"></iframe>
+            <p style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Login to Kick to chat.</p>
+        </div>
 
-        <table>
-            <tr>
-                <th>Match</th>
-                <td>1st ODI (One Day International)</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>11 January 2026 (Sunday)</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td>1:30 PM IST</td>
-            </tr>
-            <tr>
-                <th>Venue</th>
-                <td>BCA Stadium, Kotambi, Vadodara</td>
-            </tr>
-            <tr>
-                <th>Series</th>
-                <td>New Zealand Tour of India 2026</td>
-            </tr>
-        </table>
+        <div id="squad" class="tab-content">
+            <div class="card">
+                <h2>Playing XI</h2>
+                <table>
+                    <tr>
+                        <th>INDIA</th>
+                        <th>NEW ZEALAND</th>
+                    </tr>
+                    <tr><td>Shubman Gill (C)</td><td>Tom Latham (C)</td></tr>
+                    <tr><td>Rohit Sharma</td><td>Devon Conway</td></tr>
+                    <tr><td>Virat Kohli</td><td>Kane Williamson</td></tr>
+                    <tr><td>Rishabh Pant (WK)</td><td>Daryl Mitchell</td></tr>
+                    <tr><td>Ravindra Jadeja</td><td>Mitchell Santner</td></tr>
+                </table>
+            </div>
+        </div>
 
-        <h2>Team India Squad: Gill Sambhalenge Kaman</h2>
-        <div class="squad-section">
-            <p>BCCI ne is series ke liye ek mazboot squad ka elaan kiya hai. Sabse badi khabar ye hai ki <strong>Shubman Gill</strong> ko team ka kaptan banaya gaya hai. Saath hi, veteran players <strong>Rohit Sharma</strong> aur <strong>Virat Kohli</strong> ki bhi ODI squad mein wapasi hui hai.</p>
+    </div>
+
+    <script>
+        // Tab Switching Logic
+        function openTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("tab-content");
+            var tabBtns = document.getElementsByClassName("tab-btn");
             
-            <strong>India’s Probable Playing 11:</strong>
-            <ul>
-                <li>Rohit Sharma</li>
-                <li>Yashasvi Jaiswal</li>
-                <li>Virat Kohli</li>
-                <li>Shubman Gill (C)</li>
-                <li>Rishabh Pant (WK)</li>
-                <li>Ravindra Jadeja</li>
-                <li>Kuldeep Yadav</li>
-                <li>Mohammed Siraj</li>
-                <li>Arshdeep Singh</li>
-            </ul>
-        </div>
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+                x[i].classList.remove("active");
+            }
+            for (i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            
+            // Highlight the clicked button
+            event.currentTarget.classList.add("active");
+        }
 
-        <p class="highlight"><strong>Note:</strong> Jasprit Bumrah aur Hardik Pandya ko workload management ke tehat is series mein aaram diya gaya hai.</p>
+        // Refresh Stream Logic
+        function refreshStream() {
+            var player = document.getElementById('main-player');
+            var currentSrc = player.src;
+            player.src = ''; 
+            setTimeout(() => {
+                player.src = currentSrc;
+            }, 300);
+        }
 
-        <h2>Pitch Report: Vadodara ki Pitch Kaisi Hogi?</h2>
-        <p>Vadodara ka <strong>BCA Stadium (Kotambi)</strong> apni nayi pitch aur tej outfield ke liye charcha mein hai.</p>
-        <ul>
-            <li><strong>Batting Friendly:</strong> Shuruati overs mein ball thoda swing ho sakti hai, lekin batting ke liye ye track behtareen hai.</li>
-            <li><strong>Spin Factor:</strong> Second innings mein spinners ko turn milne ki ummeed hai.</li>
-            <li><strong>Toss:</strong> Jo bhi team toss jeetegi, wo pehle batting karna pasand karegi.</li>
-        </ul>
-
-        <h2>Live Streaming: Kahan Dekhen Live Match?</h2>
-        <p>Agar aap ghar baithe is mahamuqabla ka lutf uthana chahte hain, to niche di gayi jankari dekhen:</p>
-        <ul>
-            <li><strong>Website Par:</strong> Upar diye gaye player mein <strong>Free Live</strong> dekhein.</li>
-            <li><strong>TV Channel:</strong> Star Sports Network (Hindi, English, aur anya bhashao mein).</li>
-            <li><strong>Official App:</strong> JioHotstar app aur website par aap live match dekh sakte hain.</li>
-        </ul>
-
-        <h2>Conclusion (Nishkarsh)</h2>
-        <p>IND vs NZ 1st ODI 2026 mahaj ek match nahi balki ek naye daur ki shuruat hai. Kya Bharat apne ghar mein jeet se aagaz kar payega? Hume niche comments mein batayein ki aapko kya lagta hai, kaun jitega ye pehla match?</p>
-
-        <div class="footer-note">
-            <p>Aisi hi aur updates ke liye hamari website crichdlive.in se jude rahein!</p>
-        </div>
-    </article>
+        // Share Logic
+        function shareMatch() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Live Cricket: IND vs NZ',
+                    text: 'Watch India vs New Zealand Live Streaming Free HD',
+                    url: window.location.href
+                });
+            } else {
+                alert("Link Copied: " + window.location.href);
+            }
+        }
+    </script>
 
 </body>
 </html>
