@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Cricket: IND vs NZ | CricHDLive Premium</title>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,16 +14,14 @@
     </script>
     
     <style>
+        /* --- NEON THEME STYLES --- */
         :root {
             --bg-dark: #050505;
-            --bg-card: #141414;
-            --primary: #00e5ff;
-            --accent: #ff0055;
+            --primary: #00e5ff; /* Neon Blue */
             --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --gradient: linear-gradient(45deg, #00e5ff, #2979ff);
         }
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -33,6 +29,7 @@
             margin: 0;
             padding-bottom: 50px;
         }
+        
         /* Header */
         header {
             background: rgba(20, 20, 20, 0.9);
@@ -44,68 +41,88 @@
         }
         .brand { font-size: 24px; font-weight: bold; color: var(--primary); }
         
-        /* Video Player Area */
+        /* Player Container */
         .player-wrapper {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1000px; /* Desktop par zyada bada na ho */
             margin: 0 auto;
             position: relative;
             background: #000;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.15); /* Halki si blue glow */
         }
-        /* 16:9 Aspect Ratio Container */
+        
+        /* Responsive 16:9 Aspect Ratio */
         .aspect-ratio {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-bottom: 56.25%; /* 16:9 ratio maintain karega */
             height: 0;
             overflow: hidden;
         }
-        /* Player Target Div */
-        #player {
+        
+        /* Castr Iframe Setup */
+        .aspect-ratio iframe {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            border: none;
         }
 
-        /* Buttons & Tabs */
-        .action-bar, .tabs { padding: 15px; display: flex; gap: 10px; justify-content: center; background: #111; }
-        .btn { background: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        .btn-primary { background: var(--primary); color: #000; font-weight: bold; }
-        .content-area { padding: 20px; max-width: 1000px; margin: auto; }
+        /* Buttons & Content */
+        .action-bar { padding: 15px; display: flex; gap: 10px; justify-content: center; background: #111; }
+        .btn { background: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-primary { background: var(--primary); color: #000; }
+        
+        .content-area { padding: 20px; max-width: 1000px; margin: auto; text-align: center; }
+        .status-dot { color: red; animation: blink 2s infinite; }
+        
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">CricHDLive</div>
-        <div style="color: red; font-weight: bold;">● LIVE</div>
+        <div style="font-weight: bold;"><span class="status-dot">●</span> LIVE</div>
     </header>
 
     <div class="player-wrapper">
         <div class="aspect-ratio">
-            <div id="player"></div>
-        </div>
+            <iframe 
+                src="https://player.castr.com/d_1b58caf0f48f11f0a4b6d932fe52cbd6" 
+                frameborder="0" 
+                scrolling="no" 
+                allow="autoplay; fullscreen"
+                allowfullscreen 
+                webkitallowfullscreen 
+                mozallowfullscreen>
+            </iframe>
+            </div>
     </div>
 
     <div class="action-bar">
         <button class="btn btn-primary" onclick="location.reload()">🔄 Refresh Stream</button>
-        <button class="btn" onclick="alert('Link Copied!')">📤 Share</button>
+        <button class="btn" onclick="shareLink()">📤 Share</button>
     </div>
 
     <div class="content-area">
-        <h3>🏏 Match Status: IND vs NZ</h3>
-        <p>Streaming via Custom Player (No Kick Logo)</p>
+        <h3>🏏 Match Status: Connected</h3>
+        <p style="color: #aaa; font-size: 14px;">Powered by Castr High-Speed Streaming</p>
     </div>
 
     <script>
-      var player = new Clappr.Player({
-        source: "https://player.castr.com/d_1b58caf0f48f11f0a4b6d932fe52cbd6",
-        parentId: "#player",
-        width: "100%",
-        height: "100%",
-        autoPlay: true,
-      });
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Live Cricket Streaming',
+                    url: window.location.href
+                });
+            } else {
+                alert('Link copied to clipboard!');
+            }
+        }
     </script>
 
 </body>
 </html>
-
