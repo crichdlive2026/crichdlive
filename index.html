@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Cricket: IND vs NZ | CricHDLive Premium</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <meta name="description" content="Watch India vs New Zealand 3rd ODI Live. High Quality Free Streaming with Live Chat.">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XZFSKSMR7G');
+    </script>
     
     <style>
         :root {
             --bg-dark: #050505;
             --bg-card: #141414;
-            --primary: #00e5ff; /* Neon Blue */
-            --accent: #ff0055; /* Neon Pink */
+            --primary: #00e5ff;
+            --accent: #ff0055;
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
             --gradient: linear-gradient(45deg, #00e5ff, #2979ff);
         }
-
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -29,288 +33,78 @@
             margin: 0;
             padding-bottom: 50px;
         }
-
-        /* --- Header Section --- */
+        /* Header */
         header {
             background: rgba(20, 20, 20, 0.9);
-            backdrop-filter: blur(10px);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
             border-bottom: 1px solid #333;
         }
-
-        .brand {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            text-transform: uppercase;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .status-badge {
-            background: rgba(255, 0, 85, 0.2);
-            color: var(--accent);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            border: 1px solid var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 5px var(--accent); } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        /* --- Video Player Area --- */
+        .brand { font-size: 24px; font-weight: bold; color: var(--primary); }
+        
+        /* Video Player Area */
         .player-wrapper {
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
             position: relative;
             background: #000;
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
-
+        /* 16:9 Aspect Ratio Container */
         .aspect-ratio {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%; /* 16:9 ratio */
             height: 0;
             overflow: hidden;
         }
-
-        .aspect-ratio iframe {
+        /* Player Target Div */
+        #player {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        /* --- Action Bar (Refresh/Share) --- */
-        .action-bar {
-            padding: 15px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            background: #111;
-        }
-
-        .btn {
-            background: #222;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary { background: var(--gradient); color: #000; }
-        .btn:active { transform: scale(0.95); }
-
-        /* --- Ticker (Breaking News) --- */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background-color: var(--primary);
-            color: #000;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-            padding: 5px 0;
-        }
-        .ticker-move { display: inline-block; padding-left: 100%; animation: ticker 20s linear infinite; }
-        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
-
-        /* --- Tabs Navigation --- */
-        .tabs {
-            display: flex;
-            background: #111;
-            margin-top: 10px;
-            border-bottom: 1px solid #333;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 15px;
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .tab-btn.active { color: var(--primary); }
-        .tab-btn.active::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary);
-            box-shadow: 0 -2px 10px var(--primary);
-        }
-
-        /* --- Content Sections --- */
-        .content-area { padding: 20px; max-width: 1000px; margin: auto; min-height: 400px; }
-        
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Info Cards */
-        .card { background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 15px; border: 1px solid #222; }
-        h2 { font-family: 'Rajdhani', sans-serif; margin-top: 0; color: var(--primary); }
-        
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        td, th { padding: 12px; border-bottom: 1px solid #333; text-align: left; }
-        th { color: var(--text-muted); font-size: 12px; text-transform: uppercase; }
-
-        /* Chat Frame */
-        .chat-container { height: 500px; width: 100%; border: none; border-radius: 8px; }
-
+        /* Buttons & Tabs */
+        .action-bar, .tabs { padding: 15px; display: flex; gap: 10px; justify-content: center; background: #111; }
+        .btn { background: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: #000; font-weight: bold; }
+        .content-area { padding: 20px; max-width: 1000px; margin: auto; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="brand">CricHDLive</div>
-        <div class="status-badge"><div class="dot"></div> LIVE</div>
+        <div style="color: red; font-weight: bold;">● LIVE</div>
     </header>
-
-    <div class="ticker-wrap">
-        <div class="ticker-move">
-            BREAKING: India vs New Zealand 3rd ODI Live Streaming is ON. Toss: India opt to bat first. Shubman Gill to lead. | Watch Free HD Stream here.
-        </div>
-    </div>
 
     <div class="player-wrapper">
         <div class="aspect-ratio">
-            <iframe id="main-player" src="https://player.kick.com/crichdlive" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+            <div id="player"></div>
         </div>
     </div>
 
     <div class="action-bar">
-        <button class="btn btn-primary" onclick="refreshStream()">
-            🔄 Refresh Stream
-        </button>
-        <button class="btn" onclick="shareMatch()">
-            📤 Share Match
-        </button>
-    </div>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('info')">MATCH INFO</button>
-        <button class="tab-btn" onclick="openTab('chat')">LIVE CHAT</button>
-        <button class="tab-btn" onclick="openTab('squad')">SQUADS</button>
+        <button class="btn btn-primary" onclick="location.reload()">🔄 Refresh Stream</button>
+        <button class="btn" onclick="alert('Link Copied!')">📤 Share</button>
     </div>
 
     <div class="content-area">
-        
-        <div id="info" class="tab-content active">
-            <div class="card">
-                <h2>🏏 Match Summary</h2>
-                <p style="color: #ccc;">IND vs NZ 1st ODI 2026, Vadodara.</p>
-                <div style="display: flex; justify-content: space-between; margin-top: 15px; background: #000; padding: 15px; border-radius: 8px;">
-                    <div style="text-align: center;">
-                        <span style="display: block; font-size: 24px;">🇮🇳</span>
-                        <strong style="color: var(--primary)">IND</strong>
-                    </div>
-                    <div style="text-align: center; align-self: center; font-weight: bold; color: #666;">VS</div>
-                    <div style="text-align: center;">
-                        <span style="display: block; font-size: 24px;">🇳🇿</span>
-                        <strong>NZ</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>ℹ️ Stream Status</h2>
-                <p>Status: <span style="color: #0f0;">Excellent (HD)</span></p>
-                <p style="font-size: 12px; color: #777;">Note: Agar video load na ho, toh 'Refresh Stream' button dabayein.</p>
-            </div>
-        </div>
-
-        <div id="chat" class="tab-content">
-            <iframe class="chat-container" src="https://kick.com/crichdlive/chat" frameborder="0"></iframe>
-            <p style="text-align: center; font-size: 12px; color: #666; margin-top: 5px;">Login to Kick to chat.</p>
-        </div>
-
-        <div id="squad" class="tab-content">
-            <div class="card">
-                <h2>Playing XI</h2>
-                <table>
-                    <tr>
-                        <th>INDIA</th>
-                        <th>NEW ZEALAND</th>
-                    </tr>
-                    <tr><td>Shubman Gill (C)</td><td>Tom Latham (C)</td></tr>
-                    <tr><td>Rohit Sharma</td><td>Devon Conway</td></tr>
-                    <tr><td>Virat Kohli</td><td>Kane Williamson</td></tr>
-                    <tr><td>Rishabh Pant (WK)</td><td>Daryl Mitchell</td></tr>
-                    <tr><td>Ravindra Jadeja</td><td>Mitchell Santner</td></tr>
-                </table>
-            </div>
-        </div>
-
+        <h3>🏏 Match Status: IND vs NZ</h3>
+        <p>Streaming via Custom Player (No Kick Logo)</p>
     </div>
 
     <script>
-        // Tab Switching Logic
-        function openTab(tabName) {
-            var i;
-            var x = document.getElementsByClassName("tab-content");
-            var tabBtns = document.getElementsByClassName("tab-btn");
-            
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-                x[i].classList.remove("active");
-            }
-            for (i = 0; i < tabBtns.length; i++) {
-                tabBtns[i].classList.remove("active");
-            }
-            
-            document.getElementById(tabName).style.display = "block";
-            document.getElementById(tabName).classList.add("active");
-            
-            // Highlight the clicked button
-            event.currentTarget.classList.add("active");
-        }
-
-        // Refresh Stream Logic
-        function refreshStream() {
-            var player = document.getElementById('main-player');
-            var currentSrc = player.src;
-            player.src = ''; 
-            setTimeout(() => {
-                player.src = currentSrc;
-            }, 300);
-        }
-
-        // Share Logic
-        function shareMatch() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Live Cricket: IND vs NZ',
-                    text: 'Watch India vs New Zealand Live Streaming Free HD',
-                    url: window.location.href
-                });
-            } else {
-                alert("Link Copied: " + window.location.href);
-            }
-        }
+      var player = new Clappr.Player({
+        source: "https://aps31.playlist.live-video.net/v1/playlist/CoAG4XafDBmgII_ga1peq5ksjWEij7AdE7b5YvLZ1V2JCEIfqDKrdBgT3Ei9ypJyo5AmbkxR-m98Lkh2c4Idu8Wez1lFyM8x3yXhjSN-1NKuYkNLzRrSaIj_EIhtWXW1sXvHTyGJxdbVtNDwoat_Q8Z30mhwgIza5cvtG2ZwXqAs_0pOk79Xs_V8VFdgLYASP1E9FMePy0SWlPBF-ndXu8IGXTs-zErTXm66Al5znYmfvnohmDubQV0FNog1Uafq9E40qAhYXjSoTAjmJw7DwiJi8kfFfoenfS51w8ESFVy2ZJbo0EZDkOWk60GyniaXpNbEbE7KfQXoalcUIqcLLjIWZ4DthLIHZdtj64iaYF7vZsXmhJs3ERRKy1hC1EDUuwJqiMAqNZRp2o704MuHkAH6rrUksNENusq49U7KtKadcexP71-8BDCXRONVY_jcvv5v9ED1pwFs23xoJ9VwbZT0LTISK6WP2HZM-rb3bZ1apZ8va5kdDw9uqnwwetPvhFCEAzb8iSklMK2Bv9yhUDDQ-jUCEIjj5kDZ5g9lSj263sZYdwzh9k_VP-qpB_vBYkM0zLhPvtGzWKJ2quegjMGeJR9rxd9SWvDrc5_p2xwcyqUD4pl7dnJjP7ZO4d0qfuHIzmCzu3GNq955Ks_PbZF4SwiW_T9xmv143Hnb310M1SdTZnOfv66fM8aBiLUFhs0V5rZFRkp75f48eSc0E3BsG-LZfEeqImct_QeDMtCP6VzbmYgAHjeh7dqfmzx1RsRI_zJHhSHzWgdEU7LpkvlbnJXZvAX5xKSDytIL2bxoI9Kof8EIY_V4p0eOAv0Dr325ucIc_A67DoMCcecItPfLyqtz8t6bMqHD3JYz2eXeDdQ4BJKBse-l0Rao0OnljpcxOdVtMv00e4eqdhlrlQ1HE6Fg6CV1maKoGtgpKodtqktg8PoYOC8Ruc9bGGRSfxsJzkzcWP42j9l2Vi088pYJqr2REW5oWWRc6od1QjyMXa-hXDEbQXHXBaZOuDN4nk8aGgzRnSyJ43tYAN9QoJ8gASoJdXMtd2VzdC0yMJsO.m3u8",
+        parentId: "#player",
+        width: "100%",
+        height: "100%",
+        autoPlay: true,
+      });
     </script>
 
 </body>
 </html>
-
