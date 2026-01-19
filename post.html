@@ -5,38 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IND vs NZ 3rd ODI 2026: Match Preview, Squad & Live Streaming Details</title>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-XZFSKSMR7G');
     </script>
+
     <meta name="description" content="India vs New Zealand 3rd ODI 2026 ki poori jankari. Janiye match date, venue, playing 11, aur kahan dekhen live streaming.">
     <meta name="keywords" content="IND vs NZ 1st ODI 2026, India vs New Zealand Live, Cricket News Hindi, Shubman Gill Captaincy, IND vs NZ Playing 11">
     
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: auto; padding: 20px; }
+        /* --- BLOG STYLES --- */
+        body { font-family: 'Poppins', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: auto; padding: 20px; background-color: #f9f9f9; }
         h1 { color: #1a237e; border-bottom: 2px solid #1a237e; padding-bottom: 10px; }
         h2 { color: #d32f2f; margin-top: 30px; border-left: 5px solid #d32f2f; padding-left: 10px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-        th { background-color: #f4f4f4; }
+        th { background-color: #f4f4f4; color: #333; }
         .highlight { background-color: #fff9c4; padding: 15px; border-radius: 5px; border: 1px solid #fbc02d; font-style: italic; }
         .squad-section { background-color: #e3f2fd; padding: 15px; border-radius: 8px; }
         .footer-note { font-weight: bold; color: #555; margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 20px; }
-        
-        /* Live Player Container Style */
-        .live-container {
-            margin: 20px 0;
-            border: 2px solid #d32f2f;
+        hr { border: 0; border-top: 1px solid #ccc; margin: 20px 0; }
+
+        /* --- PLAYER STYLES (New) --- */
+        :root {
+            --primary: #00e5ff; /* Neon Blue */
+            --secondary: #ff0055; /* Neon Red */
+        }
+
+        .player-wrapper {
+            width: 100%;
+            position: relative;
+            background: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            border: 2px solid #333;
         }
+
+        .aspect-ratio {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .aspect-ratio iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        }
+
+        /* Watermark (Hides Twitch Logo) */
+        .custom-watermark {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            z-index: 30;
+            background: #000;
+            padding: 5px 12px;
+            border-top-left-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            border-top: 1px solid var(--primary);
+            border-left: 1px solid var(--primary);
+            pointer-events: auto;
+        }
+
+        /* Click to Play Cover */
+        .player-cover {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000 url('https://placehold.co/800x450/111/FFF?text=IND+vs+NZ+Live+-+Click+to+Watch') center/cover no-repeat;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .play-btn {
+            font-size: 40px;
+            color: var(--primary);
+            background: rgba(0,0,0,0.8);
+            border-radius: 50%;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--primary);
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+        }
+
+        /* Action Buttons */
+        .action-bar { padding: 10px; display: flex; gap: 10px; justify-content: center; background: #111; }
+        .btn { background: #333; color: #fff; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.3s; }
+        .btn:hover { background: #444; }
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-primary:hover { background: #00b8cc; }
+
     </style>
 </head>
 <body>
@@ -44,23 +118,47 @@
     <article>
         <h1>IND vs NZ 1st ODI 2026: Match Preview, Squad, Venue aur Live Streaming ki Poori Jankari</h1>
 
-        <p>Bharat aur New Zealand ke beech cricket ka romanch ek baar phir se shuru hone wala hai. <strong>New Zealand tour of India 2026</strong> ka aagaz 11 January se hone ja raha hai, jahan dono teamen pehle ODI match mein aamne-saamne hongi. Is series ko 2026 ke aane wale bade tournaments ke lihaz se bahut aham mana ja raha hai.</p>
-
-        <p>Is blog mein hum aapko <strong>IND vs NZ 1st ODI</strong> se judi har choti-badi update denge.</p>
+        <p>Bharat aur New Zealand ke beech cricket ka romanch ek baar phir se shuru hone wala hai. <strong>New Zealand tour of India 2026</strong> ka aagaz 11 January se hone ja raha hai. Is blog mein hum aapko <strong>IND vs NZ 1st ODI</strong> se judi har choti-badi update denge.</p>
 
         <hr>
 
         <h2 style="background-color: #000; color: #fff; padding: 10px; border-left: none; text-align: center;">🔴 WATCH LIVE: IND vs NZ 1st ODI</h2>
         
-        <div class="live-container">
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background-color: #000;">
-                <div id="player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+        <div class="player-wrapper">
+            
+            <div class="custom-watermark">
+                CricHD<span style="color:var(--secondary)">Live</span>
+            </div>
+    
+            <div id="player-cover" class="player-cover" onclick="playStream()">
+                <div class="play-btn">▶</div>
+                <div style="background:rgba(0,0,0,0.7); padding:5px 10px; border-radius:4px; color:#fff; font-weight:bold;">
+                    Click to Start Stream
+                </div>
+            </div>
+    
+            <div class="aspect-ratio">
+                <iframe 
+                    id="twitch-stream"
+                    src="https://player.twitch.tv/?channel=crichdlivestreaming&parent=crichdlive.in&parent=www.crichdlive.in&parent=abpcrime.github.io&parent=www.abpcrime.github.io&parent=localhost&parent=127.0.0.1&muted=false" 
+                    height="100%" 
+                    width="100%" 
+                    allowfullscreen="true"
+                    scrolling="no"
+                    frameborder="0">
+                </iframe>
+            </div>
+    
+            <div class="action-bar">
+                <button class="btn btn-primary" onclick="location.reload()">🔄 Refresh Stream</button>
+                <button class="btn" onclick="shareLink()">📤 Share Link</button>
             </div>
         </div>
-        <p style="text-align: center; font-size: 0.9em; color: #666;"><em>Agar stream start na ho, to kripya page refresh karein ya play button dabayein.</em></p>
+        <p style="text-align: center; font-size: 0.9em; color: #666;"><em>Note: Agar stream ruk jaye to 'Refresh' button dabayein.</em></p>
         <hr>
+
         <h2>Match Details: Kab aur Kahan Hoga Pehla ODI?</h2>
-        <p>India vs New Zealand ka pehla ODI match Gujarat ke Vadodara mein khela jayega. Ye stadium ek naye rang-roop mein international cricket ke liye taiyar hai.</p>
+        <p>India vs New Zealand ka pehla ODI match Gujarat ke Vadodara mein khela jayega.</p>
 
         <table>
             <tr>
@@ -87,7 +185,7 @@
 
         <h2>Team India Squad: Gill Sambhalenge Kaman</h2>
         <div class="squad-section">
-            <p>BCCI ne is series ke liye ek mazboot squad ka elaan kiya hai. Sabse badi khabar ye hai ki <strong>Shubman Gill</strong> ko team ka kaptan banaya gaya hai. Saath hi, veteran players <strong>Rohit Sharma</strong> aur <strong>Virat Kohli</strong> ki bhi ODI squad mein wapasi hui hai.</p>
+            <p>BCCI ne is series ke liye ek mazboot squad ka elaan kiya hai. <strong>Shubman Gill</strong> ko team ka kaptan banaya gaya hai.</p>
             
             <strong>India’s Probable Playing 11:</strong>
             <ul>
@@ -105,38 +203,43 @@
 
         <p class="highlight"><strong>Note:</strong> Jasprit Bumrah aur Hardik Pandya ko workload management ke tehat is series mein aaram diya gaya hai.</p>
 
-        <h2>Pitch Report: Vadodara ki Pitch Kaisi Hogi?</h2>
-        <p>Vadodara ka <strong>BCA Stadium (Kotambi)</strong> apni nayi pitch aur tej outfield ke liye charcha mein hai.</p>
-        <ul>
-            <li><strong>Batting Friendly:</strong> Shuruati overs mein ball thoda swing ho sakti hai, lekin batting ke liye ye track behtareen hai.</li>
-            <li><strong>Spin Factor:</strong> Second innings mein spinners ko turn milne ki ummeed hai.</li>
-            <li><strong>Toss:</strong> Jo bhi team toss jeetegi, wo pehle batting karna pasand karegi.</li>
-        </ul>
-
-        <h2>Live Streaming: Kahan Dekhen Live Match?</h2>
-        <p>Agar aap ghar baithe is mahamuqabla ka lutf uthana chahte hain, to niche di gayi jankari dekhen:</p>
-        <ul>
-            <li><strong>Website Par:</strong> Upar diye gaye player mein <strong>Free Live</strong> dekhein.</li>
-            <li><strong>TV Channel:</strong> Star Sports Network (Hindi, English, aur anya bhashao mein).</li>
-            <li><strong>Official App:</strong> JioHotstar app aur website par aap live match dekh sakte hain.</li>
-        </ul>
-
         <h2>Conclusion (Nishkarsh)</h2>
-        <p>IND vs NZ 1st ODI 2026 mahaj ek match nahi balki ek naye daur ki shuruat hai. Kya Bharat apne ghar mein jeet se aagaz kar payega? Hume niche comments mein batayein ki aapko kya lagta hai, kaun jitega ye pehla match?</p>
+        <p>IND vs NZ 1st ODI 2026 mahaj ek match nahi balki ek naye daur ki shuruat hai. Kya Bharat apne ghar mein jeet se aagaz kar payega?</p>
 
         <div class="footer-note">
-            <p>Aisi hi aur updates ke liye hamari website crichdlive.in se jude rahein!</p>
+            <p>Aisi hi aur updates ke liye hamari website <strong>crichdlive.in</strong> se jude rahein!</p>
+            <p style="font-size:12px; margin-top:10px;">© 2026 CricHDLive</p>
         </div>
     </article>
 
     <script>
-      var player = new Clappr.Player({
-        source: "https://aps31.playlist.live-video.net/v1/playlist/CoAG4XafDBmgII_ga1peq5ksjWEij7AdE7b5YvLZ1V2JCEIfqDKrdBgT3Ei9ypJyo5AmbkxR-m98Lkh2c4Idu8Wez1lFyM8x3yXhjSN-1NKuYkNLzRrSaIj_EIhtWXW1sXvHTyGJxdbVtNDwoat_Q8Z30mhwgIza5cvtG2ZwXqAs_0pOk79Xs_V8VFdgLYASP1E9FMePy0SWlPBF-ndXu8IGXTs-zErTXm66Al5znYmfvnohmDubQV0FNog1Uafq9E40qAhYXjSoTAjmJw7DwiJi8kfFfoenfS51w8ESFVy2ZJbo0EZDkOWk60GyniaXpNbEbE7KfQXoalcUIqcLLjIWZ4DthLIHZdtj64iaYF7vZsXmhJs3ERRKy1hC1EDUuwJqiMAqNZRp2o704MuHkAH6rrUksNENusq49U7KtKadcexP71-8BDCXRONVY_jcvv5v9ED1pwFs23xoJ9VwbZT0LTISK6WP2HZM-rb3bZ1apZ8va5kdDw9uqnwwetPvhFCEAzb8iSklMK2Bv9yhUDDQ-jUCEIjj5kDZ5g9lSj263sZYdwzh9k_VP-qpB_vBYkM0zLhPvtGzWKJ2quegjMGeJR9rxd9SWvDrc5_p2xwcyqUD4pl7dnJjP7ZO4d0qfuHIzmCzu3GNq955Ks_PbZF4SwiW_T9xmv143Hnb310M1SdTZnOfv66fM8aBiLUFhs0V5rZFRkp75f48eSc0E3BsG-LZfEeqImct_QeDMtCP6VzbmYgAHjeh7dqfmzx1RsRI_zJHhSHzWgdEU7LpkvlbnJXZvAX5xKSDytIL2bxoI9Kof8EIY_V4p0eOAv0Dr325ucIc_A67DoMCcecItPfLyqtz8t6bMqHD3JYz2eXeDdQ4BJKBse-l0Rao0OnljpcxOdVtMv00e4eqdhlrlQ1HE6Fg6CV1maKoGtgpKodtqktg8PoYOC8Ruc9bGGRSfxsJzkzcWP42j9l2Vi088pYJqr2REW5oWWRc6od1QjyMXa-hXDEbQXHXBaZOuDN4nk8aGgzRnSyJ43tYAN9QoJ8gASoJdXMtd2VzdC0yMJsO.m3u8",
-        parentId: "#player",
-        width: "100%",
-        height: "100%",
-        autoPlay: true,
-      });
+        // Function to Hide Cover
+        function playStream() {
+            var cover = document.getElementById('player-cover');
+            cover.style.opacity = '0'; 
+            setTimeout(function(){
+                cover.style.display = 'none'; 
+            }, 300);
+        }
+
+        // Function to Share
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Watch IND vs NZ Live',
+                    text: 'Watch Live India vs NZ Match Free in HD on CricHDLive!',
+                    url: window.location.href
+                });
+            } else {
+                var tempInput = document.createElement("input");
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert('Link copied to clipboard!');
+            }
+        }
     </script>
 
 </body>
