@@ -30,7 +30,7 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            font-family: 'Poppins', sans-serif; /* Modern Font */
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding-bottom: 50px;
             line-height: 1.6;
@@ -59,7 +59,64 @@
             background: #000;
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
             border-radius: 8px;
-            overflow: hidden;
+            overflow: hidden; /* Important for keeping watermark inside */
+        }
+
+        /* --- NEW: CUSTOM WATERMARK STYLE --- */
+        .custom-watermark {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 10; /* Shows above iframe */
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+            pointer-events: none; /* Allows clicks to pass through */
+            border: 1px solid var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+        }
+
+        /* --- NEW: CLICK TO PLAY COVER STYLE --- */
+        .player-cover {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Placeholder Image - You can replace URL with your match thumbnail */
+            background: #000 url('https://placehold.co/800x450/111/FFF?text=IND+vs+NZ+Live+-+Click+to+Watch') center/cover no-repeat;
+            z-index: 20; /* Shows above everything */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .play-btn {
+            font-size: 40px;
+            color: var(--primary);
+            background: rgba(0,0,0,0.8);
+            border-radius: 50%;
+            width: 80px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid var(--primary);
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+        .match-info { 
+            font-weight: bold; 
+            font-size: 16px; 
+            text-shadow: 0 0 10px black; 
+            background: rgba(0,0,0,0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
         }
         
         /* Responsive 16:9 Aspect Ratio */
@@ -83,40 +140,16 @@
         .status-dot { color: red; animation: blink 2s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
-        /* --- BLOG CONTENT STYLES (Adapted for Dark Mode) --- */
-        .content-area { 
-            padding: 20px; 
-            max-width: 900px; 
-            margin: auto; 
-        }
-
-        /* Typography */
+        /* Content Styles */
+        .content-area { padding: 20px; max-width: 900px; margin: auto; }
         h1 { color: var(--primary); font-size: 2em; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 15px; }
         h2 { color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; }
-        h3 { color: var(--text-muted); margin-top: 25px; }
-        p { color: #ddd; margin-bottom: 15px; font-size: 16px; }
-        li { color: #ddd; margin-bottom: 10px; }
-        strong { color: white; }
-
-        /* Table Style */
+        p, li { color: #ddd; }
+        .alert-box { background-color: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 15px; margin: 25px 0; border-radius: 4px; }
+        .alert-box h3 { color: #ffc107; margin: 0 0 10px 0; }
         table { width: 100%; border-collapse: collapse; margin: 25px 0; background: #111; border-radius: 8px; overflow: hidden; }
         table th, table td { border: 1px solid #333; padding: 12px; text-align: left; color: #ddd; }
         table th { background-color: #222; color: var(--primary); font-weight: bold; }
-        table tr:hover { background-color: #1a1a1a; }
-
-        /* Alert Box */
-        .alert-box {
-            background-color: rgba(255, 193, 7, 0.1); /* Transparent Yellow */
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 25px 0;
-            border-radius: 4px;
-        }
-        .alert-box h3 { color: #ffc107; margin-top: 0; }
-        
-        /* Links */
-        a { color: var(--primary); text-decoration: none; }
-        blockquote { border-left: 4px solid var(--secondary); margin: 20px 0; padding-left: 15px; color: #bbb; font-style: italic; }
 
     </style>
 </head>
@@ -128,102 +161,80 @@
     </header>
 
     <div class="player-wrapper">
+        
+        <div class="custom-watermark">
+            CricHD<span style="color:var(--secondary)">Live</span>
+        </div>
+
+        <div id="player-cover" class="player-cover" onclick="playStream()">
+            <div class="play-btn">▶</div>
+            <div class="match-info">IND vs NZ - 3rd ODI | CLICK TO WATCH</div>
+        </div>
+
         <div class="aspect-ratio">
             <iframe 
-                src="https://player.twitch.tv/?channel=crichdlivestreaming&parent=crichdlive.in&parent=abpcrime.github.io&parent=localhost&muted=false" 
+                id="twitch-stream"
+                src="https://player.twitch.tv/?channel=crichdlivestreaming&parent=crichdlive.in&parent=www.crichdlive.in&parent=abpcrime.github.io&parent=www.abpcrime.github.io&parent=localhost&parent=127.0.0.1&muted=false" 
                 height="100%" 
                 width="100%" 
                 allowfullscreen="true"
                 scrolling="no"
                 frameborder="0">
             </iframe>
-            </div>
+        </div>
+
         <div class="action-bar">
             <button class="btn btn-primary" onclick="location.reload()">🔄 Refresh</button>
             <button class="btn" onclick="shareLink()">📤 Share</button>
         </div>
     </div>
-
     <div class="content-area">
-        
         <h1>7 Best Apps to Watch Live Cricket Free in 2026</h1>
-
-        <p>Kya aap bhi cricket ke die-hard fan hain aur <strong>live cricket match</strong> dekhne ke liye internet par dhakke kha rahe hain? Aksar hum "CricHD" ya "WebCric" jaise terms search karte hain, lekin wahan sirf ads aur virus milte hain.</p>
-        <p>Agar aap chahte hain ki aapko bina rukawat, <strong>HD quality</strong> mein aur <strong>free live streaming</strong> mile, toh aap sahi jagah aaye hain. Niche humne <strong>Top 7 Legal Apps</strong> ki list di hai.</p>
+        <p>Kya aap bhi cricket ke die-hard fan hain aur <strong>live cricket match</strong> dekhne ke liye internet par dhakke kha rahe hain? Niche humne <strong>Top 7 Legal Apps</strong> ki list di hai.</p>
 
         <h2>1. JioCinema – Best for Free Live Cricket (India)</h2>
-        <p>Agar aap India mein hain, toh <strong>JioCinema</strong> filhal sabse behtareen option hai.</p>
-        <ul>
-            <li><strong>Kyun Chunein:</strong> IPL aur India ke matches bilkul free.</li>
-            <li><strong>Quality:</strong> 4K Video aur Hype Mode features.</li>
-        </ul>
+        <p>Agar aap India mein hain, toh <strong>JioCinema</strong> filhal sabse behtareen option hai. IPL aur India ke matches bilkul free.</p>
 
         <h2>2. Disney+ Hotstar – Best for World Cups</h2>
-        <p>ICC World Cup aur T20 World Cup ke liye Hotstar best hai. Mobile users ke liye aksar free streaming available hoti hai.</p>
+        <p>ICC World Cup aur T20 World Cup ke liye Hotstar best hai.</p>
 
         <div class="alert-box">
             <h3>⚠️ Warning: Piracy se Bachein</h3>
-            <p><strong>CricHD Live</strong> ya <strong>Smartcric</strong> jaisi illegal sites par virus ka khatra hota hai. Hamesha official apps (JioCinema, Hotstar) ka hi use karein taaki aapka data safe rahe.</p>
+            <p>Hamesha official apps (JioCinema, Hotstar) ka hi use karein taaki aapka data safe rahe.</p>
         </div>
 
         <h2>Comparison: Top Streaming Apps 2026</h2>
         <div style="overflow-x:auto;">
             <table>
                 <thead>
-                    <tr>
-                        <th>App Name</th>
-                        <th>Price</th>
-                        <th>Best For</th>
-                    </tr>
+                    <tr><th>App Name</th><th>Price</th><th>Best For</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>JioCinema</td>
-                        <td>Free</td>
-                        <td>IPL & India Matches</td>
-                    </tr>
-                    <tr>
-                        <td>Hotstar</td>
-                        <td>Freemium</td>
-                        <td>ICC World Cups</td>
-                    </tr>
-                    <tr>
-                        <td>SonyLIV</td>
-                        <td>Paid</td>
-                        <td>Test Cricket & Ashes</td>
-                    </tr>
-                    <tr>
-                        <td>FanCode</td>
-                        <td>Paid</td>
-                        <td>Stats & Leagues</td>
-                    </tr>
+                    <tr><td>JioCinema</td><td>Free</td><td>IPL & India Matches</td></tr>
+                    <tr><td>Hotstar</td><td>Freemium</td><td>ICC World Cups</td></tr>
+                    <tr><td>SonyLIV</td><td>Paid</td><td>Test Cricket</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <h2>Mobile Par Live Cricket Kaise Dekhein?</h2>
-        <ol>
-            <li><strong>Download App:</strong> Play Store se JioCinema ya Hotstar download karein.</li>
-            <li><strong>Login:</strong> Apne mobile number se login karein.</li>
-            <li><strong>Enjoy:</strong> 'Live' tab par click karke match HD mein dekhein.</li>
-        </ol>
-
-        <blockquote>
-            <strong>Pro Tip:</strong> Agar video buffer ho raha hai, toh quality ko 'Auto' se 'Medium' par set karein.
-        </blockquote>
-
         <hr style="border-color: #333; margin: 40px 0;">
-        
-        <h3>Conclusion</h3>
-        <p>Illegal sites par time waste karne se behtar hai ki official apps ka use karein. Yeh safe bhi hain aur high quality bhi dete hain. Enjoy the match!</p>
         
         <p style="text-align: center; margin-top: 30px; font-size: 14px; color: #666;">
             © 2026 CricHD Live . All Rights Reserved.
         </p>
-
     </div>
 
     <script>
+        // Function to Hide Cover and Start "Interacting" with Player
+        function playStream() {
+            var cover = document.getElementById('player-cover');
+            cover.style.opacity = '0'; // Smooth fade out
+            setTimeout(function(){
+                cover.style.display = 'none'; // Remove from layout
+            }, 300);
+        }
+
+        // Share Link Function
         function shareLink() {
             if (navigator.share) {
                 navigator.share({
