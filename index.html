@@ -3,312 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricHD Live Streaming | Watch Live Cricket</title>
     
-    <!-- SEO: Optimized Title -->
-    <title>CricHD Live Streaming | Watch Live Cricket on Cric HD TV</title>
-    
-    <!-- SEO: Keyword Rich Meta Description -->
-    <meta name="description" content="Welcome to CricHD Live. Get the best updates for live cricket streaming crichd, ISL matches, and find the safest crichd alternative & crichd tv options.">
+    <!-- Player Libraries -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
 
-    <!-- SEO: All Required Keywords Added -->
-    <meta name="keywords" content="crichd live streaming, crichd alternative, crichd tv, cric hd, crichd isl live, crichd.live, cric hd live, crickethd, live cricket streaming crichd, crichd com, crichdplayer, crichd in, crichd stream, crichd. vip, live cric hd, cricket live streaming crichd, crichd ai">
-
-    <!-- User's Existing Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XZFSKSMR7G');
-    </script>
-    
     <style>
-        /* --- GLOBAL STYLES (NEON THEME) --- */
-        :root {
-            --bg-dark: #050505;
-            --bg-card: #111;
-            --primary: #00e5ff; /* Neon Blue */
-            --secondary: #ff0055; /* Neon Red */
-            --text-main: #ffffff;
-            --text-muted: #aaaaaa;
-        }
-
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        :root { --bg-dark: #050505; --primary: #00e5ff; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; margin: 0; }
         
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding-bottom: 50px;
-            line-height: 1.6;
-        }
-        
-        /* Header */
-        header {
-            background: rgba(20, 20, 20, 0.95);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .brand { font-size: 20px; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Player Container */
         .player-wrapper {
-            width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
-            position: relative;
-            background: #000;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
+            width: 100%; max-width: 900px; margin: 20px auto;
+            position: relative; background: #000; border-radius: 8px; overflow: hidden;
         }
-
-        /* --- CUSTOM WATERMARK STYLE --- */
-        .custom-watermark {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 14px;
-            color: white;
-            pointer-events: none;
-            border: 1px solid var(--primary);
-            text-shadow: 0 0 5px var(--primary);
-        }
-
-        /* --- CLICK TO PLAY COVER STYLE --- */
+        
+        .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
+        
         .player-cover {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000 url('https://placehold.co/800x450/111/FFF?text=Live+Cricket+-+Click+to+Watch') center/cover no-repeat;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 20; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .play-btn {
-            font-size: 40px;
-            color: var(--primary);
-            background: rgba(0,0,0,0.8);
-            border-radius: 50%;
-            width: 80px; height: 80px;
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid var(--primary);
-            margin-bottom: 10px;
-            box-shadow: 0 0 15px var(--primary);
-            animation: pulse 1.5s infinite;
-        }
-        .match-info { 
-            font-weight: bold; 
-            font-size: 16px; 
-            text-shadow: 0 0 10px black; 
-            background: rgba(0,0,0,0.7);
-            padding: 5px 15px;
-            border-radius: 20px;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
         }
         
-        /* Responsive 16:9 Aspect Ratio */
-        .aspect-ratio {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-        .aspect-ratio iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-        }
-
-        /* Buttons */
-        .action-bar { padding: 10px; display: flex; gap: 10px; justify-content: center; background: #111; }
-        .btn { background: #333; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.3s; }
-        .btn:hover { background: #444; }
-        .btn-primary { background: var(--primary); color: #000; }
-        .btn-primary:hover { background: #00b8cc; }
-        
-        .status-dot { color: red; animation: blink 2s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-        /* Content Styles (Updated for Blog) */
-        .content-area { padding: 20px; max-width: 900px; margin: auto; }
-        h1 { color: var(--primary); font-size: 2em; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 15px; }
-        h2 { color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 15px; margin-top: 40px; }
-        h3 { color: var(--text-muted); margin-top: 25px; }
-        p, li { color: #ddd; margin-bottom: 10px; }
-        strong { color: #fff; }
-        
-        /* Alert/Warning Box */
-        .alert-box { background-color: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 15px; margin: 25px 0; border-radius: 4px; }
-        .alert-box h3 { color: #ffc107; margin: 0 0 10px 0; }
-        
-        /* Table Styles */
-        table { width: 100%; border-collapse: collapse; margin: 25px 0; background: #111; border-radius: 8px; overflow: hidden; }
-        table th, table td { border: 1px solid #333; padding: 12px; text-align: left; color: #ddd; }
-        table th { background-color: #222; color: var(--primary); font-weight: bold; }
-        table tr:hover { background-color: #1a1a1a; }
-
+        .play-btn { font-size: 50px; color: var(--primary); border: 2px solid var(--primary); 
+                    border-radius: 50%; width: 80px; height: 80px; display: flex; 
+                    align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="brand">CricHD<span style="color:#fff">Live</span></div>
-        <div style="font-weight: bold; font-size: 14px;"><span class="status-dot">●</span> LIVE</div>
-    </header>
-
     <div class="player-wrapper">
-        
-        <div class="custom-watermark">
-            CricHD<span style="color:var(--secondary)">Live</span>
-        </div>
-
+        <!-- Play Cover -->
         <div id="player-cover" class="player-cover" onclick="playStream()">
             <div class="play-btn">▶</div>
-            <!-- SEO: Added Keyword to Player Cover -->
-            <div class="match-info">CRICHD LIVE STREAMING | CLICK TO WATCH</div>
+            <p>Click to Watch Live</p>
         </div>
 
+        <!-- Player Container -->
         <div class="aspect-ratio">
-            <iframe 
-                id="twitch-stream"
-                src="https://player.twitch.tv/?channel=crichdlivestreaming&parent=crichdlive.in&parent=www.crichdlive.in&parent=abpcrime.github.io&parent=www.abpcrime.github.io&parent=localhost&parent=127.0.0.1&muted=false" 
-                height="100%" 
-                width="100%" 
-                allowfullscreen="true"
-                scrolling="no"
-                frameborder="0">
-            </iframe>
+            <div id="video-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         </div>
-
-        <div class="action-bar">
-            <button class="btn btn-primary" onclick="location.reload()">🔄 Refresh</button>
-            <button class="btn" onclick="shareLink()">📤 Share</button>
-        </div>
-    </div>
-
-    <div class="content-area">
-        <!-- SEO: Highly Optimized H1 Tag -->
-        <h1>CricHD Live Streaming: Watch Live Cricket on Cric HD & Alternatives</h1>
-
-        <p>Cricket fans ke liye live match dekhna kisi tyohar se kam nahi hota. Jab bhi India vs Pakistan, IPL ya ISL ka match hota hai, toh internet par sabse zyada search kiya jaane wala term hota hai—<strong>"live cricket streaming crichd"</strong> ya phir <strong>"crichd isl live"</strong>.</p>
-        
-        <p>Lekin kya <strong>CricHD Live</strong> ya <strong>Cric HD TV</strong> par match dekhna safe hai? Kya aapka personal data khatre mein hai?</p>
-        
-        <p>Is article mein hum <strong>crichd in</strong> aur iski streaming quality ka review karenge aur aapko batayenge ek behtarin <strong>CricHD alternative</strong> jahan aap bina buffering aur bina risk ke <strong>live cric hd</strong> matches dekh sakte hain.</p>
-
-        <!-- SEO: H2 Tag with keywords -->
-        <h2>CricHD TV Kya Hai? (What is CricHD?)</h2>
-        <p><strong>CricHD</strong> ek popular sports streaming website hai jo duniya bhar ke cricket matches ki live streaming links provide karti hai. Log aksar Google par <em>"cricket live streaming crichd"</em> ya <em>"cric hd live"</em> search karte hain taaki wo free mein match dekh sakein.</p>
-        <p>Chahe woh nayi <strong>crichd ai</strong> technology ho ya inka naya <strong>crichdplayer</strong>, yeh site UK, USA, India aur Pakistan mein kaafi famous hai.</p>
-
-        <h2>Kya Cric HD Live Stream Safe Hai?</h2>
-        <p>Sach baat yeh है ki <strong>Nahi</strong>. <strong>crichd.live</strong> aur <strong>crichd. vip</strong> jaisi websites unauthorized content dikhati hain. Google aur Cyber Security experts aisi sites se door rehne ki salah dete hain.</p>
-
-        <div class="alert-box">
-            <h3>⚠️ Warning: Safe Streaming Karein</h3>
-            <p><strong>CricHD stream</strong> use karne se aapke device mein virus aa sakta hai. Hum hamesha <strong>Official Broadcasters</strong> ya ek legal <strong>crichd alternative</strong> use karne ki salah dete hain.</p>
-        </div>
-
-        <!-- SEO: Optimized Subheading -->
-        <h2>Best CricHD Alternative: Top Legal Apps for HD Streaming</h2>
-        <p>Agar aap <strong>crickethd</strong> par risk nahi lena chahte, toh neeche di gayi apps aur websites sabse best hain:</p>
-
-        <h3>1. JioCinema (India's Best Option)</h3>
-        <p>Agar aap India mein hain, toh aapko kisi aur <strong>crichd com</strong> ki zaroorat nahi. JioCinema par IPL aur India ke matches bilkul free dikhaye jaate hain. Yahan 4K Quality available hai.</p>
-
-        <h3>2. Disney+ Hotstar</h3>
-        <p>ICC World Cup aur T20 World Cup ke liye Hotstar sabse reliable platform hai. Mobile users ke liye aksar free streaming available hoti hai.</p>
-
-        <h3>3. Willow TV (For USA/Canada)</h3>
-        <p>USA aur Canada ke cricket fans ke liye <strong>crichd live streaming</strong> ka sabse accha alternative Willow TV hai.</p>
-
-        <h2>Live Cric HD vs Legal Apps: Comparison</h2>
-        <div style="overflow-x:auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Cric HD Live (Illegal)</th>
-                        <th>JioCinema/Hotstar (Legal)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cost</td>
-                        <td>Free (Risky)</td>
-                        <td>Free / Low Cost</td>
-                    </tr>
-                    <tr>
-                        <td>Safety</td>
-                        <td>Virus Risk ⚠️</td>
-                        <td>100% Safe ✅</td>
-                    </tr>
-                    <tr>
-                        <td>Quality</td>
-                        <td>Low (SD/Buffering)</td>
-                        <td>High (HD/4K)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <hr style="border-color: #333; margin: 40px 0;">
-
-        <h3>Conclusion</h3>
-        <p>Doston, <strong>crichdlive.in</strong> par aane ke liye shukriya. <strong>CricHD Live</strong> shayad aapko free match dikha de, lekin aaj ke digital zamane mein Safety sabse zaroori hai. Isliye, unofficial links chhodkar hamesha safe platforms ka use karein.</p>
-
-        <p style="text-align: center; margin-top: 30px; font-size: 14px; color: #666;">
-            © 2026 CricHD Live. All Rights Reserved.
-        </p>
     </div>
 
     <script>
-        // Function to Hide Cover and Start "Interacting" with Player
         function playStream() {
             var cover = document.getElementById('player-cover');
-            cover.style.opacity = '0'; // Smooth fade out
-            setTimeout(function(){
-                cover.style.display = 'none'; // Remove from layout
-            }, 300);
-        }
+            cover.style.display = 'none';
 
-        // Share Link Function
-        function shareLink() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'CricHD Live Streaming TV',
-                    text: 'Watch Live Cricket Streaming HD on CricHD Live!',
-                    url: window.location.href
-                });
-            } else {
-                var tempInput = document.createElement("input");
-                tempInput.value = window.location.href;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                document.execCommand("copy");
-                document.body.removeChild(tempInput);
-                alert('Link copied to clipboard!');
-            }
+            var player = new Clappr.Player({
+                // अपना वर्किंग लिंक यहाँ डालें
+                source: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", 
+                parentId: "#video-player",
+                width: '100%',
+                height: '100%',
+                autoPlay: true,
+                plugins: [DashShakaPlayback]
+            });
         }
     </script>
-
 </body>
 </html>
