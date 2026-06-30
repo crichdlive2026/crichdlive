@@ -22,14 +22,22 @@
         
         .player-cover {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 20; display: flex;
+            background: rgba(0, 0, 0, 0.8); z-index: 20; display: flex;
             flex-direction: column; justify-content: center; align-items: center;
             cursor: pointer;
         }
         
-        .play-btn { font-size: 50px; color: var(--primary); border: 2px solid var(--primary); 
-                    border-radius: 50%; width: 80px; height: 80px; display: flex; 
-                    align-items: center; justify-content: center; }
+        .play-btn { 
+            font-size: 50px; color: var(--primary); border: 2px solid var(--primary); 
+            border-radius: 50%; width: 80px; height: 80px; display: flex; 
+            align-items: center; justify-content: center; 
+            transition: 0.3s;
+        }
+        
+        .player-cover:hover .play-btn {
+            background-color: var(--primary);
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -49,13 +57,13 @@
 
     <script>
         function playStream() {
+            // प्ले कवर को हटाना
             var cover = document.getElementById('player-cover');
             cover.style.display = 'none';
 
+            // Clappr प्लेयर शुरू करना (लिंक अब एक लाइन में है)
             var player = new Clappr.Player({
-                // अपना वर्किंग लिंक यहाँ डालें
-                source: "https://crickcast-fam.pages.dev/api/proxy?u=https%3A%2F%2Fin-mc-fblive.fancode.com%2Fmumbai%2F143399_english_hls_b76266f66a18138_1ta-di_h264%2F720p.m3u8
-", 
+                source: "https://crickcast-fam.pages.dev/api/proxy?u=https%3A%2F%2Fin-mc-fblive.fancode.com%2Fmumbai%2F143399_english_hls_b76266f66a18138_1ta-di_h264%2F720p.m3u8", 
                 parentId: "#video-player",
                 width: '100%',
                 height: '100%',
