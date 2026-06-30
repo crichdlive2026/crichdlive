@@ -1,31 +1,66 @@
-<script>
-        var API_URL = "https://live-match-api-nine.vercel.app/api"; 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricHD Live Streaming</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <style>
+        :root { --bg-dark: #050505; --primary: #00e5ff; }
+        body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; margin: 0; }
+        .player-wrapper { width: 100%; max-width: 900px; margin: 20px auto; position: relative; background: #000; border-radius: 8px; overflow: hidden; }
+        .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
+        .player-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 20; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
+        .play-btn { font-size: 50px; color: var(--primary); border: 2px solid var(--primary); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        
+        /* WhatsApp Popup Styles */
+        .wa-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; }
+        .wa-box { background: #1a1a1a; border: 2px solid #25D366; padding: 25px; border-radius: 12px; text-align: center; max-width: 320px; }
+        .wa-btn { background: #25D366; color: #000; padding: 12px 20px; font-weight: bold; text-decoration: none; border-radius: 6px; display: inline-block; width: 80%; }
+        .close-popup { background: transparent; color: #888; border: none; margin-top: 15px; cursor: pointer; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Popup -->
+    <div id="wa-popup" class="wa-overlay">
+        <div class="wa-box">
+            <h3>🔴 Live Updates</h3>
+            <p>जॉइन करें WhatsApp Channel</p>
+            <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-btn" onclick="closePopup()">Join Now</a>
+            <br>
+            <button class="close-popup" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Player -->
+    <div class="player-wrapper">
+        <div id="player-cover" class="player-cover" onclick="startStream()">
+            <div class="play-btn">▶</div>
+        </div>
+        <div class="aspect-ratio">
+            <div id="video-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+
+    <script>
+        var API_URL = "https://live-match-api-nine.vercel.app/api";
         var currentLink = "";
 
-        // पॉपअप हमेशा दिखेगा (क्योंकि हमने localStorage हटा दिया है)
-        window.onload = function() {
-            document.getElementById('wa-popup').style.display = 'flex';
-            fetchLink();
-        };
+        // API से डेटा लाना
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => { currentLink = data.live_link; })
+            .catch(err => console.log(err));
 
-        // Join बटन दबाते ही पॉपअप बंद हो जाएगा
         function closePopup() {
             document.getElementById('wa-popup').style.display = 'none';
         }
 
-        // API से लिंक लाना
-        function fetchLink() {
-            fetch(API_URL)
-                .then(res => res.json())
-                .then(data => { currentLink = data.live_link; })
-                .catch(err => console.error("Error:", err));
-        }
-
-        // प्लेयर स्टार्ट करना
         function startStream() {
-            if (currentLink === "") { alert("लिंक लोड हो रहा है, थोड़ा इंतज़ार करें..."); return; }
+            if (currentLink === "") { alert("लिंक लोड हो रहा है, 2 सेकंड रुकें..."); return; }
             document.getElementById('player-cover').style.display = 'none';
-            var player = new Clappr.Player({
+            new Clappr.Player({
                 source: currentLink, 
                 parentId: "#video-player",
                 width: '100%', height: '100%', autoPlay: true,
@@ -33,3 +68,5 @@
             });
         }
     </script>
+</body>
+</html>
