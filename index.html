@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricHD Live Streaming | Watch Live Cricket</title>
     
-    <!-- Player Libraries -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.min.js"></script>
 
     <style>
         :root { --bg-dark: #050505; --primary: #00e5ff; }
@@ -34,22 +32,17 @@
             transition: 0.3s;
         }
         
-        .player-cover:hover .play-btn {
-            background-color: var(--primary);
-            color: #000;
-        }
+        .player-cover:hover .play-btn { background-color: var(--primary); color: #000; }
     </style>
 </head>
 <body>
 
     <div class="player-wrapper">
-        <!-- Play Cover -->
         <div id="player-cover" class="player-cover" onclick="playStream()">
             <div class="play-btn">▶</div>
             <p>Click to Watch Live</p>
         </div>
 
-        <!-- Player Container -->
         <div class="aspect-ratio">
             <div id="video-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
         </div>
@@ -57,18 +50,16 @@
 
     <script>
         function playStream() {
-            // प्ले कवर को हटाना
             var cover = document.getElementById('player-cover');
             cover.style.display = 'none';
 
-            // Clappr प्लेयर शुरू करना (लिंक अब एक लाइन में है)
             var player = new Clappr.Player({
                 source: "https://crickcast-fam.pages.dev/api/proxy?u=https%3A%2F%2Fin-mc-fblive.fancode.com%2Fmumbai%2F143399_english_hls_b76266f66a18138_1ta-di_h264%2F720p.m3u8", 
                 parentId: "#video-player",
                 width: '100%',
                 height: '100%',
                 autoPlay: true,
-                plugins: [DashShakaPlayback]
+                mimeType: "application/x-mpegURL" // यह लाइन Clappr को बताती है कि यह m3u8 फॉर्मेट है
             });
         }
     </script>
