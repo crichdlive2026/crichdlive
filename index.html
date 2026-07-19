@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricHD Live Streaming</title>
-    <!-- Clappr प्लेयर जो .m3u8 स्ट्रीम को ब्राउज़र में चलाने का काम करता है -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
     <style>
         :root { --bg-dark: #050505; --primary: #00e5ff; }
@@ -50,14 +49,14 @@
             document.getElementById('player-cover').style.display = 'none';
             document.getElementById('video-player').innerHTML = "";
 
-            // आपका Cloudflare Worker का लिंक
+            // आपका Cloudflare Worker
             var workerUrl = "https://my-cors-proxy.nareshnangad.workers.dev/?url=";
             
             // आपका SonyLIV Ten 3 HD का असली m3u8 लिंक
             var liveM3u8 = "https://dishmt.slivcdn.com/hls/live/2020591/TEN3HD/hdntl=exp=1784529012~acl=%2f*~id=1fee2002-e826-4dff-a118-acac0deb270a~data=hdntl~hmac=25fcc4cbee06600f79c868d9220d5b9cc9557d83c7281408547f7c5dfaff676b/master_3500.m3u8";
 
-            // दोनों को जोड़कर फाइनल स्ट्रीम यूआरएल बनाया गया है
-            var finalStreamUrl = workerUrl + liveM3u8;
+            // मुख्य बदलाव: encodeURIComponent का उपयोग ताकि %2f और ~ जैसे स्पेशल सुरक्षा टोकन कभी खराब न हों
+            var finalStreamUrl = workerUrl + encodeURIComponent(liveM3u8);
 
             new Clappr.Player({
                 source: finalStreamUrl, 
