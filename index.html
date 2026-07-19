@@ -28,12 +28,10 @@
 </head>
 <body>
 
-    <!-- WhatsApp Button (प्लेयर के ऊपर) -->
     <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn" style="margin-bottom: 20px;">
         📢 Join WhatsApp Channel for Links
     </a>
 
-    <!-- Player -->
     <div class="player-wrapper">
         <div id="player-cover" class="player-cover" onclick="startStream()">
             <div class="play-btn">▶</div>
@@ -48,12 +46,13 @@
         var API_URL = "https://live-match-api-nine.vercel.app/api";
         var currentLink = "";
 
-        // API से डेटा लोड करना
+        // API से लाइव मैच का असली लिंक लोड करना
         fetch(API_URL)
             .then(res => res.json())
             .then(data => { 
-                // लिंक के आगे-पीछे का फालतू स्पेस हटा रहे हैं
-                currentLink = data.live_link.trim(); 
+                if (data && data.live_link) {
+                    currentLink = data.live_link.trim(); 
+                }
             })
             .catch(err => console.log("API Error:", err));
 
@@ -62,9 +61,14 @@
                 alert("लिंक लोड हो रहा है, कृपया 2 सेकंड रुकें..."); 
                 return; 
             }
+            
+            // प्लेयर कवर छुपाएं
             document.getElementById('player-cover').style.display = 'none';
             
-            // मुख्य बदलाव: असली लिंक को Vercel Proxy के जरिए पास किया जा रहा है
+            // पुराने प्लेयर को पूरी तरह साफ़ (Reset) करें ताकि री-लोड एरर न आए
+            document.getElementById('video-player').innerHTML = "";
+            
+            // असली लिंक को Vercel Proxy के जरिए पास किया जा रहा है
             var proxyUrl = "https://live-match-api-nine.vercel.app/api/proxy?url=" + encodeURIComponent(currentLink);
 
             new Clappr.Player({
@@ -77,7 +81,16 @@
                 playback: {
                     hlsjsConfig: {
                         enableWorker: true,
-                        maxBufferLength: 30
+                        lowLatencyMode: true,
+                        maxBufferLength: 30,
+                        // अगर नेटवर्क मैनिफेस्ट लोड होने में दिक्कत करे तो टाइमआउट बढ़ाएं
+                        manifestLoadingTimeOut: 20000,
+                        manifestLoadingMaxRetry: 4,
+                        manifestLoadingRetryDelay: 2000,
+                        // CORS से जुड़े क्रेडेंशियल्स संभालने के लिए
+                        xhrSetup: function(xhr, url) {
+                            xhr.withCredentials = false;
+                        }
                     }
                 }
             });
