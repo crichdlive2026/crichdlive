@@ -51,17 +51,35 @@
         // API से डेटा लोड करना
         fetch(API_URL)
             .then(res => res.json())
-            .then(data => { currentLink = data.live_link; })
-            .catch(err => console.log(err));
+            .then(data => { 
+                // लिंक के आगे-पीछे का फालतू स्पेस हटा रहे हैं
+                currentLink = data.live_link.trim(); 
+            })
+            .catch(err => console.log("API Error:", err));
 
         function startStream() {
-            if (currentLink === "") { alert("लिंक लोड हो रहा है, 2 सेकंड रुकें..."); return; }
+            if (currentLink === "") { 
+                alert("लिंक लोड हो रहा है, कृपया 2 सेकंड रुकें..."); 
+                return; 
+            }
             document.getElementById('player-cover').style.display = 'none';
+            
+            // मुख्य बदलाव: असली लिंक को Vercel Proxy के जरिए पास किया जा रहा है
+            var proxyUrl = "https://live-match-api-nine.vercel.app/api/proxy?url=" + encodeURIComponent(currentLink);
+
             new Clappr.Player({
-                source: currentLink, 
+                source: proxyUrl, 
                 parentId: "#video-player",
-                width: '100%', height: '100%', autoPlay: true,
-                mimeType: "application/x-mpegURL"
+                width: '100%', 
+                height: '100%', 
+                autoPlay: true,
+                mimeType: "application/x-mpegURL",
+                playback: {
+                    hlsjsConfig: {
+                        enableWorker: true,
+                        maxBufferLength: 30
+                    }
+                }
             });
         }
     </script>
