@@ -28,10 +28,12 @@
 </head>
 <body>
 
+    <!-- WhatsApp Button (प्लेयर के ऊपर) -->
     <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn" style="margin-bottom: 20px;">
         📢 Join WhatsApp Channel for Links
     </a>
 
+    <!-- Player -->
     <div class="player-wrapper">
         <div id="player-cover" class="player-cover" onclick="startStream()">
             <div class="play-btn">▶</div>
@@ -65,11 +67,9 @@
             document.getElementById('player-cover').style.display = 'none';
             document.getElementById('video-player').innerHTML = "";
 
-            // मुख्य बदलाव: ottplus लिंक को Vercel Proxy के जरिए चलाया जा रहा है (ताकि CORS एरर न आए)
-            var proxyUrl = "https://live-match-api-nine.vercel.app/api/proxy?url=" + encodeURIComponent(currentLink);
-
+            // मुख्य बदलाव: अब हम बिना किसी प्रॉक्सी के सीधे (Direct) स्ट्रीम चला रहे हैं ताकि स्पीड पूरी मिले
             new Clappr.Player({
-                source: proxyUrl, 
+                source: currentLink, 
                 parentId: "#video-player",
                 width: '100%', 
                 height: '100%', 
@@ -78,7 +78,10 @@
                 playback: {
                     hlsjsConfig: {
                         enableWorker: true,
-                        maxBufferLength: 30
+                        lowLatencyMode: true,
+                        maxBufferLength: 30,
+                        manifestLoadingTimeOut: 15000,
+                        manifestLoadingMaxRetry: 3
                     }
                 }
             });
