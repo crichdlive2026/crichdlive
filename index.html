@@ -45,8 +45,12 @@
     </div>
 
     <script>
+        // 1. आपका Vercel API जहाँ से मूल लिंक आएगा
         var API_URL = "https://live-match-api-nine.vercel.app/api";
-        var PROXY_URL = "https://live-match-api-nine.vercel.app/api/proxy?url=";
+        
+        // 2. आपका अपना Cloudflare CORS Proxy (यह Vercel की जगह लेगा और ब्लॉक नहीं होगा)
+        var PROXY_URL = "https://my-cors-proxy.nareshnangad.workers.dev/";
+        
         var currentLink = "";
 
         // API से असली लिंक लोड करना
@@ -68,8 +72,8 @@
             document.getElementById('player-cover').style.display = 'none';
             document.getElementById('video-player').innerHTML = "";
 
-            // मुख्य बदलाव: CORS एरर से बचने के लिए लिंक को Vercel Proxy के जरिए भेजा जा रहा है
-            var finalStreamUrl = PROXY_URL + encodeURIComponent(currentLink);
+            // Cloudflare Worker के जरिए स्ट्रीम को बायपास करना
+            var finalStreamUrl = PROXY_URL + currentLink;
 
             new Clappr.Player({
                 source: finalStreamUrl, 
