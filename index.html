@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags: Title aur Description ko optimized kiya gaya hai -->
+    <!-- SEO Meta Tags -->
     <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free | CricHD Live</title>
     <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online with real-time live scores and commentary.">
     <meta name="keywords" content="IND vs SL live streaming, India vs Sri Lanka live match, IND vs SL test series live, watch cricket live free, crichdlive, live cricket match online, cricket score, playing XI">
@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://crichdlive.in/og-image.jpg">
     <meta property="og:url" content="https://crichdlive.in/">
 
-    <!-- JSON-LD Schema Markup (Google isse content samajhta hai) -->
+    <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -29,7 +29,7 @@
     }
     </script>
 
-    <!-- Google Analytics (Fast Load) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -38,6 +38,7 @@
       gtag('config', 'G-XZFSKSMR7G');
     </script>
 
+    <!-- HLS Library -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <style>
@@ -46,25 +47,35 @@
         .player-wrapper { width: 100%; max-width: 900px; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 10px; box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
         .aspect-ratio { position: relative; padding-bottom: 56.25%; }
         video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .wa-join-btn { background-color: #25D366; color: #000; padding: 12px 25px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 10px; display: inline-block; }
-        .content-box { max-width: 900px; width: 100%; background: #0a0a0a; padding: 15px; border-radius: 8px; border: 1px solid #1a1a1a; margin-bottom: 10px; }
+        .wa-join-btn { background-color: #25D366; color: #000; padding: 12px 25px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 10px; display: inline-block; transition: 0.3s; }
+        .wa-join-btn:hover { background-color: #1ebd5a; transform: scale(1.05); }
+        .content-box { max-width: 900px; width: 100%; background: #0a0a0a; padding: 15px; border-radius: 8px; border: 1px solid #1a1a1a; margin-bottom: 10px; box-sizing: border-box; }
+        .content-box h1 { color: #00e5ff; font-size: 22px; margin-top: 0; }
+        .content-box h2 { color: #00e5ff; font-size: 18px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .content-box p { color: #ccc; font-size: 14px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
+    <!-- WhatsApp Button -->
     <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel for HD Links</a>
 
+    <!-- Video Player Box -->
     <div class="player-wrapper">
         <div class="aspect-ratio">
             <video id="video" controls autoplay playsinline></video>
         </div>
     </div>
 
+    <!-- Live Score Box -->
     <div class="content-box">
-        <h2 style="color: #00e5ff; margin: 0;">🏏 IND vs SL - Live Score</h2>
-        <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
+        <h2 style="color: #00e5ff; margin: 0 0 10px 0;">🏏 IND vs SL - Live Score</h2>
+        <div style="background: #fff; border-radius: 5px; padding: 5px;">
+            <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
+        </div>
     </div>
 
+    <!-- SEO Content Box -->
     <div class="content-box">
         <h1>IND vs SL Live Streaming: Watch India vs Sri Lanka Test Match Free</h1>
         <p>Welcome to <strong>CricHD Live</strong>. We provide the fastest and most reliable live streaming for the <strong>India tour of Sri Lanka</strong>. Watch every ball of the Test match without buffering.</p>
@@ -72,6 +83,7 @@
         <p>Our HD stream is optimized for mobile users. Get live scorecards, match predictions, and real-time commentary updates right here.</p>
     </div>
 
+    <!-- Professional & Fast Player Script -->
     <script>
         const API_URL = 'https://live-match-api-nine.vercel.app/api'; 
         var video = document.getElementById('video');
@@ -79,12 +91,54 @@
         fetch(API_URL)
             .then(res => res.json())
             .then(data => {
-                var hls = new Hls();
-                hls.loadSource(data.live_link);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+                var videoSrc = data.live_link;
+                
+                if (Hls.isSupported()) {
+                    var hlsConfig = {
+                        maxBufferLength: 30,
+                        maxMaxBufferLength: 60,
+                        liveSyncDurationCount: 3,
+                        lowLatencyMode: true,
+                        xhrSetup: function(xhr, url) {
+                            xhr.withCredentials = false;
+                        }
+                    };
+
+                    var hls = new Hls(hlsConfig);
+                    hls.loadSource(videoSrc);
+                    hls.attachMedia(video);
+                    
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() { 
+                        video.play().catch(e => console.log("Autoplay restricted by browser.")); 
+                    });
+
+                    // Error Auto-Recovery (Professional Feature)
+                    hls.on(Hls.Events.ERROR, function(event, data) {
+                        if (data.fatal) {
+                            switch(data.type) {
+                                case Hls.ErrorTypes.NETWORK_ERROR:
+                                    console.log("Network error... trying to recover");
+                                    hls.startLoad();
+                                    break;
+                                case Hls.ErrorTypes.MEDIA_ERROR:
+                                    console.log("Media error... trying to recover");
+                                    hls.recoverMediaError();
+                                    break;
+                                default:
+                                    hls.destroy();
+                                    break;
+                            }
+                        }
+                    });
+
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = videoSrc;
+                    video.addEventListener('loadedmetadata', function() { 
+                        video.play(); 
+                    });
+                }
             })
-            .catch(err => console.error("Stream loading failed", err));
+            .catch(err => console.error("Error loading stream:", err));
     </script>
 </body>
 </html>
