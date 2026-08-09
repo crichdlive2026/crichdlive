@@ -19,19 +19,33 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- 🚀 Schema Markup -->
+    <!-- 🚀 Updated Schema Markup (Errors Fixed for 15 Aug 2026) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SportsEvent",
-      "name": "CricHD Live Cricket Streaming",
+      "name": "IND vs SL Live Cricket Match Streaming",
       "description": "Watch live cricket streaming on crichd in HD free.",
       "sport": "Cricket",
+      "startDate": "2026-08-15T10:00:00+05:30",
+      "location": {
+        "@type": "Place",
+        "name": "Live Streaming Online on CricHDLive",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN"
+        }
+      },
       "homeTeam": { "@type": "SportsTeam", "name": "India" },
       "awayTeam": { "@type": "SportsTeam", "name": "Sri Lanka" },
       "eventStatus": "https://schema.org/EventScheduled",
       "isAccessibleForFree": true,
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "offers": { 
+        "@type": "Offer", 
+        "price": "0", 
+        "priceCurrency": "INR",
+        "url": "https://crichdlive.in/"
+      },
       "url": "https://crichdlive.in/"
     }
     </script>
@@ -171,7 +185,6 @@
                 } else {
                     video.style.display = 'block';
                     
-                    // 🌟 1. प्लेयर को सबसे पहले चालू (Initialize) करें ताकि वह रेडी रहे
                     playerInstance = new Plyr(video, {
                         controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen'],
                         settings: ['quality', 'speed'],
@@ -179,7 +192,6 @@
                         muted: true
                     });
                     
-                    // 🌟 2. उसके बाद HLS को प्लेयर के साथ जोड़ें
                     if (Hls.isSupported()) {
                         var hls = new Hls({
                             maxBufferLength: 30,
@@ -191,11 +203,9 @@
                         hls.attachMedia(video);
                         
                         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                            // लोडिंग स्क्रीन तुरंत हटाएं
                             loadingOverlay.style.opacity = '0';
                             setTimeout(() => loadingOverlay.style.display = 'none', 400);
                             
-                            // वीडियो प्ले करें
                             let playPromise = playerInstance.play();
                             if (playPromise !== undefined) {
                                 playPromise.then(() => {
