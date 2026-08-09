@@ -9,7 +9,6 @@
     <link href="https://zencdn.net" rel="stylesheet" />
     
     <style>
-        /* पूरी वेबसाइट का बैकग्राउंड और लेआउट */
         body {
             background-color: #0b0f19;
             margin: 0;
@@ -21,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* हेडर (ऊपरी हिस्सा) */
         header {
             background-color: #111827;
             padding: 15px 20px;
@@ -37,7 +35,6 @@
             letter-spacing: 1px;
         }
 
-        /* मुख्य कंटेनर */
         .container {
             flex: 1;
             max-width: 960px;
@@ -47,7 +44,6 @@
             box-sizing: border-box;
         }
 
-        /* वीडियो प्लेयर का आउटर बॉक्स */
         .player-wrapper {
             background-color: #111827;
             border-radius: 12px;
@@ -56,7 +52,6 @@
             border: 1px solid #1f2937;
         }
 
-        /* स्टेटस बार (मैच लाइव का इंडिकेटर) */
         .status-bar {
             background-color: #1f2937;
             padding: 10px 20px;
@@ -81,7 +76,6 @@
             100% { opacity: 1; }
         }
 
-        /* फ़ुटर */
         footer {
             background-color: #111827;
             text-align: center;
@@ -91,7 +85,6 @@
             border-top: 1px solid #1f2937;
         }
 
-        /* मोबाइल के लिए प्लेयर को सेट करना */
         .video-js {
             font-size: 14px;
             width: 100%;
@@ -100,43 +93,66 @@
 </head>
 <body>
 
-    <!-- वेबसाइट का नाम -->
     <header>
         <h1>CricHDLive</h1>
     </header>
 
     <div class="container">
         <div class="player-wrapper">
-            <!-- लाइव स्टेटस -->
             <div class="status-bar">
                 <div class="live-dot"></div>
-                <span>लाइव स्ट्रीमिंग चालू है...</span>
+                <span id="stream-status">स्ट्रीमिंग लोड हो रही है...</span>
             </div>
             
-            <!-- मुख्य वीडियो प्लेयर (यह ब्राउज़र में .m3u8 को चलाएगा) -->
+            <!-- मुख्य वीडियो प्लेयर (शुरुआत में इसमें कोई सोर्स लिंक नहीं है) -->
             <video id="cric-live-player" 
                    class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" 
                    controls 
                    preload="auto" 
                    data-setup='{}'>
-                   
-                <!-- आपका लाइव और सुरक्षित M3U8 लिंक -->
-                <source src="https://crichdlive.in" type="application/x-mpegURL">
-                
-                <p class="vjs-no-js">
-                    इस लाइव मैच को देखने के लिए कृपया अपने ब्राउज़र में JavaScript चालू करें।
-                </p>
+                <p class="vjs-no-js">इस लाइव मैच को देखने के लिए कृपया जावास्क्रिप्ट चालू करें।</p>
             </video>
         </div>
     </div>
 
-    <!-- कॉपीराइट फ़ुटर -->
     <footer>
         &copy; 2026 CricHDLive.in | सर्वाधिकार सुरक्षित।
     </footer>
 
-    <!-- Video.js JavaScript फ़ाइल (HLS सपोर्ट के लिए ज़रूरी है) -->
+    <!-- Video.js JavaScript फ़ाइल -->
     <script src="https://zencdn.net"></script>
+
+    <!-- ⚡ जादुई स्क्रिप्ट जो API से लिंक लाकर प्लेयर में डालेगी -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // यहाँ अपनी GitHub/Vercel वाली API का पूरा URL डालें
+            // उदाहरण के लिए: https://crichdlive.in या जो भी आपका API पाथ है
+            const apiEndpoint = "/api/index"; 
+
+            // Video.js प्लेयर को इनिशियलाइज़ करना
+            const player = videojs('cric-live-player');
+
+            // API से डेटा खींचना
+            fetch(apiEndpoint)
+                .then(response => response.json())
+                .then(result => {
+                    if(result.success && result.data) {
+                        // प्लेयर में लाइव M3U8 लिंक सेट करना
+                        player.src({
+                            src: result.data,
+                            type: 'application/x-mpegURL'
+                        });
+                        document.getElementById("stream-status").innerText = "लाइव स्ट्रीमिंग चालू है...";
+                    } else {
+                        document.getElementById("stream-status").innerText = "स्ट्रीम लिंक नहीं मिल पाया।";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching stream:", error);
+                    document.getElementById("stream-status").innerText = "सर्वर से कनेक्ट करने में एरर।";
+                });
+        });
+    </script>
 
 </body>
 </html>
