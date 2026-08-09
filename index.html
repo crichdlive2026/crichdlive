@@ -3,88 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free | CricHD Live</title>
-    <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online, live scores, and match highlights.">
-    <meta name="keywords" content="ind vs sl live streaming, india vs sri lanka live match, ind vs sl test live, crichd live, crichdlive.in, today test match live, watch cricket free">
+    <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free</title>
+    <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online.">
     <link rel="canonical" href="https://crichdlive.in/" />
-    <meta property="og:title" content="🔴 LIVE: IND vs SL Test Match Live Streaming">
-    <meta property="og:description" content="Watch IND vs SL Test series live streaming in HD on crichdlive.in.">
-    <meta property="og:url" content="https://crichdlive.in/">
-
-    <!-- Schema Markup for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsEvent",
-      "name": "India vs Sri Lanka Test Match",
-      "description": "Live streaming of IND vs SL Test Series",
-      "homeTeam": "India",
-      "awayTeam": "Sri Lanka"
-    }
-    </script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XZFSKSMR7G');
-    </script>
-
-    <!-- HLS Player Library -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
     <style>
         :root { --bg-dark: #050505; --primary: #00e5ff; }
-        body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
-        .player-wrapper { width: 100%; max-width: 900px; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); }
+        body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 15px; }
+        .player-wrapper { width: 100%; max-width: 900px; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
         .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
         video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .wa-join-btn { background-color: #25D366; color: #000; padding: 12px 25px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 15px; }
-        .score-container, .seo-content { max-width: 900px; width: 100%; background: #0a0a0a; padding: 15px; border-radius: 8px; border: 1px solid #1a1a1a; margin-bottom: 10px; }
-        .seo-content h1 { color: #00e5ff; font-size: 22px; }
-        .seo-content h2 { color: #00e5ff; font-size: 18px; border-bottom: 1px solid #222; padding-bottom: 5px; }
     </style>
 </head>
 <body>
-
-    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel for Links</a>
-
+    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel</a>
     <div class="player-wrapper">
         <div class="aspect-ratio">
             <video id="video" controls autoplay playsinline></video>
         </div>
     </div>
-
-    <div class="score-container">
-        <h3 style="color: #00e5ff; margin: 0;">🏏 IND vs SL - Live Score</h3>
-        <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
-    </div>
-
-    <div class="seo-content">
-        <h1>IND vs SL Live Streaming - Watch Test Match Online</h1>
-        <p>Welcome to <strong>CricHD Live</strong>. Stream India vs Sri Lanka Test series in HD. Buffering-free experience for cricket fans.</p>
-        <h2>Watch Cricket Live</h2>
-        <p>Catch every ball and moment of the IND vs SL match online on your mobile or desktop.</p>
-    </div>
-
     <script>
+        const API_URL = 'https://your-vercel-api-link.com/api'; // यहाँ अपनी Vercel API का लिंक डालें
         var video = document.getElementById('video');
-        // अपना नया m3u8 लिंक यहाँ डालें
-        var videoSrc = 'YOUR_M3U8_LINK_HERE'; 
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() { video.play(); });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.addEventListener('loadedmetadata', function() { video.play(); });
-        }
+
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                var videoSrc = data.live_link;
+                if (Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(videoSrc);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() { video.play(); });
+                }
+            });
     </script>
 </body>
 </html>
