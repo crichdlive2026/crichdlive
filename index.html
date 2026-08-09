@@ -66,8 +66,8 @@
     <div class="player-wrapper">
         <div id="loader"></div>
         <div class="aspect-ratio" id="playerContainer">
-            <!-- muted हटा दिया है ताकि आवाज के साथ प्ले हो सके -->
-            <video id="video" controls playsinline></video>
+            <!-- आटोप्ले और म्यूट जोड़ा गया है ताकि ब्राउज़र बिना अटके तुरंत चलाए -->
+            <video id="video" controls autoplay muted playsinline></video>
         </div>
     </div>
 
@@ -108,7 +108,9 @@
                         
                         hls.on(Hls.Events.MANIFEST_PARSED, () => {
                             loader.style.display = 'none';
-                            console.log("Stream loaded successfully. Click play if it doesn't start automatically.");
+                            video.play().catch(e => {
+                                console.log("Autoplay blocked, waiting for user interaction:", e);
+                            });
                         });
 
                         hls.on(Hls.Events.ERROR, (event, errData) => {
