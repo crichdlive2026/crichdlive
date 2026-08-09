@@ -1,202 +1,24 @@
 <!DOCTYPE html>
-<html lang="hi-IN">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free | CricHD Live</title>
-    <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online.">
-    <link rel="canonical" href="https://crichdlive.in/" />
-    
-    <!-- HLS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-    <style>
-        :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; }
-        body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
-        
-        .player-wrapper { 
-            width: 100%; 
-            max-width: 900px; 
-            background: #000; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            margin-bottom: 15px; 
-            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-        .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
-        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        /* Professional Loading Screen Overlay */
-        #loadingOverlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 5, 5, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            transition: opacity 0.4s ease;
-        }
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border-left-color: var(--primary);
-            animation: spin 0.9s linear infinite;
-            margin-bottom: 12px;
-        }
-        .loading-text {
-            color: #fff;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Professional Tap to Unmute Button */
-        #unmuteBtn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.75);
-            color: #fff;
-            border: 1px solid var(--primary);
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 15;
-            display: none;
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-            transition: transform 0.2s, background 0.2s;
-        }
-        #unmuteBtn:hover {
-            background: var(--primary);
-            color: #000;
-            transform: scale(1.05);
-        }
-
-        .wa-join-btn { 
-            background-color: var(--accent); 
-            color: #000; 
-            padding: 12px 30px; 
-            font-size: 16px;
-            font-weight: bold; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            margin-bottom: 15px; 
-            display: inline-block; 
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-        .content-box { max-width: 900px; width: 100%; background: #111; padding: 20px; border-radius: 10px; border: 1px solid #222; margin-bottom: 15px; box-sizing: border-box; }
-    </style>
+    <title>Live Match</title>
+    <!-- Video.js CSS लाइब्रेरी -->
+    <link href="https://zencdn.net" rel="stylesheet" />
 </head>
-<body>
+<body style="background-color: #000; margin: 0; padding: 20px;">
 
-    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel for HD Links</a>
-
-    <div class="player-wrapper">
-        <!-- प्रोफेशनल लोडिंग स्क्रीन -->
-        <div id="loadingOverlay">
-            <div class="spinner"></div>
-            <div class="loading-text">Connecting to Live HD Stream...</div>
-        </div>
-
-        <!-- अनम्यूट करने के लिए फ्लोटिंग बटन -->
-        <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
-
-        <div class="aspect-ratio" id="playerContainer">
-            <video id="video" controls autoplay muted playsinline></video>
-        </div>
+    <div style="max-width: 850px; margin: 0 auto;">
+        <!-- वीडियो प्लेयर एलिमेंट -->
+        <video id="cricket-player" class="video-js vjs-default-skin vjs-big-play-centered" 
+               controls preload="auto" width="100%" height="480" data-setup='{}'>
+            <!-- आपका फाइनल सुरक्षित M3U8 लिंक -->
+            <source src="https://crichdlive.in" type="application/x-mpegURL">
+            <p class="vjs-no-js">यह वीडियो देखने के लिए जावास्क्रिप्ट चालू करें।</p>
+        </video>
     </div>
 
-    <div class="content-box">
-        <h3 style="color: var(--primary); margin: 0 0 10px 0;">🏏 IND vs SL - Live Score</h3>
-        <div style="background: #fff; border-radius: 6px; overflow: hidden; padding: 5px;">
-            <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
-        </div>
-    </div>
-
-    <script>
-        const API_URL = 'https://live-match-api-nine.vercel.app/api'; 
-        const container = document.getElementById('playerContainer');
-        const video = document.getElementById('video');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const unmuteBtn = document.getElementById('unmuteBtn');
-
-        // यूजर के क्लिक पर आवाज चालू करने का फंक्शन
-        function unmuteStream() {
-            video.muted = false;
-            unmuteBtn.style.display = 'none';
-        }
-
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(response => {
-                const { type, data } = response;
-
-                if (type === 'iframe') {
-                    loadingOverlay.style.display = 'none';
-                    video.style.display = 'none';
-                    container.innerHTML = data;
-                } else {
-                    video.style.display = 'block';
-                    
-                    if (Hls.isSupported()) {
-                        var hls = new Hls({
-                            maxBufferLength: 30,
-                            lowLatencyMode: true,
-                            xhrSetup: (xhr) => { xhr.withCredentials = false; }
-                        });
-
-                        hls.loadSource(data);
-                        hls.attachMedia(video);
-                        
-                        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                            // लोडिंग स्क्रीन हटाएँ और वीडियो चलाएं (म्यूट के साथ ताकि ब्राउज़र न रोके)
-                            loadingOverlay.style.opacity = '0';
-                            setTimeout(() => loadingOverlay.style.display = 'none', 400);
-                            
-                            video.play().then(() => {
-                                // अगर वीडियो चल गई, तो अनम्यूट बटन दिखाएं ताकि यूजर आवाज खोल सके
-                                if(video.muted) {
-                                    unmuteBtn.style.display = 'block';
-                                }
-                            }).catch(e => {
-                                console.log("Autoplay restricted:", e);
-                            });
-                        });
-
-                        hls.on(Hls.Events.ERROR, (event, errData) => {
-                            if (errData.fatal) {
-                                switch(errData.type) {
-                                    case Hls.ErrorTypes.NETWORK_ERROR: hls.startLoad(); break;
-                                    case Hls.ErrorTypes.MEDIA_ERROR: hls.recoverMediaError(); break;
-                                    default: hls.destroy(); break;
-                                }
-                            }
-                        });
-
-                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = data;
-                        video.addEventListener('loadedmetadata', () => {
-                            loadingOverlay.style.display = 'none';
-                            video.play();
-                            if(video.muted) unmuteBtn.style.display = 'block';
-                        });
-                    }
-                }
-            })
-            .catch(err => {
-                loadingOverlay.style.display = 'none';
-                console.error("API Fetch Error:", err);
-            });
-    </script>
+    <!-- Video.js जावास्क्रिप्ट फ़ाइल -->
+    <script src="https://zencdn.net"></script>
 </body>
 </html>
