@@ -17,43 +17,29 @@
     <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free</title>
     <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online, live scores, and playing XI.">
     <meta name="keywords" content="ind vs sl live streaming, india vs sri lanka live match, ind vs sl test live, crichd live, crichdlive.in, today test match live">
+    <link rel="canonical" href="https://crichdlive.in/" />
     
     <style>
         :root { --bg-dark: #050505; --primary: #00e5ff; }
         body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        /* नया Player Wrapper (Fixed Height के साथ) */
+        /* नया और साफ Player Design (बिल्कुल सही 16:9 रेशियो में) */
         .player-wrapper { 
             width: 100%; 
             max-width: 900px; 
-            background: #ffffff; /* बैकग्राउंड वाइट ताकि Akamai पेज मिक्स हो जाए */
+            position: relative; 
+            background: #000; 
             border-radius: 8px; 
             overflow: hidden; 
             margin-bottom: 15px; 
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
-            position: relative;
-            height: 600px; /* डेस्कटॉप के लिए हाइट */
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); 
         }
-
-        /* Iframe Cropping Hack (ऊपर का हिस्सा छुपाने के लिए) */
-        .akamai-iframe {
-            position: absolute;
-            top: -90px; /* यह Akamai के लोगो को ऊपर खिसका कर छुपा देगा */
-            left: 0;
-            width: 100%;
-            height: calc(100% + 90px); 
-            border: none;
-        }
-
-        /* मोबाइल के लिए स्क्रीन एडजस्टमेंट */
-        @media (max-width: 768px) {
-            .player-wrapper {
-                height: 480px; /* मोबाइल स्क्रीन के हिसाब से हाइट */
-            }
-            .akamai-iframe {
-                top: -110px; /* मोबाइल पर मेनू थोड़ा बड़ा होता है, इसलिए ज्यादा ऊपर खिसकाया */
-                height: calc(100% + 110px);
-            }
+        
+        .aspect-ratio { 
+            position: relative; 
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0; 
+            overflow: hidden;
         }
 
         /* WhatsApp Button Design */
@@ -86,14 +72,24 @@
 
     <!-- Player Box -->
     <div class="player-wrapper">
-        <!-- Akamai Iframe Hack के साथ -->
-        <iframe 
-            class="akamai-iframe"
-            scrolling="no" 
-            allow="autoplay; fullscreen" 
-            allowfullscreen="" 
-            src="https://players.akamai.com/players/hlsjs?streamUrl=https%3A%2F%2Fdishmt.slivcdn.com%2Fhls%2Flive%2F2011747%2FTEN1HD%2Fhdntl%3Dexp%3D1786220671~acl%3D%252f*~id%3D158e8351-3529-4a2f-8dbc-a875e210522e~data%3Dhdntl~hmac%3D419cc06abe626aa97c516e738d951497f2b5ad11e1f1d952f7886072a907b0e7%2Fmaster_664.m3u8">
-        </iframe>
+        <div class="aspect-ratio">
+            <!-- आपका नया Dacast Iframe Code -->
+            <iframe 
+                id="2516a74e-99eb-cec9-af67-fab36b1da465-live-2ce77f5a-8861-4c91-b6ee-f95f50d13a3a" 
+                src="https://iframe.dacast.com/live/2516a74e-99eb-cec9-af67-fab36b1da465/2ce77f5a-8861-4c91-b6ee-f95f50d13a3a" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                scrolling="no" 
+                allow="autoplay;encrypted-media" 
+                allowfullscreen 
+                webkitallowfullscreen 
+                mozallowfullscreen 
+                oallowfullscreen 
+                msallowfullscreen 
+                style="position:absolute;top:0;left:0;">
+            </iframe>
+        </div>
     </div>
 
     <!-- Live Score Widget -->
@@ -110,8 +106,8 @@
         <h1>IND vs SL Live Streaming - Watch Test Match Online in HD</h1>
         <p>Welcome to <strong>CricHD Live</strong> (crichdlive.in). Get ready for the thrilling <strong>India vs Sri Lanka Test Series</strong>. Watch the complete IND vs SL match live online directly on your mobile and desktop in HD quality.</p>
         
-        <h2>How to play?</h2>
-        <p>Click on the blue <strong>"Play stream"</strong> button inside the player above to start watching the live match. Enable fullscreen for the best experience.</p>
+        <h2>Match Details & Playing XI</h2>
+        <p>Catch every ball, four, and six of the IND vs SL Test match today. Our advanced player ensures that you don't miss any moment of the India tour of Sri Lanka even on a slow internet connection.</p>
     </div>
 
 </body>
