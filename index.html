@@ -24,7 +24,8 @@
         </div>
     </div>
     <script>
-        const API_URL = 'https://your-vercel-api-link.com/api'; // यहाँ अपनी Vercel API का लिंक डालें
+        // आपकी Vercel API का लिंक जो अब सही काम करेगा
+        const API_URL = 'https://live-match-api-nine.vercel.app/api'; 
         var video = document.getElementById('video');
 
         fetch(API_URL)
@@ -35,9 +36,12 @@
                     var hls = new Hls();
                     hls.loadSource(videoSrc);
                     hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, function() { video.play(); });
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() { 
+                        video.play().catch(e => console.log("Autoplay blocked, user interaction required.")); 
+                    });
                 }
-            });
+            })
+            .catch(err => console.error("Error fetching live link:", err));
     </script>
 </body>
 </html>
