@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 🚀 GSC Optimized Meta Title & Description (Intact) -->
+    <!-- 🚀 GSC Optimized Meta Title & Description -->
     <title>CricHD Live Streaming - Watch Live Cricket on Cric HD Free</title>
     <meta name="description" content="Welcome to CricHD Live. Watch IND vs SL live cricket streaming on crichd. Enjoy buffering-free cric hd matches, crickethd scores, and crichdtv streams today.">
     <meta name="keywords" content="crichd, crichd live streaming, cric hd, crichd live, crichdtv, crickethd, live cricket streaming crichd, crichd tv live, live cricket streaming on crichd, crichd co">
     
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://crichdlive.in/" />
     
-    <!-- 🚀 Open Graph (OG) Tags -->
+    <!-- 🚀 Open Graph (OG) & Twitter Tags -->
     <meta property="og:title" content="🔴 CricHD Live Streaming - Watch Cricket Free">
     <meta property="og:description" content="Join CricHD Live for the best live cricket streaming crichd experience. Watch matches in HD without buffering!">
     <meta property="og:image" content="https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1200&auto=format&fit=crop">
     <meta property="og:url" content="https://crichdlive.in/">
     <meta property="og:type" content="website">
-
-    <!-- 🚀 Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🔴 CricHD Live Streaming - Watch Cricket Free">
-    <meta name="twitter:description" content="Watch live cricket streaming on crichd in HD.">
     
-    <!-- 🚀 Schema Markup (JSON-LD) -->
+    <!-- 🚀 Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -41,34 +36,19 @@
     }
     </script>
 
-    <!-- 🌟 NEW: Plyr Player CSS -->
+    <!-- 🌟 Premium Plyr CSS & JS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    
-    <!-- HLS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    
-    <!-- 🌟 NEW: Plyr Player JS -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <style>
         :root { 
-            --bg-dark: #080808; 
-            --primary: #00e5ff; 
-            --accent: #25D366; 
-            /* Plyr Theme Override to match your website */
-            --plyr-color-main: #00e5ff; 
-            --plyr-video-control-color-hover: #fff;
+            --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; 
+            --plyr-color-main: #00e5ff; --plyr-video-control-color-hover: #fff;
         }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         
-        .page-title {
-            font-size: 22px;
-            color: var(--primary);
-            text-align: center;
-            margin: 10px 0 20px 0;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
+        .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
@@ -78,7 +58,6 @@
         .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
         video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Plyr specific overrides for better look */
         .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         .plyr__controls { background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)) !important; padding-top: 30px !important; }
         
@@ -99,25 +78,15 @@
         #unmuteBtn {
             position: absolute; bottom: 60px; right: 20px; background: rgba(0, 0, 0, 0.75); 
             color: #fff; border: 1px solid var(--primary); padding: 10px 18px; border-radius: 30px;
-            font-size: 14px; font-weight: bold; cursor: pointer; z-index: 25; /* High z-index to stay above player */
+            font-size: 14px; font-weight: bold; cursor: pointer; z-index: 25;
             display: none; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
             transition: transform 0.2s, background 0.2s;
         }
         #unmuteBtn:hover { background: var(--primary); color: #000; transform: scale(1.05); }
 
-        .wa-join-btn { 
-            background-color: var(--accent); color: #000; padding: 12px 30px; 
-            font-size: 16px; font-weight: bold; border-radius: 50px; 
-            text-decoration: none; margin-bottom: 15px; display: inline-block; 
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-        
-        .content-box { 
-            max-width: 900px; width: 100%; background: #111; padding: 20px; 
-            border-radius: 10px; border: 1px solid #222; margin-bottom: 20px; box-sizing: border-box; 
-        }
+        .wa-join-btn { background-color: var(--accent); color: #000; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+        .content-box { max-width: 900px; width: 100%; background: #111; padding: 20px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px; box-sizing: border-box; }
 
-        /* SEO Content Styling */
         .seo-text { font-size: 15px; line-height: 1.7; color: #d1d5db; margin-top: 15px; border-top: 1px solid #333; padding-top: 20px; }
         .seo-text h2 { font-size: 20px; color: #fff; margin-bottom: 12px; border-bottom: 2px solid var(--primary); padding-bottom: 5px; display: inline-block;}
         .seo-text h3 { font-size: 18px; color: var(--primary); margin-top: 25px; margin-bottom: 10px;}
@@ -142,7 +111,6 @@
         <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
 
         <div class="aspect-ratio" id="playerContainer">
-            <!-- 🌟 Removed default 'controls' so Plyr can take over -->
             <video id="video" autoplay muted playsinline></video>
         </div>
     </div>
@@ -179,9 +147,8 @@
         const video = document.getElementById('video');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const unmuteBtn = document.getElementById('unmuteBtn');
-        let playerInstance = null; // Store Plyr instance
+        let playerInstance = null;
 
-        // 🌟 Advanced Unmute logic for Plyr
         function unmuteStream() {
             if (playerInstance) {
                 playerInstance.muted = false;
@@ -190,16 +157,6 @@
                 video.muted = false;
             }
             unmuteBtn.style.display = 'none';
-        }
-
-        // 🌟 Initialize Plyr UI
-        function initPlyr() {
-            playerInstance = new Plyr(video, {
-                controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen'],
-                settings: ['quality', 'speed'],
-                autoplay: true,
-                muted: true
-            });
         }
 
         fetch(API_URL)
@@ -214,6 +171,15 @@
                 } else {
                     video.style.display = 'block';
                     
+                    // 🌟 1. प्लेयर को सबसे पहले चालू (Initialize) करें ताकि वह रेडी रहे
+                    playerInstance = new Plyr(video, {
+                        controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen'],
+                        settings: ['quality', 'speed'],
+                        autoplay: true,
+                        muted: true
+                    });
+                    
+                    // 🌟 2. उसके बाद HLS को प्लेयर के साथ जोड़ें
                     if (Hls.isSupported()) {
                         var hls = new Hls({
                             maxBufferLength: 30,
@@ -225,21 +191,24 @@
                         hls.attachMedia(video);
                         
                         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                            // 🌟 Remove Loading Screen
+                            // लोडिंग स्क्रीन तुरंत हटाएं
                             loadingOverlay.style.opacity = '0';
                             setTimeout(() => loadingOverlay.style.display = 'none', 400);
                             
-                            // 🌟 Start Professional Player
-                            initPlyr();
-
-                            // Try playing
-                            playerInstance.play().then(() => {
-                                if(playerInstance.muted) {
+                            // वीडियो प्ले करें
+                            let playPromise = playerInstance.play();
+                            if (playPromise !== undefined) {
+                                playPromise.then(() => {
+                                    if(playerInstance.muted) {
+                                        unmuteBtn.style.display = 'block';
+                                    }
+                                }).catch(error => {
+                                    console.log("Autoplay blocked, forcing mute");
+                                    playerInstance.muted = true;
+                                    playerInstance.play();
                                     unmuteBtn.style.display = 'block';
-                                }
-                            }).catch(e => {
-                                console.log("Autoplay restricted by browser");
-                            });
+                                });
+                            }
                         });
 
                         hls.on(Hls.Events.ERROR, (event, errData) => {
@@ -253,11 +222,9 @@
                         });
 
                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        // Safari Fallback
                         video.src = data;
                         video.addEventListener('loadedmetadata', () => {
                             loadingOverlay.style.display = 'none';
-                            initPlyr();
                             playerInstance.play();
                             if(playerInstance.muted) unmuteBtn.style.display = 'block';
                         });
