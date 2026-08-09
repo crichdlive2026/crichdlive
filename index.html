@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Google Tag (gtag.js) - Google Analytics Tracking Code -->
+    <!-- Google Tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,143 +13,67 @@
       gtag('config', 'G-XZFSKSMR7G');
     </script>
 
-    <!-- IND vs SL Series SEO Meta Tags -->
-    <title>🔴 LIVE: IND vs SL Test Match Live Streaming - Watch India vs Sri Lanka Free</title>
-    <meta name="description" content="Watch India vs Sri Lanka Test series live streaming in HD on crichdlive.in. Enjoy buffering-free IND vs SL live match online, live scores, and playing XI.">
-    <meta name="keywords" content="ind vs sl live streaming, india vs sri lanka live match, ind vs sl test live, crichd live, crichdlive.in, today test match live">
+    <title>🔴 LIVE: IND vs SL Test Match Live Streaming</title>
     <link rel="canonical" href="https://crichdlive.in/" />
     
-    <!-- Shaka Player CSS & Library -->
+    <!-- Shaka Player Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.4/shaka-player.compiled.js"></script>
 
     <style>
         :root { --bg-dark: #050505; --primary: #00e5ff; }
         body { background-color: var(--bg-dark); color: #fff; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        
-        /* Player Design (16:9 Ratio) */
-        .player-wrapper { 
-            width: 100%; 
-            max-width: 900px; 
-            position: relative; 
-            background: #000; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            margin-bottom: 15px; 
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); 
-        }
-        
-        .aspect-ratio { 
-            position: relative; 
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0; 
-            overflow: hidden;
-        }
-
-        /* Shaka Video Element inside Aspect Ratio */
-        .aspect-ratio video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-        }
-
-        /* WhatsApp Button Design */
-        .wa-join-btn {
-            background-color: #25D366; color: #000; padding: 15px 30px;
-            font-size: 18px; font-weight: bold; border-radius: 50px;
-            text-decoration: none; display: inline-block;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: 0.3s;
-        }
-        .wa-join-btn:hover { background-color: #1ebd5a; transform: scale(1.05); }
-
-        /* Score & SEO Content */
-        .score-container, .seo-content {
-            max-width: 900px; width: 100%; margin-bottom: 15px; background: #0a0a0a; 
-            padding: 15px; border-radius: 8px; border: 1px solid #1a1a1a; text-align: center; box-sizing: border-box;
-        }
-        .seo-content { text-align: left; padding: 25px; margin-top: 10px; line-height: 1.6; }
-        .seo-content h1 { color: #00e5ff; font-size: 24px; margin-top: 0; }
-        .seo-content h2 { color: #00e5ff; font-size: 20px; margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 8px; }
-        .seo-content h3 { font-size: 16px; color: #fff; margin-bottom: 5px; }
-        .seo-content p { color: #ccc; font-size: 15px; }
+        .player-wrapper { width: 100%; max-width: 900px; position: relative; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 15px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.15); }
+        .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .aspect-ratio video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; }
+        .wa-join-btn { background-color: #25D366; color: #000; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 50px; text-decoration: none; display: inline-block; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+        .score-container, .seo-content { max-width: 900px; width: 100%; margin-bottom: 15px; background: #0a0a0a; padding: 15px; border-radius: 8px; border: 1px solid #1a1a1a; text-align: center; }
+        .seo-content { text-align: left; padding: 25px; }
     </style>
 </head>
 <body>
 
-    <!-- WhatsApp Button -->
-    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn" style="margin-bottom: 20px;">
-        📢 Join WhatsApp Channel for Links
-    </a>
+    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn" style="margin-bottom: 20px;">📢 Join WhatsApp Channel</a>
 
-    <!-- Player Box -->
     <div class="player-wrapper">
         <div class="aspect-ratio">
-            <!-- Shaka Video Player -->
-            <video id="videoContainer" controls autoplay poster=""></video>
+            <video id="videoContainer" controls autoplay></video>
         </div>
     </div>
 
-    <!-- Live Score Widget -->
     <div class="score-container">
-        <h3 style="color: #00e5ff; margin-top: 0; font-size: 18px;">🏏 IND vs SL - Live Score</h3>
-        <div style="background: #ffffff; border-radius: 5px; overflow: hidden; padding: 5px;">
-            <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
-        </div>
-        <p style="color: #888; font-size: 12px; margin-bottom: 0; margin-top: 10px;">Score updates automatically.</p>
+        <h3 style="color: #00e5ff;">🏏 IND vs SL - Live Score</h3>
+        <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
     </div>
 
-    <!-- SEO & Match Details Section -->
-    <div class="seo-content">
-        <h1>IND vs SL Live Streaming - Watch Test Match Online in HD</h1>
-        <p>Welcome to <strong>CricHD Live</strong> (crichdlive.in). Get ready for the thrilling <strong>India vs Sri Lanka Test Series</strong>. Watch the complete IND vs SL match live online directly on your mobile and desktop in HD quality.</p>
-        
-        <h2>Match Details & Playing XI</h2>
-        <p>Catch every ball, four, and six of the IND vs SL Test match today. Our advanced player ensures that you don't miss any moment of the India tour of Sri Lanka even on a slow internet connection.</p>
-    </div>
-
-    <!-- Shaka Player Initialization Script -->
     <script>
-        // आपके Linode VPS प्रॉक्सी और Jio लिंक का कॉम्बिनेशन
-        const manifestUri = 'https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_HD_MOB/WDVLive/index.mpd?__hdnea__=st=1786262436~exp=1786284036~acl=/*~hmac=4b594cd3747231dea3c6bde4c51c2599d0e848232e6bff1394275d8f62f920c2';
-
-        async function initApp() {
-            // Install polyfills provided by Shaka player
-            shaka.polyfill.installAll();
-
-            // Check if the browser supports the required APIs
-            if (shaka.Player.isBrowserSupported()) {
-                initPlayer();
-            } else {
-                console.error('Browser not supported!');
-            }
-        }
+        // अपना नया लिंक यहाँ डालें (बिना DRM वाला लिंक सबसे बेहतर है)
+        const manifestUri = 'https://stream.crichdlive.in/live/bpk-tv/Ten_HD_MOB/WDVLive/index.mpd?__hdnea__=st=1786262436~exp=1786284036~acl=/*~hmac=4b594cd3747231dea3c6bde4c51c2599d0e848232e6bff1394275d8f62f920c2';
 
         async function initPlayer() {
             const video = document.getElementById('videoContainer');
             const player = new shaka.Player(video);
 
-            player.addEventListener('error', onErrorEvent);
+            // DRM कॉन्फ़िगरेशन (यदि आपके पास लाइसेंस URL है)
+            player.configure({
+                drm: {
+                    servers: {
+                        'com.widevine.alpha': 'https://license.example.com/widevine' // यहाँ अपना License URL डालें
+                    }
+                }
+            });
+
+            player.addEventListener('error', (event) => {
+                console.error('Shaka Player Error:', event.detail);
+            });
 
             try {
                 await player.load(manifestUri);
-                console.log('Video has been loaded successfully via Linode VPS proxy!');
             } catch (e) {
-                onError(e);
+                console.error('Player Load Error:', e);
             }
         }
 
-        function onErrorEvent(event) {
-            onError(event.detail);
-        }
-
-        function onError(error) {
-            console.error('Error code', error.code, 'object', error);
-        }
-
-        document.addEventListener('DOMContentLoaded', initApp);
+        document.addEventListener('DOMContentLoaded', initPlayer);
     </script>
-
 </body>
 </html>
