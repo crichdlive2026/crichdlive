@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 🚀 GSC Optimized Meta Title & Description -->
+    <!-- 🚀 GSC Optimized Meta Title & Description (Intact) -->
     <title>CricHD Live Streaming - Watch Live Cricket on Cric HD Free</title>
     <meta name="description" content="Welcome to CricHD Live. Watch IND vs SL live cricket streaming on crichd. Enjoy buffering-free cric hd matches, crickethd scores, and crichdtv streams today.">
     <meta name="keywords" content="crichd, crichd live streaming, cric hd, crichd live, crichdtv, crickethd, live cricket streaming crichd, crichd tv live, live cricket streaming on crichd, crichd co">
@@ -41,11 +41,24 @@
     }
     </script>
 
+    <!-- 🌟 NEW: Plyr Player CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    
     <!-- HLS Library -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    
+    <!-- 🌟 NEW: Plyr Player JS -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
     <style>
-        :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; }
+        :root { 
+            --bg-dark: #080808; 
+            --primary: #00e5ff; 
+            --accent: #25D366; 
+            /* Plyr Theme Override to match your website */
+            --plyr-color-main: #00e5ff; 
+            --plyr-video-control-color-hover: #fff;
+        }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         
         .page-title {
@@ -65,6 +78,10 @@
         .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
         video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
+        /* Plyr specific overrides for better look */
+        .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        .plyr__controls { background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)) !important; padding-top: 30px !important; }
+        
         #loadingOverlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(8px);
@@ -80,9 +97,9 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         #unmuteBtn {
-            position: absolute; bottom: 20px; right: 20px; background: rgba(0, 0, 0, 0.75); 
+            position: absolute; bottom: 60px; right: 20px; background: rgba(0, 0, 0, 0.75); 
             color: #fff; border: 1px solid var(--primary); padding: 10px 18px; border-radius: 30px;
-            font-size: 14px; font-weight: bold; cursor: pointer; z-index: 15;
+            font-size: 14px; font-weight: bold; cursor: pointer; z-index: 25; /* High z-index to stay above player */
             display: none; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
             transition: transform 0.2s, background 0.2s;
         }
@@ -114,19 +131,19 @@
 
     <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel for HD Links</a>
 
-    <!-- 🚀 Main H1 matches the top search queries -->
     <h1 class="page-title">🔴 CricHD Live Streaming - Watch Live Cricket on Cric HD</h1>
 
     <div class="player-wrapper">
         <div id="loadingOverlay">
             <div class="spinner"></div>
-            <div class="loading-text">Connecting to Live HD Stream...</div>
+            <div class="loading-text">Connecting to HD Stream...</div>
         </div>
 
         <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
 
         <div class="aspect-ratio" id="playerContainer">
-            <video id="video" controls autoplay muted playsinline></video>
+            <!-- 🌟 Removed default 'controls' so Plyr can take over -->
+            <video id="video" autoplay muted playsinline></video>
         </div>
     </div>
 
@@ -137,7 +154,6 @@
             <script type="text/javascript" src="https://www.cricwaves.com/cricket/widgets/script/scoreWidgets.js"></script>
         </div>
 
-        <!-- 🚀 GSC Keyword Integrated Text Area -->
         <div class="seo-text">
             <h2>Welcome to CricHD Live Streaming</h2>
             <p>Welcome to <strong>CricHD</strong>, your ultimate home for watching live cricket online. If you are searching for the best <strong>crichd live streaming</strong> link for today's match, you have arrived at the perfect destination. We provide a seamless, buffering-free <strong>cric hd</strong> experience so you never miss a moment of the action.</p>
@@ -163,10 +179,27 @@
         const video = document.getElementById('video');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const unmuteBtn = document.getElementById('unmuteBtn');
+        let playerInstance = null; // Store Plyr instance
 
+        // 🌟 Advanced Unmute logic for Plyr
         function unmuteStream() {
-            video.muted = false;
+            if (playerInstance) {
+                playerInstance.muted = false;
+                playerInstance.volume = 1;
+            } else {
+                video.muted = false;
+            }
             unmuteBtn.style.display = 'none';
+        }
+
+        // 🌟 Initialize Plyr UI
+        function initPlyr() {
+            playerInstance = new Plyr(video, {
+                controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen'],
+                settings: ['quality', 'speed'],
+                autoplay: true,
+                muted: true
+            });
         }
 
         fetch(API_URL)
@@ -192,15 +225,20 @@
                         hls.attachMedia(video);
                         
                         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                            // 🌟 Remove Loading Screen
                             loadingOverlay.style.opacity = '0';
                             setTimeout(() => loadingOverlay.style.display = 'none', 400);
                             
-                            video.play().then(() => {
-                                if(video.muted) {
+                            // 🌟 Start Professional Player
+                            initPlyr();
+
+                            // Try playing
+                            playerInstance.play().then(() => {
+                                if(playerInstance.muted) {
                                     unmuteBtn.style.display = 'block';
                                 }
                             }).catch(e => {
-                                console.log("Autoplay restricted:", e);
+                                console.log("Autoplay restricted by browser");
                             });
                         });
 
@@ -215,11 +253,13 @@
                         });
 
                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        // Safari Fallback
                         video.src = data;
                         video.addEventListener('loadedmetadata', () => {
                             loadingOverlay.style.display = 'none';
-                            video.play();
-                            if(video.muted) unmuteBtn.style.display = 'block';
+                            initPlyr();
+                            playerInstance.play();
+                            if(playerInstance.muted) unmuteBtn.style.display = 'block';
                         });
                     }
                 }
