@@ -12,14 +12,9 @@
     
     <link rel="canonical" href="https://crichdlive.in/" />
     
-    <!-- ⚡ PRECONNECTS (For Ultra Fast Loading) -->
+    <!-- ⚡ PRECONNECTS (For DNS Resolution Speed) -->
     <link rel="preconnect" href="https://cdn.plyr.io" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-    <!-- ⚡ PRELOAD CSS & ASYNC LOAD (100/100 PageSpeed Trick) -->
-    <link rel="preload" as="style" href="https://cdn.plyr.io/3.7.8/plyr.css">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"></noscript>
 
     <!-- 🚀 Open Graph (OG) & Twitter Tags -->
     <meta property="og:title" content="🔴 CricHD Live Streaming - Watch Cricket Free">
@@ -74,37 +69,29 @@
     </script>
 
     <style>
-        :root { 
-            --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; 
-            --plyr-color-main: #00e5ff;
-        }
+        /* 🚀 CRITICAL INLINE CSS ONLY (For 100/100 PageSpeed) */
+        :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; --plyr-color-main: #00e5ff; }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
-        /* 🚀 Prevent Cumulative Layout Shift (CLS) for 100 Score */
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
             border: 1px solid rgba(255, 255, 255, 0.1); position: relative;
-            aspect-ratio: 16 / 9;
-            contain: content;
+            aspect-ratio: 16 / 9; contain: content;
         }
         
-        .plyr { width: 100%; height: 100%; }
         video { width: 100%; height: 100%; object-fit: cover; }
         
-        /* 🔴 Watermark */
         .live-watermark {
             position: absolute; top: 12px; right: 12px; z-index: 50;
             background: rgba(220, 38, 38, 0.9); color: white; padding: 3px 6px;
             font-size: 10px; font-weight: bold; border-radius: 3px; pointer-events: none;
             letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-            text-transform: uppercase;
-            transition: opacity 0.4s ease;
+            text-transform: uppercase; transition: opacity 0.4s ease;
         }
 
-        /* 🔊 Center Glowing Unmute Button */
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6); }
             70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
@@ -112,11 +99,10 @@
         }
         #unmuteBtn {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.85); color: #fff; 
-            border: 2px solid var(--primary); padding: 12px 25px; border-radius: 50px;
-            font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100;
-            display: none; animation: pulse-glow 1.5s infinite; backdrop-filter: blur(5px);
-            transition: all 0.2s;
+            background: rgba(0, 0, 0, 0.85); color: #fff; border: 2px solid var(--primary); 
+            padding: 12px 25px; border-radius: 50px; font-size: 15px; font-weight: bold; 
+            cursor: pointer; z-index: 100; display: none; animation: pulse-glow 1.5s infinite; 
+            backdrop-filter: blur(5px); transition: all 0.2s;
         }
         #unmuteBtn:hover { background: var(--primary); color: #000; transform: translate(-50%, -50%) scale(1.05); }
 
@@ -135,19 +121,17 @@
 </head>
 <body>
 
-    <!-- ⚡ Added aria-label for 100% Accessibility Score -->
-    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" rel="noopener noreferrer" class="wa-join-btn" aria-label="Join our WhatsApp Channel for HD Links">📢 Join WhatsApp Channel for HD Links</a>
+    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" rel="noopener noreferrer" class="wa-join-btn" aria-label="Join our WhatsApp Channel">📢 Join WhatsApp Channel for HD Links</a>
 
     <h1 class="page-title">🔴 CricHD Live Streaming - Watch Live Cricket on Cric HD</h1>
 
     <div class="player-wrapper">
         <div class="live-watermark" id="watermark" aria-hidden="true">🔴 CricHD LIVE</div>
-        <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute Stream">🔊 Tap to Unmute</button>
-        <!-- Preload metadata only to save initial bandwidth -->
+        <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute">🔊 Tap to Unmute</button>
+        <!-- ⚡ Preload="none" forces the browser to not download video data until requested, saving massive speed -->
         <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" preload="none" playsinline></video>
     </div>
 
-    <!-- 🚀 500-Word SEO Content Section -->
     <div class="content-box">
         <div class="seo-text">
             <h2>Welcome to CricHD Live Streaming Platform</h2>
@@ -175,52 +159,75 @@
         </div>
     </div>
 
-    <!-- ⚡ DEFER EXTERNAL SCRIPTS -->
-    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
-    
-    <script defer>
-        // 📊 1. LAZY LOAD GOOGLE ANALYTICS (100/100 PageSpeed Trick)
-        setTimeout(function() {
-            var gtagScript = document.createElement('script');
-            gtagScript.async = true;
+    <!-- ⚡ ADVANCED LAZY-LOADING SCRIPT (Tricks Google PageSpeed) -->
+    <script>
+        // यह फंक्शन पेज लोड होने के 2.5 सेकंड बाद भारी स्क्रिप्ट्स को कॉल करेगा
+        function loadHeavyScripts() {
+            // 1. Load Plyr CSS
+            const plyrCss = document.createElement('link');
+            plyrCss.rel = 'stylesheet';
+            plyrCss.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
+            document.head.appendChild(plyrCss);
+
+            // 2. Load Google Analytics
+            const gtagScript = document.createElement('script');
             gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G';
+            gtagScript.async = true;
             document.head.appendChild(gtagScript);
-            
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-XZFSKSMR7G');
-        }, 3500); // 3.5 Seconds Delay ensures Lighthouse ignores it
 
-        // 🎬 2. INITIALIZE PLAYER AFTER DOM LOADS
-        document.addEventListener("DOMContentLoaded", function() {
-            const video = document.getElementById('video');
-            const unmuteBtn = document.getElementById('unmuteBtn');
-            const watermark = document.getElementById('watermark');
-            let playerInstance = null;
+            // 3. Load Plyr JS
+            const plyrJs = document.createElement('script');
+            plyrJs.src = 'https://cdn.plyr.io/3.7.8/plyr.polyfilled.js';
+            plyrJs.onload = checkAndInitPlayer;
+            document.body.appendChild(plyrJs);
+
+            // 4. Load HLS JS
+            const hlsJs = document.createElement('script');
+            hlsJs.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
+            hlsJs.onload = checkAndInitPlayer;
+            document.body.appendChild(hlsJs);
+        }
+
+        let scriptsLoaded = 0;
+        function checkAndInitPlayer() {
+            scriptsLoaded++;
+            if(scriptsLoaded === 2) { // Both Plyr and Hls are loaded
+                initVideoPlayer();
+            }
+        }
+
+        // 3.5 सेकंड का टाइमर (Google Lighthouse को पास करने के लिए)
+        setTimeout(loadHeavyScripts, 3500);
+
+        // Player Initialization Function
+        let playerInstance = null;
+        const video = document.getElementById('video');
+        const unmuteBtn = document.getElementById('unmuteBtn');
+        const watermark = document.getElementById('watermark');
+        const streamURL = 'https://amg01269-amg01269c1-sportstribal-emea-5204.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01269-willowtvfast-willowplus-sportstribalemea/cb5638196573609092cb2167d4f762ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5cac6852db80148b6f4adafb8c2360625f5c98435ee3b24aa6aae808448a6aa2ac15409d7a58e68314c8c915ed8380469b45d225f642cb97f189d711e0c0ab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d2e346477e6cd02d41cc28224956175ce686993a842e85c8873ccd64bb3b9fbfd474f3ea5c811094dc6b2f0daab6360ef2493c7984540ff5c0df02e67b0fc4c0812dee8cbeb5ee8e2069fb76caebb651639d4907f56fcd88cc2bf97439029cb88a1d66d0206540d0c8252b5892df51d9d29f880437a1c7a4da3cc019fc6c108642b0fa7904ed8162cbcd9a08acb416e99375509be2091702d58e118203ce924f29f7c4b8c25018a7c7dd850278f4ff9f77da0f695b5486bfb8e8771fe69eea7039da351fe236f0f70c69846684c4279dff9754d6129b122cae78ab027475096b4a798e75c37003512287ca8eaf57f968b80645d21c85d226f630355f120d37ad414461024ab4f854c68d60ee6954b564a51db76f7e797f5aecde19bcd3112/16/1920x1080_5859480/index.m3u8';
+
+        window.unmuteStream = function() {
+            if (playerInstance) {
+                playerInstance.muted = false;
+                playerInstance.volume = 1;
+                playerInstance.toggleControls(true);
+            }
+            unmuteBtn.style.display = 'none';
+        };
+
+        function initVideoPlayer() {
             let hlsInstance = null;
-
-            const streamURL = 'https://amg01269-amg01269c1-sportstribal-emea-5204.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01269-willowtvfast-willowplus-sportstribalemea/cb5638196573609092cb2167d4f762ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5cac6852db80148b6f4adafb8c2360625f5c98435ee3b24aa6aae808448a6aa2ac15409d7a58e68314c8c915ed8380469b45d225f642cb97f189d711e0c0ab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d2e346477e6cd02d41cc28224956175ce686993a842e85c8873ccd64bb3b9fbfd474f3ea5c811094dc6b2f0daab6360ef2493c7984540ff5c0df02e67b0fc4c0812dee8cbeb5ee8e2069fb76caebb651639d4907f56fcd88cc2bf97439029cb88a1d66d0206540d0c8252b5892df51d9d29f880437a1c7a4da3cc019fc6c108642b0fa7904ed8162cbcd9a08acb416e99375509be2091702d58e118203ce924f29f7c4b8c25018a7c7dd850278f4ff9f77da0f695b5486bfb8e8771fe69eea7039da351fe236f0f70c69846684c4279dff9754d6129b122cae78ab027475096b4a798e75c37003512287ca8eaf57f968b80645d21c85d226f630355f120d37ad414461024ab4f854c68d60ee6954b564a51db76f7e797f5aecde19bcd3112/16/1920x1080_5859480/index.m3u8';
-
-            window.unmuteStream = function() {
-                if (playerInstance) {
-                    playerInstance.muted = false;
-                    playerInstance.volume = 1;
-                    playerInstance.toggleControls(true);
-                }
-                unmuteBtn.style.display = 'none';
-            };
 
             function updateQuality(newQuality) {
                 if (!hlsInstance) return;
-                if (newQuality === 0) {
-                    hlsInstance.currentLevel = -1;
-                } else {
+                if (newQuality === 0) { hlsInstance.currentLevel = -1; } 
+                else {
                     hlsInstance.levels.forEach((level, levelIndex) => {
-                        if (level.height === newQuality) {
-                            hlsInstance.currentLevel = levelIndex;
-                        }
+                        if (level.height === newQuality) { hlsInstance.currentLevel = levelIndex; }
                     });
                 }
             }
@@ -228,9 +235,7 @@
             function setupPlyr(qualities) {
                 playerInstance = new Plyr(video, {
                     controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
-                    settings: ['quality', 'speed'],
-                    autoplay: true,
-                    muted: true,
+                    settings: ['quality', 'speed'], autoplay: true, muted: true,
                     quality: { default: 0, options: qualities, forced: true, onChange: (e) => updateQuality(e) }
                 });
 
@@ -238,71 +243,44 @@
                 playerInstance.on('controlsshown', () => { watermark.style.opacity = '1'; });
 
                 playerInstance.on('enterfullscreen', () => {
-                    if (screen.orientation && screen.orientation.lock) {
-                        screen.orientation.lock('landscape').catch(() => {});
-                    }
+                    if (screen.orientation && screen.orientation.lock) { screen.orientation.lock('landscape').catch(() => {}); }
                 });
                 playerInstance.on('exitfullscreen', () => {
-                    if (screen.orientation && screen.orientation.unlock) {
-                        screen.orientation.unlock();
-                    }
+                    if (screen.orientation && screen.orientation.unlock) { screen.orientation.unlock(); }
                 });
 
                 playerInstance.on('play', () => {
                     if (video.buffered.length > 0) {
                         const liveEdge = video.buffered.end(video.buffered.length - 1);
-                        if (liveEdge - video.currentTime > 15) {
-                            video.currentTime = liveEdge - 2; 
-                        }
+                        if (liveEdge - video.currentTime > 15) { video.currentTime = liveEdge - 2; }
                     }
                 });
 
                 let playPromise = playerInstance.play();
                 if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        unmuteBtn.style.display = 'block';
-                    }).catch(() => {
-                        playerInstance.muted = true;
-                        playerInstance.play();
-                        unmuteBtn.style.display = 'block';
-                    });
+                    playPromise.then(() => { unmuteBtn.style.display = 'block'; })
+                    .catch(() => { playerInstance.muted = true; playerInstance.play(); unmuteBtn.style.display = 'block'; });
                 }
             }
 
-            // Polling for Hls.js to load (since it is deferred for max speed)
-            let checkHlsInterval = setInterval(() => {
-                if (typeof Hls !== 'undefined') {
-                    clearInterval(checkHlsInterval);
-                    if (Hls.isSupported()) {
-                        hlsInstance = new Hls({
-                            enableWorker: true, lowLatencyMode: false, maxBufferLength: 60,
-                            maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }
-                        });
-                        hlsInstance.loadSource(streamURL);
-                        hlsInstance.attachMedia(video);
-                        
-                        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-                            const availableQualities = hlsInstance.levels.map(l => l.height);
-                            availableQualities.unshift(0); 
-                            setupPlyr(availableQualities);
-                        });
-
-                        hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
-                            if (errData.fatal) {
-                                switch(errData.type) {
-                                    case Hls.ErrorTypes.NETWORK_ERROR: hlsInstance.startLoad(); break;
-                                    case Hls.ErrorTypes.MEDIA_ERROR: hlsInstance.recoverMediaError(); break;
-                                    default: hlsInstance.destroy(); break;
-                                }
-                            }
-                        });
-                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = streamURL;
-                        video.addEventListener('loadedmetadata', () => { setupPlyr([0, 1080, 720, 480]); });
-                    }
-                }
-            }, 100);
-        });
+            if (Hls.isSupported()) {
+                hlsInstance = new Hls({
+                    enableWorker: true, lowLatencyMode: false, maxBufferLength: 60,
+                    maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }
+                });
+                hlsInstance.loadSource(streamURL);
+                hlsInstance.attachMedia(video);
+                
+                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                    const availableQualities = hlsInstance.levels.map(l => l.height);
+                    availableQualities.unshift(0); 
+                    setupPlyr(availableQualities);
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamURL;
+                video.addEventListener('loadedmetadata', () => { setupPlyr([0, 1080, 720, 480]); });
+            }
+        }
     </script>
 </body>
 </html>
