@@ -25,10 +25,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-XZFSKSMR7G'); 
     </script>
-    <!-- ========================================== -->
     
     <!-- 🚀 100% Complete & Validated Schema Markup -->
     <script type="application/ld+json">
@@ -94,33 +92,34 @@
             border: 1px solid rgba(255, 255, 255, 0.1); position: relative;
         }
         .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
-        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; object-fit: cover; }
 
         .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-        .plyr__controls { background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)) !important; padding-top: 30px !important; }
         
-        #loadingOverlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(8px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 20; transition: opacity 0.4s ease;
+        /* 🔴 Live Watermark Badge */
+        .live-watermark {
+            position: absolute; top: 15px; right: 15px; z-index: 15;
+            background: rgba(220, 38, 38, 0.9); color: white; padding: 4px 10px;
+            font-size: 11px; font-weight: bold; border-radius: 4px; pointer-events: none;
+            letter-spacing: 1px; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-transform: uppercase;
         }
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1); width: 50px; height: 50px;
-            border-radius: 50%; border-left-color: var(--primary);
-            animation: spin 0.9s linear infinite; margin-bottom: 12px;
-        }
-        .loading-text { color: #fff; font-size: 15px; font-weight: 500; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        #unmuteBtn {
-            position: absolute; bottom: 60px; right: 20px; background: rgba(0, 0, 0, 0.75); 
-            color: #fff; border: 1px solid var(--primary); padding: 10px 18px; border-radius: 30px;
-            font-size: 14px; font-weight: bold; cursor: pointer; z-index: 25;
-            display: none; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
-            transition: transform 0.2s, background 0.2s;
+        /* 🔊 Center Glowing Unmute Button */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
         }
-        #unmuteBtn:hover { background: var(--primary); color: #000; transform: scale(1.05); }
+        #unmuteBtn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85); color: #fff; 
+            border: 2px solid var(--primary); padding: 12px 25px; border-radius: 50px;
+            font-size: 16px; font-weight: bold; cursor: pointer; z-index: 25;
+            display: none; animation: pulse-glow 1.5s infinite; backdrop-filter: blur(5px);
+            transition: all 0.2s;
+        }
+        #unmuteBtn:hover { background: var(--primary); color: #000; transform: translate(-50%, -50%) scale(1.05); }
 
         .wa-join-btn { background-color: var(--accent); color: #000; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
         .content-box { max-width: 900px; width: 100%; background: #111; padding: 20px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px; box-sizing: border-box; }
@@ -141,15 +140,14 @@
     <h1 class="page-title">🔴 CricHD Live Streaming - Watch Live Cricket on Cric HD</h1>
 
     <div class="player-wrapper">
-        <div id="loadingOverlay">
-            <div class="spinner"></div>
-            <div class="loading-text">Connecting to HD Stream...</div>
-        </div>
+        <!-- Professional Watermark -->
+        <div class="live-watermark" id="watermark">🔴 CricHD LIVE</div>
 
         <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
 
         <div class="aspect-ratio" id="playerContainer">
-            <video id="video" autoplay muted playsinline></video>
+            <!-- ⚡ Autoplay removed from HTML to give Plyr full control safely -->
+            <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline></video>
         </div>
     </div>
 
@@ -163,124 +161,142 @@
         <div class="seo-text">
             <h2>Welcome to CricHD Live Streaming</h2>
             <p>Welcome to <strong>CricHD</strong>, your ultimate home for watching live cricket online. If you are searching for the best <strong>crichd live streaming</strong> link for today's match, you have arrived at the perfect destination. We provide a seamless, buffering-free <strong>cric hd</strong> experience so you never miss a moment of the action.</p>
-
             <h3>⚡ Why Choose Us for CricHD Live?</h3>
-            <p>Whether you call it <strong>crickethd</strong>, <strong>crichdtv</strong>, or simply <strong>crichd co</strong>, our platform is designed to give cricket fans the fastest updates and live action. Enjoy <strong>live cricket streaming on crichd</strong> with crystal clear 1080p and 720p HD video quality, perfectly optimized for both mobile and desktop users.</p>
-
             <ul>
                 <li><strong>Zero Buffering:</strong> Experience smooth <strong>crichd tv live</strong> streams even on slower internet connections (3G/4G).</li>
                 <li><strong>Multiple Tournaments:</strong> From international test series to T20 leagues, enjoy all <strong>live cricket streaming crichd</strong> style.</li>
                 <li><strong>Always Free:</strong> Watch your favorite teams battle it out on <strong>crichd live</strong> without any subscriptions or hidden fees.</li>
             </ul>
-
             <div class="disclaimer">
-                <strong>Disclaimer:</strong> CricHDLive.in operates strictly as a search engine and index for media. We only share and embed links that are already available freely in the public domain on the internet. We do not host, upload, or manage any copyrighted video, media, or broadcast files on our own servers. All trademarks, videos, trade names, service marks, copyrighted work, logos referenced herein belong to their respective owners/companies.
+                <strong>Disclaimer:</strong> CricHDLive.in operates strictly as a search engine and index for media. We only share and embed links that are already available freely in the public domain on the internet. We do not host, upload, or manage any copyrighted video, media, or broadcast files on our own servers.
             </div>
         </div>
     </div>
 
     <script>
-        const API_URL = 'https://live-match-api-nine.vercel.app/api'; 
-        const container = document.getElementById('playerContainer');
         const video = document.getElementById('video');
-        const loadingOverlay = document.getElementById('loadingOverlay');
         const unmuteBtn = document.getElementById('unmuteBtn');
         let playerInstance = null;
+        let hlsInstance = null;
+
+        // 🚀 Direct M3U8 Link
+        const streamURL = 'https://amg01269-amg01269c1-sportstribal-emea-5204.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01269-willowtvfast-willowplus-sportstribalemea/cb5638196573609092cb2167d4f762ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5cac6852db80148b6f4adafb8c2360625f5c98435ee3b24aa6aae808448a6aa2ac15409d7a58e68314c8c915ed8380469b45d225f642cb97f189d711e0c0ab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d2e346477e6cd02d41cc28224956175ce686993a842e85c8873ccd64bb3b9fbfd474f3ea5c811094dc6b2f0daab6360ef2493c7984540ff5c0df02e67b0fc4c0812dee8cbeb5ee8e2069fb76caebb651639d4907f56fcd88cc2bf97439029cb88a1d66d0206540d0c8252b5892df51d9d29f880437a1c7a4da3cc019fc6c108642b0fa7904ed8162cbcd9a08acb416e99375509be2091702d58e118203ce924f29f7c4b8c25018a7c7dd850278f4ff9f77da0f695b5486bfb8e8771fe69eea7039da351fe236f0f70c69846684c4279dff9754d6129b122cae78ab027475096b4a798e75c37003512287ca8eaf57f968b80645d21c85d226f630355f120d37ad414461024ab4f854c68d60ee6954b564a51db76f7e797f5aecde19bcd3112/16/1920x1080_5859480/index.m3u8';
 
         function unmuteStream() {
             if (playerInstance) {
                 playerInstance.muted = false;
                 playerInstance.volume = 1;
-            } else {
-                video.muted = false;
+                // अनम्यूट करते ही कंट्रोल्स पट्टी (Bar) सामने लाएं
+                playerInstance.toggleControls(true);
             }
             unmuteBtn.style.display = 'none';
         }
 
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(response => {
-                const { type, data } = response;
+        function updateQuality(newQuality) {
+            if (!hlsInstance) return;
+            if (newQuality === 0) {
+                hlsInstance.currentLevel = -1; // Auto Quality
+            } else {
+                hlsInstance.levels.forEach((level, levelIndex) => {
+                    if (level.height === newQuality) {
+                        hlsInstance.currentLevel = levelIndex;
+                    }
+                });
+            }
+        }
 
-                if (type === 'iframe') {
-                    loadingOverlay.style.display = 'none';
-                    video.style.display = 'none';
-                    container.innerHTML = data;
-                } else {
-                    video.style.display = 'block';
-                    
-                    // 🌟 Professional Player Initialization
-                    playerInstance = new Plyr(video, {
-                        controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen'],
-                        settings: ['quality', 'speed'],
-                        autoplay: true,
-                        muted: true
-                    });
-                    
-                    if (Hls.isSupported()) {
-                        // 🚀 ADVANCED SMOOTH BUFFERING SETTINGS
-                        var hls = new Hls({
-                            enableWorker: true,
-                            lowLatencyMode: false,
-                            maxBufferLength: 60,
-                            maxMaxBufferLength: 600,
-                            liveSyncDuration: 15,
-                            xhrSetup: (xhr) => { xhr.withCredentials = false; }
-                        });
+        // 🌟 प्लेयर के सारे कंट्रोल्स को इनिशियलाइज़ करना
+        function setupPlyr(qualities) {
+            playerInstance = new Plyr(video, {
+                controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
+                settings: ['quality', 'speed'],
+                autoplay: true,
+                muted: true,
+                quality: {
+                    default: 0, 
+                    options: qualities, 
+                    forced: true,
+                    onChange: (e) => updateQuality(e)
+                }
+            });
 
-                        hls.loadSource(data);
-                        hls.attachMedia(video);
-                        
-                        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                            loadingOverlay.style.opacity = '0';
-                            setTimeout(() => loadingOverlay.style.display = 'none', 400);
-                            
-                            let playPromise = playerInstance.play();
-                            if (playPromise !== undefined) {
-                                playPromise.then(() => {
-                                    if(playerInstance.muted) {
-                                        unmuteBtn.style.display = 'block';
-                                    }
-                                }).catch(error => {
-                                    console.log("Autoplay blocked, forcing mute");
-                                    playerInstance.muted = true;
-                                    playerInstance.play();
-                                    unmuteBtn.style.display = 'block';
-                                });
-                            }
-                        });
+            // 🔄 Auto Screen Rotate on Fullscreen
+            playerInstance.on('enterfullscreen', () => {
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(() => {});
+                }
+            });
+            playerInstance.on('exitfullscreen', () => {
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
+            });
 
-                        // 🚀 ERROR RECOVERY
-                        hls.on(Hls.Events.ERROR, (event, errData) => {
-                            if (errData.fatal) {
-                                switch(errData.type) {
-                                    case Hls.ErrorTypes.NETWORK_ERROR: 
-                                        hls.startLoad(); 
-                                        break;
-                                    case Hls.ErrorTypes.MEDIA_ERROR: 
-                                        hls.recoverMediaError(); 
-                                        break;
-                                    default: 
-                                        hls.destroy(); 
-                                        break;
-                                }
-                            }
-                        });
-
-                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = data;
-                        video.addEventListener('loadedmetadata', () => {
-                            loadingOverlay.style.display = 'none';
-                            playerInstance.play();
-                            if(playerInstance.muted) unmuteBtn.style.display = 'block';
-                        });
+            // ⚡ Live Sync Feature
+            playerInstance.on('play', () => {
+                if (video.buffered.length > 0) {
+                    const liveEdge = video.buffered.end(video.buffered.length - 1);
+                    if (liveEdge - video.currentTime > 15) {
+                        video.currentTime = liveEdge - 2; 
                     }
                 }
-            })
-            .catch(err => {
-                loadingOverlay.style.display = 'none';
-                console.error("API Fetch Error:", err);
             });
+
+            // ⚡ Play the video
+            let playPromise = playerInstance.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    unmuteBtn.style.display = 'block';
+                }).catch(() => {
+                    playerInstance.muted = true;
+                    playerInstance.play();
+                    unmuteBtn.style.display = 'block';
+                });
+            }
+        }
+
+        // 🌟 HLS.js Setup
+        if (Hls.isSupported()) {
+            hlsInstance = new Hls({
+                enableWorker: true,
+                lowLatencyMode: false,
+                maxBufferLength: 60,
+                maxMaxBufferLength: 600,
+                liveSyncDuration: 15,
+                xhrSetup: (xhr) => { xhr.withCredentials = false; }
+            });
+
+            hlsInstance.loadSource(streamURL);
+            hlsInstance.attachMedia(video);
+            
+            // ✅ फिक्स: जब स्ट्रीम लोड हो जाए, तभी प्लेयर (Plyr) को स्टार्ट करो
+            hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                const availableQualities = hlsInstance.levels.map(l => l.height);
+                availableQualities.unshift(0); // Add 'Auto' quality
+                
+                // अब प्लेयर को क्वालिटी लिस्ट देकर इनिशियलाइज़ करो
+                setupPlyr(availableQualities);
+            });
+
+            hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
+                if (errData.fatal) {
+                    switch(errData.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR: 
+                            hlsInstance.startLoad(); break;
+                        case Hls.ErrorTypes.MEDIA_ERROR: 
+                            hlsInstance.recoverMediaError(); break;
+                        default: 
+                            hlsInstance.destroy(); break;
+                    }
+                }
+            });
+
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = streamURL;
+            video.addEventListener('loadedmetadata', () => {
+                setupPlyr([0, 1080, 720, 480]); // Default qualities for Apple devices
+            });
+        }
     </script>
 </body>
 </html>
