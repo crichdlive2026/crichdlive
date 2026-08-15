@@ -18,6 +18,17 @@
     <meta property="og:url" content="https://crichdlive.in/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 📊 GOOGLE ANALYTICS 4 (LIVE VIEWERS TRACKING) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XZFSKSMR7G'); 
+    </script>
+    <!-- ========================================== -->
     
     <!-- 🚀 100% Complete & Validated Schema Markup -->
     <script type="application/ld+json">
@@ -207,9 +218,13 @@
                     });
                     
                     if (Hls.isSupported()) {
+                        // 🚀 ADVANCED SMOOTH BUFFERING SETTINGS
                         var hls = new Hls({
-                            maxBufferLength: 30,
-                            lowLatencyMode: true,
+                            enableWorker: true,
+                            lowLatencyMode: false,
+                            maxBufferLength: 60,
+                            maxMaxBufferLength: 600,
+                            liveSyncDuration: 15,
                             xhrSetup: (xhr) => { xhr.withCredentials = false; }
                         });
 
@@ -235,12 +250,19 @@
                             }
                         });
 
+                        // 🚀 ERROR RECOVERY
                         hls.on(Hls.Events.ERROR, (event, errData) => {
                             if (errData.fatal) {
                                 switch(errData.type) {
-                                    case Hls.ErrorTypes.NETWORK_ERROR: hls.startLoad(); break;
-                                    case Hls.ErrorTypes.MEDIA_ERROR: hls.recoverMediaError(); break;
-                                    default: hls.destroy(); break;
+                                    case Hls.ErrorTypes.NETWORK_ERROR: 
+                                        hls.startLoad(); 
+                                        break;
+                                    case Hls.ErrorTypes.MEDIA_ERROR: 
+                                        hls.recoverMediaError(); 
+                                        break;
+                                    default: 
+                                        hls.destroy(); 
+                                        break;
                                 }
                             }
                         });
