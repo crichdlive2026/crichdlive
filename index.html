@@ -80,29 +80,31 @@
     <style>
         :root { 
             --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; 
-            --plyr-color-main: #00e5ff; --plyr-video-control-color-hover: #fff;
+            --plyr-color-main: #00e5ff;
         }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
+        /* 🚀 Player Wrapper with modern aspect-ratio */
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
             border: 1px solid rgba(255, 255, 255, 0.1); position: relative;
+            aspect-ratio: 16 / 9;
         }
-        .aspect-ratio { position: relative; padding-bottom: 56.25%; height: 0; }
-        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; object-fit: cover; }
-
-        .plyr { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         
-        /* 🔴 Live Watermark Badge */
+        .plyr { width: 100%; height: 100%; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* 🔴 Watermark with Smart Auto-Hide Animation */
         .live-watermark {
-            position: absolute; top: 15px; right: 15px; z-index: 15;
-            background: rgba(220, 38, 38, 0.9); color: white; padding: 4px 10px;
-            font-size: 11px; font-weight: bold; border-radius: 4px; pointer-events: none;
-            letter-spacing: 1px; box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: absolute; top: 12px; right: 12px; z-index: 50;
+            background: rgba(220, 38, 38, 0.9); color: white; padding: 3px 6px;
+            font-size: 10px; font-weight: bold; border-radius: 3px; pointer-events: none;
+            letter-spacing: 0.5px; box-shadow: 0 2px 6px rgba(0,0,0,0.5);
             text-transform: uppercase;
+            transition: opacity 0.4s ease; /* Smooth Fade In/Out */
         }
 
         /* 🔊 Center Glowing Unmute Button */
@@ -115,7 +117,7 @@
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.85); color: #fff; 
             border: 2px solid var(--primary); padding: 12px 25px; border-radius: 50px;
-            font-size: 16px; font-weight: bold; cursor: pointer; z-index: 25;
+            font-size: 15px; font-weight: bold; cursor: pointer; z-index: 100;
             display: none; animation: pulse-glow 1.5s infinite; backdrop-filter: blur(5px);
             transition: all 0.2s;
         }
@@ -140,15 +142,10 @@
     <h1 class="page-title">🔴 CricHD Live Streaming - Watch Live Cricket on Cric HD</h1>
 
     <div class="player-wrapper">
-        <!-- Professional Watermark -->
+        <!-- 🔴 Logo Watermark -->
         <div class="live-watermark" id="watermark">🔴 CricHD LIVE</div>
-
         <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
-
-        <div class="aspect-ratio" id="playerContainer">
-            <!-- ⚡ Autoplay removed from HTML to give Plyr full control safely -->
-            <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline></video>
-        </div>
+        <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline></video>
     </div>
 
     <!-- Score & Content Section -->
@@ -176,6 +173,7 @@
     <script>
         const video = document.getElementById('video');
         const unmuteBtn = document.getElementById('unmuteBtn');
+        const watermark = document.getElementById('watermark');
         let playerInstance = null;
         let hlsInstance = null;
 
@@ -186,7 +184,6 @@
             if (playerInstance) {
                 playerInstance.muted = false;
                 playerInstance.volume = 1;
-                // अनम्यूट करते ही कंट्रोल्स पट्टी (Bar) सामने लाएं
                 playerInstance.toggleControls(true);
             }
             unmuteBtn.style.display = 'none';
@@ -195,7 +192,7 @@
         function updateQuality(newQuality) {
             if (!hlsInstance) return;
             if (newQuality === 0) {
-                hlsInstance.currentLevel = -1; // Auto Quality
+                hlsInstance.currentLevel = -1;
             } else {
                 hlsInstance.levels.forEach((level, levelIndex) => {
                     if (level.height === newQuality) {
@@ -205,7 +202,6 @@
             }
         }
 
-        // 🌟 प्लेयर के सारे कंट्रोल्स को इनिशियलाइज़ करना
         function setupPlyr(qualities) {
             playerInstance = new Plyr(video, {
                 controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
@@ -218,6 +214,14 @@
                     forced: true,
                     onChange: (e) => updateQuality(e)
                 }
+            });
+
+            // 🌟 SMART AUTO-HIDE LOGO (Logo hides when controls hide)
+            playerInstance.on('controlshidden', () => {
+                watermark.style.opacity = '0';
+            });
+            playerInstance.on('controlsshown', () => {
+                watermark.style.opacity = '1';
             });
 
             // 🔄 Auto Screen Rotate on Fullscreen
@@ -242,7 +246,7 @@
                 }
             });
 
-            // ⚡ Play the video
+            // ⚡ Ensure Unmute Button Shows Up
             let playPromise = playerInstance.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
@@ -255,7 +259,6 @@
             }
         }
 
-        // 🌟 HLS.js Setup
         if (Hls.isSupported()) {
             hlsInstance = new Hls({
                 enableWorker: true,
@@ -269,12 +272,9 @@
             hlsInstance.loadSource(streamURL);
             hlsInstance.attachMedia(video);
             
-            // ✅ फिक्स: जब स्ट्रीम लोड हो जाए, तभी प्लेयर (Plyr) को स्टार्ट करो
             hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
                 const availableQualities = hlsInstance.levels.map(l => l.height);
-                availableQualities.unshift(0); // Add 'Auto' quality
-                
-                // अब प्लेयर को क्वालिटी लिस्ट देकर इनिशियलाइज़ करो
+                availableQualities.unshift(0); 
                 setupPlyr(availableQualities);
             });
 
@@ -294,7 +294,7 @@
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = streamURL;
             video.addEventListener('loadedmetadata', () => {
-                setupPlyr([0, 1080, 720, 480]); // Default qualities for Apple devices
+                setupPlyr([0, 1080, 720, 480]); 
             });
         }
     </script>
