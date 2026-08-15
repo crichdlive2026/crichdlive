@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 🚀 GSC Optimized Meta Title & Description -->
+    <!-- 🚀 SEO Optimized Meta Title & Description -->
     <title>CricHD Live Streaming - Watch Live Cricket on Cric HD Free</title>
     <meta name="description" content="Welcome to CricHD Live. Watch IND vs SL live cricket streaming on crichd. Enjoy buffering-free cric hd matches, crickethd scores, and crichdtv streams today.">
     <meta name="keywords" content="crichd, crichd live streaming, cric hd, crichd live, crichdtv, crickethd, live cricket streaming crichd, crichd tv live, live cricket streaming on crichd, crichd co">
+    <meta name="theme-color" content="#080808">
     
     <link rel="canonical" href="https://crichdlive.in/" />
     
+    <!-- ⚡ PRECONNECTS (For Ultra Fast Loading) -->
+    <link rel="preconnect" href="https://cdn.plyr.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+    <!-- ⚡ PRELOAD CSS & ASYNC LOAD (Removes Render Blocking) -->
+    <link rel="preload" as="style" href="https://cdn.plyr.io/3.7.8/plyr.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"></noscript>
+
     <!-- 🚀 Open Graph (OG) & Twitter Tags -->
     <meta property="og:title" content="🔴 CricHD Live Streaming - Watch Cricket Free">
     <meta property="og:description" content="Join CricHD Live for the best live cricket streaming crichd experience. Watch matches in HD without buffering!">
@@ -19,7 +30,7 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- 📊 GOOGLE ANALYTICS 4 (LIVE VIEWERS TRACKING) -->
+    <!-- 📊 GOOGLE ANALYTICS 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -28,7 +39,7 @@
       gtag('config', 'G-XZFSKSMR7G'); 
     </script>
     
-    <!-- 🚀 100% Complete & Validated Schema Markup -->
+    <!-- 🚀 Validated Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -72,11 +83,6 @@
     }
     </script>
 
-    <!-- 🌟 Premium Plyr CSS & JS (Professional Video Player) -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
     <style>
         :root { 
             --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; 
@@ -86,12 +92,13 @@
         
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
-        /* 🚀 Player Wrapper */
+        /* 🚀 Prevent Cumulative Layout Shift (CLS) */
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
             border: 1px solid rgba(255, 255, 255, 0.1); position: relative;
             aspect-ratio: 16 / 9;
+            contain: content;
         }
         
         .plyr { width: 100%; height: 100%; }
@@ -126,7 +133,6 @@
         .wa-join-btn { background-color: var(--accent); color: #000; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
         .content-box { max-width: 900px; width: 100%; background: #111; padding: 30px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px; box-sizing: border-box; }
 
-        /* 🚀 Enhanced SEO Text Styling */
         .seo-text { font-size: 16px; line-height: 1.8; color: #d1d5db; margin-top: 0; }
         .seo-text h2 { font-size: 24px; color: #fff; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 8px; display: inline-block; margin-top: 0;}
         .seo-text h3 { font-size: 20px; color: var(--primary); margin-top: 30px; margin-bottom: 12px;}
@@ -139,13 +145,15 @@
 </head>
 <body>
 
-    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" class="wa-join-btn">📢 Join WhatsApp Channel for HD Links</a>
+    <!-- ⚡ Added aria-label for 100% Accessibility Score -->
+    <a href="https://whatsapp.com/channel/0029VbCjOyZLI8YafhIOAo0d" target="_blank" rel="noopener noreferrer" class="wa-join-btn" aria-label="Join our WhatsApp Channel for HD Links">📢 Join WhatsApp Channel for HD Links</a>
 
     <h1 class="page-title">🔴 CricHD Live Streaming - Watch Live Cricket on Cric HD</h1>
 
     <div class="player-wrapper">
-        <div class="live-watermark" id="watermark">🔴 CricHD LIVE</div>
-        <button id="unmuteBtn" onclick="unmuteStream()">🔊 Tap to Unmute</button>
+        <div class="live-watermark" id="watermark" aria-hidden="true">🔴 CricHD LIVE</div>
+        <!-- ⚡ Added aria-label for 100% Accessibility Score -->
+        <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute Stream">🔊 Tap to Unmute</button>
         <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline></video>
     </div>
 
@@ -177,132 +185,120 @@
         </div>
     </div>
 
-    <script>
-        const video = document.getElementById('video');
-        const unmuteBtn = document.getElementById('unmuteBtn');
-        const watermark = document.getElementById('watermark');
-        let playerInstance = null;
-        let hlsInstance = null;
+    <!-- ⚡ MOVED SCRIPTS TO BOTTOM AND ADDED DEFER (Removes Render Blocking for 100/100 speed) -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
+    
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('video');
+            const unmuteBtn = document.getElementById('unmuteBtn');
+            const watermark = document.getElementById('watermark');
+            let playerInstance = null;
+            let hlsInstance = null;
 
-        // 🚀 Direct M3U8 Link
-        const streamURL = 'https://amg01269-amg01269c1-sportstribal-emea-5204.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01269-willowtvfast-willowplus-sportstribalemea/cb5638196573609092cb2167d4f762ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5cac6852db80148b6f4adafb8c2360625f5c98435ee3b24aa6aae808448a6aa2ac15409d7a58e68314c8c915ed8380469b45d225f642cb97f189d711e0c0ab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d2e346477e6cd02d41cc28224956175ce686993a842e85c8873ccd64bb3b9fbfd474f3ea5c811094dc6b2f0daab6360ef2493c7984540ff5c0df02e67b0fc4c0812dee8cbeb5ee8e2069fb76caebb651639d4907f56fcd88cc2bf97439029cb88a1d66d0206540d0c8252b5892df51d9d29f880437a1c7a4da3cc019fc6c108642b0fa7904ed8162cbcd9a08acb416e99375509be2091702d58e118203ce924f29f7c4b8c25018a7c7dd850278f4ff9f77da0f695b5486bfb8e8771fe69eea7039da351fe236f0f70c69846684c4279dff9754d6129b122cae78ab027475096b4a798e75c37003512287ca8eaf57f968b80645d21c85d226f630355f120d37ad414461024ab4f854c68d60ee6954b564a51db76f7e797f5aecde19bcd3112/16/1920x1080_5859480/index.m3u8';
+            const streamURL = 'https://amg01269-amg01269c1-sportstribal-emea-5204.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01269-willowtvfast-willowplus-sportstribalemea/cb5638196573609092cb2167d4f762ffa65928d80b6c852a6ab454876da64607d1e3b680fd358b785d9f01de6a1a0a080361cf12ce3407c3c76ad91174204213cfcac9229d86170ab5c60c2c3aab016635837209c0790a79dca93d0d8636ba304530e01b615b37c2ec5cac6852db80148b6f4adafb8c2360625f5c98435ee3b24aa6aae808448a6aa2ac15409d7a58e68314c8c915ed8380469b45d225f642cb97f189d711e0c0ab5c91913d19733a0b53dbe5509dcd54b7a8f5035bbd42588d9ac884d9f7df5d35873d2e346477e6cd02d41cc28224956175ce686993a842e85c8873ccd64bb3b9fbfd474f3ea5c811094dc6b2f0daab6360ef2493c7984540ff5c0df02e67b0fc4c0812dee8cbeb5ee8e2069fb76caebb651639d4907f56fcd88cc2bf97439029cb88a1d66d0206540d0c8252b5892df51d9d29f880437a1c7a4da3cc019fc6c108642b0fa7904ed8162cbcd9a08acb416e99375509be2091702d58e118203ce924f29f7c4b8c25018a7c7dd850278f4ff9f77da0f695b5486bfb8e8771fe69eea7039da351fe236f0f70c69846684c4279dff9754d6129b122cae78ab027475096b4a798e75c37003512287ca8eaf57f968b80645d21c85d226f630355f120d37ad414461024ab4f854c68d60ee6954b564a51db76f7e797f5aecde19bcd3112/16/1920x1080_5859480/index.m3u8';
 
-        function unmuteStream() {
-            if (playerInstance) {
-                playerInstance.muted = false;
-                playerInstance.volume = 1;
-                playerInstance.toggleControls(true);
+            window.unmuteStream = function() {
+                if (playerInstance) {
+                    playerInstance.muted = false;
+                    playerInstance.volume = 1;
+                    playerInstance.toggleControls(true);
+                }
+                unmuteBtn.style.display = 'none';
+            };
+
+            function updateQuality(newQuality) {
+                if (!hlsInstance) return;
+                if (newQuality === 0) {
+                    hlsInstance.currentLevel = -1;
+                } else {
+                    hlsInstance.levels.forEach((level, levelIndex) => {
+                        if (level.height === newQuality) {
+                            hlsInstance.currentLevel = levelIndex;
+                        }
+                    });
+                }
             }
-            unmuteBtn.style.display = 'none';
-        }
 
-        function updateQuality(newQuality) {
-            if (!hlsInstance) return;
-            if (newQuality === 0) {
-                hlsInstance.currentLevel = -1;
-            } else {
-                hlsInstance.levels.forEach((level, levelIndex) => {
-                    if (level.height === newQuality) {
-                        hlsInstance.currentLevel = levelIndex;
+            function setupPlyr(qualities) {
+                playerInstance = new Plyr(video, {
+                    controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
+                    settings: ['quality', 'speed'],
+                    autoplay: true,
+                    muted: true,
+                    quality: { default: 0, options: qualities, forced: true, onChange: (e) => updateQuality(e) }
+                });
+
+                playerInstance.on('controlshidden', () => { watermark.style.opacity = '0'; });
+                playerInstance.on('controlsshown', () => { watermark.style.opacity = '1'; });
+
+                playerInstance.on('enterfullscreen', () => {
+                    if (screen.orientation && screen.orientation.lock) {
+                        screen.orientation.lock('landscape').catch(() => {});
                     }
                 });
-            }
-        }
-
-        function setupPlyr(qualities) {
-            playerInstance = new Plyr(video, {
-                controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
-                settings: ['quality', 'speed'],
-                autoplay: true,
-                muted: true,
-                quality: {
-                    default: 0, 
-                    options: qualities, 
-                    forced: true,
-                    onChange: (e) => updateQuality(e)
-                }
-            });
-
-            // 🌟 SMART AUTO-HIDE LOGO
-            playerInstance.on('controlshidden', () => {
-                watermark.style.opacity = '0';
-            });
-            playerInstance.on('controlsshown', () => {
-                watermark.style.opacity = '1';
-            });
-
-            // 🔄 Auto Screen Rotate on Fullscreen
-            playerInstance.on('enterfullscreen', () => {
-                if (screen.orientation && screen.orientation.lock) {
-                    screen.orientation.lock('landscape').catch(() => {});
-                }
-            });
-            playerInstance.on('exitfullscreen', () => {
-                if (screen.orientation && screen.orientation.unlock) {
-                    screen.orientation.unlock();
-                }
-            });
-
-            // ⚡ Live Sync Feature
-            playerInstance.on('play', () => {
-                if (video.buffered.length > 0) {
-                    const liveEdge = video.buffered.end(video.buffered.length - 1);
-                    if (liveEdge - video.currentTime > 15) {
-                        video.currentTime = liveEdge - 2; 
+                playerInstance.on('exitfullscreen', () => {
+                    if (screen.orientation && screen.orientation.unlock) {
+                        screen.orientation.unlock();
                     }
-                }
-            });
-
-            let playPromise = playerInstance.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    unmuteBtn.style.display = 'block';
-                }).catch(() => {
-                    playerInstance.muted = true;
-                    playerInstance.play();
-                    unmuteBtn.style.display = 'block';
                 });
+
+                playerInstance.on('play', () => {
+                    if (video.buffered.length > 0) {
+                        const liveEdge = video.buffered.end(video.buffered.length - 1);
+                        if (liveEdge - video.currentTime > 15) {
+                            video.currentTime = liveEdge - 2; 
+                        }
+                    }
+                });
+
+                let playPromise = playerInstance.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        unmuteBtn.style.display = 'block';
+                    }).catch(() => {
+                        playerInstance.muted = true;
+                        playerInstance.play();
+                        unmuteBtn.style.display = 'block';
+                    });
+                }
             }
-        }
 
-        if (Hls.isSupported()) {
-            hlsInstance = new Hls({
-                enableWorker: true,
-                lowLatencyMode: false,
-                maxBufferLength: 60,
-                maxMaxBufferLength: 600,
-                liveSyncDuration: 15,
-                xhrSetup: (xhr) => { xhr.withCredentials = false; }
-            });
+            // Polling for Hls.js to load (since it's deferred)
+            let checkHlsInterval = setInterval(() => {
+                if (typeof Hls !== 'undefined') {
+                    clearInterval(checkHlsInterval);
+                    if (Hls.isSupported()) {
+                        hlsInstance = new Hls({
+                            enableWorker: true, lowLatencyMode: false, maxBufferLength: 60,
+                            maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }
+                        });
+                        hlsInstance.loadSource(streamURL);
+                        hlsInstance.attachMedia(video);
+                        
+                        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                            const availableQualities = hlsInstance.levels.map(l => l.height);
+                            availableQualities.unshift(0); 
+                            setupPlyr(availableQualities);
+                        });
 
-            hlsInstance.loadSource(streamURL);
-            hlsInstance.attachMedia(video);
-            
-            hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-                const availableQualities = hlsInstance.levels.map(l => l.height);
-                availableQualities.unshift(0); 
-                setupPlyr(availableQualities);
-            });
-
-            hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
-                if (errData.fatal) {
-                    switch(errData.type) {
-                        case Hls.ErrorTypes.NETWORK_ERROR: 
-                            hlsInstance.startLoad(); break;
-                        case Hls.ErrorTypes.MEDIA_ERROR: 
-                            hlsInstance.recoverMediaError(); break;
-                        default: 
-                            hlsInstance.destroy(); break;
+                        hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
+                            if (errData.fatal) {
+                                switch(errData.type) {
+                                    case Hls.ErrorTypes.NETWORK_ERROR: hlsInstance.startLoad(); break;
+                                    case Hls.ErrorTypes.MEDIA_ERROR: hlsInstance.recoverMediaError(); break;
+                                    default: hlsInstance.destroy(); break;
+                                }
+                            }
+                        });
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = streamURL;
+                        video.addEventListener('loadedmetadata', () => { setupPlyr([0, 1080, 720, 480]); });
                     }
                 }
-            });
-
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamURL;
-            video.addEventListener('loadedmetadata', () => {
-                setupPlyr([0, 1080, 720, 480]); 
-            });
-        }
+            }, 100);
+        });
     </script>
 </body>
 </html>
