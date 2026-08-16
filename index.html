@@ -3,41 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- 🚀 SEO Optimized Meta Title & Description -->
     <title>CricHD Live Streaming - Watch Live Cricket on Cric HD Free</title>
     <meta name="description" content="Welcome to CricHD Live. Watch IND vs SL live cricket streaming on crichd. Enjoy buffering-free cric hd matches, crickethd scores, and crichdtv streams today.">
     <meta name="keywords" content="crichd, crichd live streaming, cric hd, crichd live, crichdtv, crickethd, live cricket streaming crichd, crichd tv live, live cricket streaming on crichd, crichd co">
     <meta name="theme-color" content="#080808">
-    
+
     <link rel="canonical" href="https://crichdlive.in/" />
-    
-    <!-- ⚡ PRECONNECTS (For DNS Resolution Speed) -->
+
+    <!-- ⚡ PRECONNECTS -->
     <link rel="preconnect" href="https://cdn.plyr.io" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 
-    <!-- ⚡ PRELOAD CSS (Removes Render Blocking) -->
+    <!-- ⚡ PRELOAD CSS -->
     <link rel="preload" as="style" href="https://cdn.plyr.io/3.7.8/plyr.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"></noscript>
 
     <style>
-        /* 🚀 CRITICAL INLINE CSS ONLY */
+        /* 🚀 CRITICAL CSS */
         :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
-        /* 🚀 Player Wrapper - Prevents CLS */
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
             border: 1px solid rgba(255, 255, 255, 0.1); position: relative;
             aspect-ratio: 16 / 9; contain: content;
         }
-        
+
         video { width: 100%; height: 100%; object-fit: cover; }
-        
+
         .live-watermark {
             position: absolute; top: 12px; right: 12px; z-index: 50;
             background: rgba(220, 38, 38, 0.9); color: white; padding: 3px 6px;
@@ -46,7 +45,6 @@
             text-transform: uppercase; transition: opacity 0.4s ease;
         }
 
-        /* 🌟 Instant Loading Overlay (Stops Black Screen) */
         #loadingOverlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
@@ -61,7 +59,6 @@
         .loading-text { font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 1px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* 🔊 Play Button */
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6); }
             70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
@@ -96,11 +93,10 @@
 
     <div class="player-wrapper">
         <div class="live-watermark" id="watermark" aria-hidden="true">🔴 CricHD LIVE</div>
-        
-        <!-- 🌟 Instant Loading Overlay -->
+
         <div id="loadingOverlay">
             <div class="spinner"></div>
-            <div class="loading-text" id="loadingText">Connecting to API...</div>
+            <div class="loading-text" id="loadingText">Connecting to Live Server...</div>
         </div>
 
         <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute">🔊 Tap to Unmute</button>
@@ -111,7 +107,7 @@
         <div class="seo-text">
             <h2>Welcome to CricHD Live Streaming Platform</h2>
             <p>Welcome to <strong>CricHD</strong>, your ultimate home for watching live cricket online. If you are a die-hard cricket fan searching for the most reliable and fastest <strong>crichd live streaming</strong> link for today's match, you have arrived at the perfect destination. Cricket is more than just a sport; it is an emotion that unites millions. We truly understand this passion, and that is why we are dedicated to providing a seamless, buffering-free <strong>cric hd</strong> experience so you never miss a single ball, boundary, or crucial wicket.</p>
-            
+
             <h3>⚡ The Ultimate Cricket Viewing Experience</h3>
             <p>When it comes to enjoying favorite matches, fans constantly search the internet for terms like <strong>crickethd</strong>, <strong>crichdtv</strong>, or simply <strong>crichd co</strong>. Our platform brings all these world-class viewing experiences into one single, easy-to-use interface. You can now easily enjoy <strong>live cricket streaming on crichd</strong> with crystal clear 1080p, 720p, and high-definition video quality. Our streams are perfectly optimized for both mobile smartphones and desktop PCs, ensuring that no matter what device you use, the match looks spectacular.</p>
 
@@ -155,8 +151,8 @@
             let playerInstance = null;
             let hlsInstance = null;
 
-            // 🔴 अपना VERCEL API का लिंक यहाँ डालें:
-            const API_URL = 'https://live-match-api-nine.vercel.app/api '; 
+            // 🔴 VERCEL API LINK (Spaces removed)
+            const API_URL = 'https://live-match-api-nine.vercel.app/api'; 
 
             window.unmuteStream = function() {
                 if (playerInstance) {
@@ -200,8 +196,10 @@
                 }
             }
 
-            // 1️⃣ सबसे पहले API से डेटा मंगाएं
-            fetch(API_URL)
+            // 1️⃣ API Fetch with Cache Buster (ताकि हमेशा नया लिंक आए)
+            const fetchURL = API_URL + "?nocache=" + new Date().getTime();
+
+            fetch(fetchURL)
                 .then(response => response.json())
                 .then(result => {
                     if(result.success) {
@@ -212,12 +210,12 @@
                         let checkScripts = setInterval(() => {
                             if (typeof Hls !== 'undefined' && typeof Plyr !== 'undefined') {
                                 clearInterval(checkScripts);
-                                
+
                                 if (Hls.isSupported()) {
                                     hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: false, maxBufferLength: 60, maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }});
                                     hlsInstance.loadSource(streamURL);
                                     hlsInstance.attachMedia(video);
-                                    
+
                                     hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
                                         const availableQualities = hlsInstance.levels.map(l => l.height);
                                         availableQualities.unshift(0); 
