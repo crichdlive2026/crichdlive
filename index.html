@@ -15,66 +15,20 @@
     <!-- ⚡ PRECONNECTS (For DNS Resolution Speed) -->
     <link rel="preconnect" href="https://cdn.plyr.io" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 
-    <!-- 🚀 Open Graph (OG) & Twitter Tags -->
-    <meta property="og:title" content="🔴 CricHD Live Streaming - Watch Cricket Free">
-    <meta property="og:description" content="Join CricHD Live for the best live cricket streaming crichd experience. Watch matches in HD without buffering!">
-    <meta property="og:image" content="https://crichdlive.in/ind-vs-sl-live-match.jpg">
-    <meta property="og:url" content="https://crichdlive.in/">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- 🚀 Validated Schema Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsEvent",
-      "name": "IND vs SL Live Cricket Match Streaming",
-      "description": "Watch live cricket streaming on crichd in HD free.",
-      "sport": "Cricket",
-      "startDate": "2026-08-15T10:00:00+05:30",
-      "endDate": "2026-08-19T18:00:00+05:30",
-      "image": "https://crichdlive.in/ind-vs-sl-live-match.jpg",
-      "location": {
-        "@type": "Place",
-        "name": "Live Streaming Online on CricHDLive",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "IN"
-        }
-      },
-      "organizer": {
-        "@type": "Organization",
-        "name": "CricHD Live",
-        "url": "https://crichdlive.in/"
-      },
-      "performer": [
-        { "@type": "SportsTeam", "name": "India" },
-        { "@type": "SportsTeam", "name": "Sri Lanka" }
-      ],
-      "homeTeam": { "@type": "SportsTeam", "name": "India" },
-      "awayTeam": { "@type": "SportsTeam", "name": "Sri Lanka" },
-      "eventStatus": "https://schema.org/EventScheduled",
-      "isAccessibleForFree": true,
-      "offers": { 
-        "@type": "Offer", 
-        "price": "0", 
-        "priceCurrency": "INR",
-        "availability": "https://schema.org/InStock",
-        "validFrom": "2026-08-13T00:00:00+05:30",
-        "url": "https://crichdlive.in/"
-      },
-      "url": "https://crichdlive.in/"
-    }
-    </script>
+    <!-- ⚡ PRELOAD CSS (Removes Render Blocking) -->
+    <link rel="preload" as="style" href="https://cdn.plyr.io/3.7.8/plyr.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css"></noscript>
 
     <style>
-        /* 🚀 CRITICAL INLINE CSS ONLY (For 100/100 PageSpeed) */
-        :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; --plyr-color-main: #00e5ff; }
+        /* 🚀 CRITICAL INLINE CSS ONLY */
+        :root { --bg-dark: #080808; --primary: #00e5ff; --accent: #25D366; }
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
-        
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
+        /* 🚀 Player Wrapper - Prevents CLS */
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
@@ -92,6 +46,22 @@
             text-transform: uppercase; transition: opacity 0.4s ease;
         }
 
+        /* 🌟 Instant Loading Overlay (Stops Black Screen) */
+        #loadingOverlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 40; transition: opacity 0.5s ease;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1); border-top: 4px solid var(--primary);
+            border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        .loading-text { font-size: 16px; font-weight: 600; color: #fff; letter-spacing: 1px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* 🔊 Play Button */
         @keyframes pulse-glow {
             0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6); }
             70% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
@@ -108,7 +78,6 @@
 
         .wa-join-btn { background-color: var(--accent); color: #000; padding: 12px 30px; font-size: 16px; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 15px; display: inline-block; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
         .content-box { max-width: 900px; width: 100%; background: #111; padding: 30px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px; box-sizing: border-box; }
-
         .seo-text { font-size: 16px; line-height: 1.8; color: #d1d5db; margin-top: 0; }
         .seo-text h2 { font-size: 24px; color: #fff; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 8px; display: inline-block; margin-top: 0;}
         .seo-text h3 { font-size: 20px; color: var(--primary); margin-top: 30px; margin-bottom: 12px;}
@@ -127,9 +96,15 @@
 
     <div class="player-wrapper">
         <div class="live-watermark" id="watermark" aria-hidden="true">🔴 CricHD LIVE</div>
+        
+        <!-- 🌟 Instant Loading Overlay -->
+        <div id="loadingOverlay">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingText">Connecting to API...</div>
+        </div>
+
         <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute">🔊 Tap to Unmute</button>
-        <!-- ⚡ Preload="none" forces the browser to not download video data until requested, saving massive speed -->
-        <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" preload="none" playsinline></video>
+        <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline autoplay muted></video>
     </div>
 
     <div class="content-box">
@@ -148,106 +123,69 @@
                 <li><strong>Zero Buffering Technology:</strong> If one server link experiences heavy traffic, our system ensures you remain connected without interruptions, bringing the live stadium atmosphere directly to your screen.</li>
             </ul>
 
-            <h3>🏆 Coverage of All Major Tournaments</h3>
-            <p>What can you watch here? Absolutely everything! From high-octane T20 leagues like the IPL, PSL, BBL, and CPL, to classic Test matches, fast-paced ODIs, and World Cup tournaments. No matter where you are in the world, the <strong>cric hd</strong> platform ensures you stay connected to the game you love. Bookmark our page for all your future cricket viewing needs and tell your friends about <strong>crickethd</strong> and <strong>crichdtv</strong> so they can join in the fun.</p>
-            
-            <p>Thank you for choosing us for <strong>live cricket streaming on crichd</strong>. Sit back, relax, grab some snacks, and enjoy the ultimate <strong>crichd co</strong> broadcast today!</p>
-
             <div class="disclaimer">
                 <strong>Disclaimer & DMCA Policy:</strong> CricHDLive.in operates strictly as a search engine and index for media. We only share and embed links (such as m3u8 streams) that are already available freely in the public domain on the internet. We do not host, upload, or manage any copyrighted video, media, or broadcast files on our own servers. All trademarks, videos, trade names, service marks, copyrighted work, and logos referenced herein belong to their respective owners and broadcasting companies. If you believe any content violates your copyright, please contact the original media hosters.
             </div>
         </div>
     </div>
 
-    <!-- ⚡ ADVANCED LAZY-LOADING SCRIPT (Tricks Google PageSpeed) -->
-    <script>
-        // यह फंक्शन पेज लोड होने के 2.5 सेकंड बाद भारी स्क्रिप्ट्स को कॉल करेगा
-        function loadHeavyScripts() {
-            // 1. Load Plyr CSS
-            const plyrCss = document.createElement('link');
-            plyrCss.rel = 'stylesheet';
-            plyrCss.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
-            document.head.appendChild(plyrCss);
+    <!-- ⚡ DEFERRED JAVASCRIPT -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
 
-            // 2. Load Google Analytics
-            const gtagScript = document.createElement('script');
-            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G';
+    <script defer>
+        // 📊 Lazy Load Analytics 
+        setTimeout(() => {
+            var gtagScript = document.createElement('script');
             gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZFSKSMR7G';
             document.head.appendChild(gtagScript);
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-XZFSKSMR7G');
+        }, 3500);
 
-            // 3. Load Plyr JS
-            const plyrJs = document.createElement('script');
-            plyrJs.src = 'https://cdn.plyr.io/3.7.8/plyr.polyfilled.js';
-            plyrJs.onload = checkAndInitPlayer;
-            document.body.appendChild(plyrJs);
-
-            // 4. Load HLS JS
-            const hlsJs = document.createElement('script');
-            hlsJs.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
-            hlsJs.onload = checkAndInitPlayer;
-            document.body.appendChild(hlsJs);
-        }
-
-        let scriptsLoaded = 0;
-        function checkAndInitPlayer() {
-            scriptsLoaded++;
-            if(scriptsLoaded === 2) { // Both Plyr and Hls are loaded
-                initVideoPlayer();
-            }
-        }
-
-        // 3.5 सेकंड का टाइमर (Google Lighthouse को पास करने के लिए)
-        setTimeout(loadHeavyScripts, 3500);
-
-        // Player Initialization Function
-        let playerInstance = null;
-        const video = document.getElementById('video');
-        const unmuteBtn = document.getElementById('unmuteBtn');
-        const watermark = document.getElementById('watermark');
-        const streamURL = 'https://s3.itcnbd.live/server-4/stream/aHR0cDovLzE3Mi4xOS4xNy4yMDI6ODA5MC9obHMvU29ueVRlbjJoZC5tM3U4.m3u8';
-
-        window.unmuteStream = function() {
-            if (playerInstance) {
-                playerInstance.muted = false;
-                playerInstance.volume = 1;
-                playerInstance.toggleControls(true);
-            }
-            unmuteBtn.style.display = 'none';
-        };
-
-        function initVideoPlayer() {
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById('video');
+            const unmuteBtn = document.getElementById('unmuteBtn');
+            const watermark = document.getElementById('watermark');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const loadingText = document.getElementById('loadingText');
+            let playerInstance = null;
             let hlsInstance = null;
 
-            function updateQuality(newQuality) {
-                if (!hlsInstance) return;
-                if (newQuality === 0) { hlsInstance.currentLevel = -1; } 
-                else {
-                    hlsInstance.levels.forEach((level, levelIndex) => {
-                        if (level.height === newQuality) { hlsInstance.currentLevel = levelIndex; }
-                    });
+            // 🔴 अपना VERCEL API का लिंक यहाँ डालें:
+            const API_URL = 'live-match-api-nine.vercel.app'; 
+
+            window.unmuteStream = function() {
+                if (playerInstance) {
+                    playerInstance.muted = false;
+                    playerInstance.volume = 1;
+                    playerInstance.toggleControls(true);
                 }
-            }
+                unmuteBtn.style.display = 'none';
+            };
 
             function setupPlyr(qualities) {
                 playerInstance = new Plyr(video, {
                     controls: ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'pip', 'fullscreen'],
                     settings: ['quality', 'speed'], autoplay: true, muted: true,
-                    quality: { default: 0, options: qualities, forced: true, onChange: (e) => updateQuality(e) }
+                    quality: { default: 0, options: qualities, forced: true, onChange: (e) => {
+                        if (hlsInstance) { hlsInstance.currentLevel = (e === 0) ? -1 : hlsInstance.levels.findIndex(l => l.height === e); }
+                    }}
+                });
+
+                playerInstance.on('playing', () => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => loadingOverlay.style.display = 'none', 500);
+                    if(playerInstance.muted) unmuteBtn.style.display = 'block';
                 });
 
                 playerInstance.on('controlshidden', () => { watermark.style.opacity = '0'; });
                 playerInstance.on('controlsshown', () => { watermark.style.opacity = '1'; });
-
-                playerInstance.on('enterfullscreen', () => {
-                    if (screen.orientation && screen.orientation.lock) { screen.orientation.lock('landscape').catch(() => {}); }
-                });
-                playerInstance.on('exitfullscreen', () => {
-                    if (screen.orientation && screen.orientation.unlock) { screen.orientation.unlock(); }
-                });
+                playerInstance.on('enterfullscreen', () => { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(()=>{}); });
+                playerInstance.on('exitfullscreen', () => { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); });
 
                 playerInstance.on('play', () => {
                     if (video.buffered.length > 0) {
@@ -258,29 +196,58 @@
 
                 let playPromise = playerInstance.play();
                 if (playPromise !== undefined) {
-                    playPromise.then(() => { unmuteBtn.style.display = 'block'; })
-                    .catch(() => { playerInstance.muted = true; playerInstance.play(); unmuteBtn.style.display = 'block'; });
+                    playPromise.catch(() => { playerInstance.muted = true; playerInstance.play(); });
                 }
             }
 
-            if (Hls.isSupported()) {
-                hlsInstance = new Hls({
-                    enableWorker: true, lowLatencyMode: false, maxBufferLength: 60,
-                    maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }
+            // 1️⃣ सबसे पहले API से डेटा मंगाएं
+            fetch(API_URL)
+                .then(response => response.json())
+                .then(result => {
+                    if(result.success) {
+                        const streamURL = result.data;
+                        loadingText.innerText = 'Starting Live Stream...';
+
+                        // 2️⃣ चेक करें कि प्लेयर स्क्रिप्ट लोड हुई हैं या नहीं
+                        let checkScripts = setInterval(() => {
+                            if (typeof Hls !== 'undefined' && typeof Plyr !== 'undefined') {
+                                clearInterval(checkScripts);
+                                
+                                if (Hls.isSupported()) {
+                                    hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: false, maxBufferLength: 60, maxMaxBufferLength: 600, liveSyncDuration: 15, xhrSetup: (xhr) => { xhr.withCredentials = false; }});
+                                    hlsInstance.loadSource(streamURL);
+                                    hlsInstance.attachMedia(video);
+                                    
+                                    hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+                                        const availableQualities = hlsInstance.levels.map(l => l.height);
+                                        availableQualities.unshift(0); 
+                                        setupPlyr(availableQualities);
+                                    });
+
+                                    hlsInstance.on(Hls.Events.ERROR, (event, errData) => {
+                                        if (errData.fatal) {
+                                            switch(errData.type) {
+                                                case Hls.ErrorTypes.NETWORK_ERROR: hlsInstance.startLoad(); break;
+                                                case Hls.ErrorTypes.MEDIA_ERROR: hlsInstance.recoverMediaError(); break;
+                                                default: hlsInstance.destroy(); break;
+                                            }
+                                        }
+                                    });
+                                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                                    video.src = streamURL;
+                                    video.addEventListener('loadedmetadata', () => { setupPlyr([0, 1080, 720, 480]); });
+                                }
+                            }
+                        }, 100);
+                    } else {
+                        loadingText.innerText = 'Stream Not Available!';
+                    }
+                })
+                .catch(err => {
+                    console.error('API Fetch Error:', err);
+                    loadingText.innerText = 'Server Error. Please Refresh!';
                 });
-                hlsInstance.loadSource(streamURL);
-                hlsInstance.attachMedia(video);
-                
-                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-                    const availableQualities = hlsInstance.levels.map(l => l.height);
-                    availableQualities.unshift(0); 
-                    setupPlyr(availableQualities);
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = streamURL;
-                video.addEventListener('loadedmetadata', () => { setupPlyr([0, 1080, 720, 480]); });
-            }
-        }
+        });
     </script>
 </body>
 </html>
