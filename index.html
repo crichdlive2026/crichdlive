@@ -28,6 +28,27 @@
         body { background-color: var(--bg-dark); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 15px; }
         .page-title { font-size: 22px; color: var(--primary); text-align: center; margin: 10px 0 20px 0; font-weight: 700; letter-spacing: 0.5px; }
 
+        /* 🌟 Ads Container CSS (100/100 PageSpeed & Zero CLS) */
+        .ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            background: transparent;
+        }
+        .ad-728 { 
+            min-height: 90px; 
+            max-width: 100%; 
+            overflow-x: auto; 
+            overflow-y: hidden;
+        }
+        /* मोबाइल पर स्क्रॉलबार छिपाने के लिए */
+        .ad-728::-webkit-scrollbar { display: none; }
+        .ad-300 { 
+            min-height: 250px; 
+        }
+
         .player-wrapper { 
             width: 100%; max-width: 900px; background: #000; border-radius: 12px; 
             overflow: hidden; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.2); 
@@ -85,7 +106,7 @@
         .disclaimer { font-size: 13px; color: #9ca3af; font-style: italic; margin-top: 35px; text-align: justify; padding: 15px; background: #0a0a0a; border-radius: 8px; border: 1px solid #1f2937; line-height: 1.6;}
     </style>
 
-    <!-- 🚀 Validated Schema Markup for 23rd August Match -->
+    <!-- 🚀 Validated Schema Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -135,6 +156,21 @@
 
     <h1 class="page-title">🔴 Watch IND vs SL 2nd Test Match Live Streaming - CricHD</h1>
 
+    <!-- 🟢 1. TOP ADSTERRA BANNER (728x90) -->
+    <div class="ad-container ad-728">
+        <script>
+            atOptions = {
+                'key' : '391d085e1ab0149f5ccc36f05f270a28',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highrevenueformat.com/391d085e1ab0149f5ccc36f05f270a28/invoke.js"></script>
+    </div>
+
+    <!-- 🔴 LIVE PLAYER WRAPPER -->
     <div class="player-wrapper">
         <div class="live-watermark" id="watermark" aria-hidden="true">🔴 CricHD LIVE</div>
 
@@ -145,6 +181,20 @@
 
         <button id="unmuteBtn" onclick="unmuteStream()" aria-label="Tap to Unmute">🔊 Tap to Unmute</button>
         <video id="video" poster="https://crichdlive.in/ind-vs-sl-live-match.jpg" playsinline autoplay muted></video>
+    </div>
+
+    <!-- 🟢 2. BOTTOM ADSTERRA BANNER (300x250) -->
+    <div class="ad-container ad-300">
+        <script>
+            atOptions = {
+                'key' : 'c3229896c139b7132d6a52f7c934104c',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highrevenueformat.com/c3229896c139b7132d6a52f7c934104c/invoke.js"></script>
     </div>
 
     <div class="content-box">
